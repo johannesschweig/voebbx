@@ -1,4 +1,5 @@
 import { chromium, Page } from '@playwright/test';
+import { NEARBY_LIBRARIES_ORDER } from './distanceConfig';
 
 export interface AvailabilityInfo {
   branch: string;
@@ -8,116 +9,158 @@ export interface AvailabilityInfo {
 
 export interface SearchResult {
   title: string;
+  url?: string
   availability: AvailabilityInfo[];
 }
 
-export async function searchVoebb(query: string): Promise<SearchResult[]> {
-  // Headless false so we can watch it interact. Change to true for production/background speed.
-  const browser = await chromium.launch({ headless: false, slowMo: 150 }); 
+async function handleCookieBanner(page: Page): Promise<void> {
+  const cookieButton = page.locator('button:has-text("Akzeptieren"), button:has-text("Erlauben")').first();
+  if (await cookieButton.isVisible()) {
+    await cookieButton.click();
+  }
+}
+
+async function executeSearchQuery(page: Page, query: string): Promise<void> {
+  const searchInput = page.locator('input[type="search"], input[name="Query"], #search-input').first();
+  await searchInput.waitFor({ timeout: 5000 });
+  await searchInput.fill(query);
+
+  console.log(`[voebbx] Submitting query...`);
+  await Promise.all([
+    page.waitForNavigation({ waitUntil: 'load', timeout: 15000 }).catch(() => {}),
+    searchInput.press('Enter')
+  ]);
+}
+
+async function locateAndNavigateToAsset(page: Page, query: string): Promise<void> {
+  await page.waitForSelector('#container', { timeout: 15000 });
+  console.log(`[voebbx] Hunting for physical text matches inside container...`);
+
+  const cleanQuery = query.replace(/["']/g, ''); 
+  const targetLinks = page.locator(`#container a:has-text("${cleanQuery}")`);
+  const linksCount = await targetLinks.count();
+
+  let targetLink = targetLinks.first();
+  let foundPhysicalBook = false;
+
+  for (let i = 0; i < linksCount; i++) {
+    const currentLink = targetLinks.nth(i);
+    const rowText = await currentLink.evaluate(el => el.closest('tr, li, .grid-row')?.textContent || '');
+    
+    if (!rowText.toLowerCase().includes('e-medium') && 
+        !rowText.toLowerCase().includes('online-ressource') && 
+        !rowText.toLowerCase().includes('download')) {
+      targetLink = currentLink;
+      foundPhysicalBook = true;
+      console.log(`[voebbx] Filtered out e-media. Found print match at index: ${i + 1}`);
+      break;
+    }
+  }
+
+  if (!(await targetLink.isVisible())) {
+    console.log(`[voebbx] No clean matching records found. Checking fallback tables...`);
+    const fallbackLink = page.locator('#container table tr td a').first();
+    if (await fallbackLink.isVisible()) {
+      await fallbackLink.click();
+    } else {
+      throw new Error('Core link matrix completely unrecognized.');
+    }
+  } else {
+    await targetLink.click();
+  }
+}
+
+async function extractTitleText(page: Page, query: string): Promise<string> {
+  // Target the innermost layout div first to avoid pulling hidden accessibility tags
+  const titleContainer = page.locator('.adis-maintitle .html_div, #results h2 .html_div').first();
   
+  if (await titleContainer.isVisible()) {
+    const rawTitle = await titleContainer.textContent() || '';
+    return rawTitle.trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
+  }
+  
+  // Fallback to standard headings if the div matrix isn't present
+  const fallbackHeader = page.locator('#results h2, h1').first();
+  if (await fallbackHeader.isVisible()) {
+    const rawTitle = await fallbackHeader.textContent() || '';
+    return rawTitle.replace(/Aktuelle Seite:\s*/gi, '').trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
+  }
+  
+  return query;
+}
+
+async function extractKopierlink(page: Page): Promise<string | undefined> {
+  try {
+    const permalinkAnchor = page.locator('.aDISListe a:has-text("Kopierlink"), a.permalink-unclicked').first();
+    await permalinkAnchor.waitFor({ state: 'attached', timeout: 3000 });
+    return await permalinkAnchor.getAttribute('href') || undefined;
+  } catch (e) {
+    console.log(`[voebbx] Could not extract permanent Kopierlink.`);
+    return undefined;
+  }
+}
+
+export async function searchVoebb(query: string): Promise<SearchResult[]> {
+  const browser = await chromium.launch({ headless: true });  
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 }, 
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   });
-  
   const page = await context.newPage();
 
   try {
-    console.log(`[voebbx] Launching voebb.de (Desktop View)...`);
+    console.log(`[voebbx] Launching voebb.de...`);
     await page.goto('https://www.voebb.de/', { waitUntil: 'load' });
 
-    // Handle initial cookie banner if present
-    const cookieButton = page.locator('button:has-text("Akzeptieren"), button:has-text("Erlauben")').first();
-    if (await cookieButton.isVisible()) {
-      await cookieButton.click();
-    }
+    await handleCookieBanner(page);
+    await executeSearchQuery(page, query);
+    await locateAndNavigateToAsset(page, query);
 
-    const searchInput = page.locator('input[type="search"], input[name="Query"], #search-input').first();
-    await searchInput.waitFor({ timeout: 5000 });
-    await searchInput.fill(query);
-
-    console.log(`[voebbx] Submitting query...`);
-    await Promise.all([
-      page.waitForNavigation({ waitUntil: 'load', timeout: 15000 }).catch(() => {}),
-      searchInput.press('Enter')
-    ]);
-
-    console.log(`[voebbx] App Matrix URL: ${page.url()}`);
-
-    // Wait for the dynamic container to mount
-    await page.waitForSelector('#container', { timeout: 15000 });
-    console.log(`[voebbx] Hunting for physical book text matches inside container...`);
-
-    const cleanQuery = query.replace(/["']/g, ''); 
-    const dynamicTextSelector = `#container a:has-text("${cleanQuery}")`;
-    const targetLinks = page.locator(dynamicTextSelector);
-    const linksCount = await targetLinks.count();
-
-    let targetLink = targetLinks.first();
-    let titleText = '';
-    let foundPhysicalBook = false;
-
-    // Loop through the matched text links to find the first one that is NOT an e-medium
-    for (let i = 0; i < linksCount; i++) {
-      const currentLink = targetLinks.nth(i);
-      
-      // Look at the parent row structure to see if it lists "e-Medium", "Online", or "Download"
-      const rowText = await currentLink.evaluate(el => el.closest('tr, li, .grid-row')?.textContent || '');
-      
-      if (!rowText.toLowerCase().includes('e-medium') && 
-          !rowText.toLowerCase().includes('online-ressource') && 
-          !rowText.toLowerCase().includes('download')) {
-        
-        targetLink = currentLink;
-        foundPhysicalBook = true;
-        console.log(`[voebbx] Filtered out e-media. Found a physical print entry at match index: ${i + 1}`);
-        break;
-      }
-    }
-
-    if (!foundPhysicalBook && linksCount > 0) {
-      console.log(`[voebbx] Warning: Only digital matches detected. Attempting extraction on index 0.`);
-    }
-
-    if (!(await targetLink.isVisible())) {
-      console.log(`[voebbx] No clean matching records found. Checking absolute first table link...`);
-      const fallbackLink = page.locator('#container table tr td a').first();
-      if (await fallbackLink.isVisible()) {
-        const fallbackText = await fallbackLink.textContent();
-        titleText = (fallbackText || 'Fallback Book Title').trim().replace(/[\n\t]+/g, ' ');
-        await fallbackLink.click();
-      } else {
-        console.log('[voebbx] Core link matrix completely unrecognized.');
-        await page.screenshot({ path: 'failure-state-desktop.png' });
-        await browser.close();
-        return [];
-      }
-    } else {
-      const detectedTitle = await targetLink.textContent();
-      titleText = (detectedTitle || query).trim().replace(/[\n\t]+/g, ' ');
-      console.log(`[voebbx] Successfully isolated print anchor! Navigating into: "${titleText}"`);
-      await targetLink.click();
-    }
-
-    // Give legacy architecture a brief buffer window to process session shift
+    // Dynamic rendering buffer window
     await page.waitForTimeout(1000);
     await page.waitForLoadState('networkidle');
     
-    // Scrape dynamic nested table rows
-    const availability = await parseAvailabilityTable(page);
+    // Resolve Page Meta Attributes
+    const titleText = await extractTitleText(page, query);
+    const permanentUrl = await extractKopierlink(page);
+    console.log(`[voebbx] Active Target: "${titleText}" | Link: ${permanentUrl}`);
 
+    // Parse the actual target physical table data matrix
+    const availability = await parseAvailabilityTable(page);
     await browser.close();
-    
-    // Explicitly returns our fully scoped titleText string along with parsed array
+
+    if (availability.length > 0) {
+      console.log(`[voebbx] Raw scraped branches: ${availability.map(a => a.branch).join(', ')}`);
+    }
+
+    // Run custom 10km Filter & Sort calculations
+    const filteredAndSortedAvailability = availability
+      .map(item => {
+        const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName => 
+          item.branch.toLowerCase().includes(nearbyName.toLowerCase())
+        );
+        return { ...item, sortIndex: matchedIndex };
+      })
+      .filter(item => {
+        const isKeep = item.sortIndex !== -1;
+        if (!isKeep) {
+          console.log(`[voebbx] Filtered out far branch: "${item.branch}" (>10km)`);
+        }
+        return isKeep;
+      })
+      .sort((a, b) => a.sortIndex - b.sortIndex)
+      .map(({ sortIndex, ...cleanItem }) => cleanItem);
+
     return [{ 
       title: titleText, 
-      availability 
+      url: permanentUrl,
+      availability: filteredAndSortedAvailability
     }];
 
   } catch (error) {
     await page.screenshot({ path: 'error-screenshot.png' }).catch(() => {});
     await browser.close();
-    console.error('[voebbx] Error:', error);
+    console.error('[voebbx] Pipeline Execution Failed:', error.message || error);
     throw error;
   }
 }
@@ -167,7 +210,7 @@ async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
           continue;
         }
 
-        console.log(`[voebbx] Live Asset Row ${i + 1} -> Branch: "${cleanBranch}", Status: "${cleanStatus}"`);
+        //console.log(`[voebbx] Live Asset Row ${i + 1} -> Branch: "${cleanBranch}", Status: "${cleanStatus}"`);
 
         if (cleanBranch && cleanStatus) {
           list.push({
