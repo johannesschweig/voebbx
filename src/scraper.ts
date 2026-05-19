@@ -1,6 +1,9 @@
 import { chromium, Page } from '@playwright/test';
 import { NEARBY_LIBRARIES_ORDER } from './distanceConfig';
 
+// ==========================================
+// Type Definitions
+// ==========================================
 export interface AvailabilityInfo {
   branch: string;
   status: string;
@@ -9,10 +12,13 @@ export interface AvailabilityInfo {
 
 export interface SearchResult {
   title: string;
-  url?: string
+  url?: string;
   availability: AvailabilityInfo[];
 }
 
+// ==========================================
+// 1. Search & Navigation Utilities
+// ==========================================
 async function handleCookieBanner(page: Page): Promise<void> {
   const cookieButton = page.locator('button:has-text("Akzeptieren"), button:has-text("Erlauben")').first();
   if (await cookieButton.isVisible()) {
@@ -32,61 +38,59 @@ async function executeSearchQuery(page: Page, query: string): Promise<void> {
   ]);
 }
 
-async function locateAndNavigateToAsset(page: Page, query: string): Promise<void> {
-  await page.waitForSelector('#container', { timeout: 15000 });
-  console.log(`[voebbx] Hunting for physical text matches inside container...`);
-
-  const cleanQuery = query.replace(/["']/g, ''); 
-  const targetLinks = page.locator(`.rList_titel a`);
-  const linksCount = await targetLinks.count();
-
-  let targetLink = targetLinks.first();
-  let foundPhysicalBook = false;
-
-  for (let i = 0; i < linksCount; i++) {
-    const currentLink = targetLinks.nth(i);
-    const rowText = await currentLink.evaluate(el => el.closest('tr, li, .grid-row')?.textContent || '');
+// ==========================================
+// 2. List View Extractors
+// ==========================================
+async function extractPrintTargetUrls(page: Page): Promise<string[]> {
+  const linkLocator = page.locator('.rList_titel a');
+  await linkLocator.first().waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+  
+  const count = await linkLocator.count();
+  const targetUrls: string[] = [];
+  
+  for (let i = 0; i < count; i++) {
+    const currentLink = linkLocator.nth(i);
     
-    if (!rowText.toLowerCase().includes('e-medium') && 
-        !rowText.toLowerCase().includes('online-ressource') && 
-        !rowText.toLowerCase().includes('download')) {
-      targetLink = currentLink;
-      foundPhysicalBook = true;
-      console.log(`[voebbx] Filtered out e-media. Found print match at index: ${i + 1}`);
-      break;
-    }
-  }
+    // Evaluate parent text context to safely filter media formats out of the pipeline
+    const rowText = await currentLink.evaluate(el => el.closest('.rList_li, tr, li')?.textContent || '');
+    const lowerText = rowText.toLowerCase();
 
-  if (!(await targetLink.isVisible())) {
-    console.log(`[voebbx] No clean matching records found. Checking fallback tables...`);
-    const fallbackLink = page.locator('#container table tr td a').first();
-    if (await fallbackLink.isVisible()) {
-      await fallbackLink.click();
-    } else {
-      throw new Error('Core link matrix completely unrecognized.');
+    if (
+      lowerText.includes('e-medium') || 
+      lowerText.includes('online-ressource') || 
+      lowerText.includes('download') || 
+      lowerText.includes('e-book')
+    ) {
+      console.log(`[voebbx] Skipping digital asset row at listing index ${i + 1}`);
+      continue;
     }
-  } else {
-    await targetLink.click();
+
+    const href = await currentLink.getAttribute('href');
+    if (href) {
+      const fullUrl = href.startsWith('http') ? href : `https://www.voebb.de${href}`;
+      targetUrls.push(fullUrl);
+    }
   }
+  return targetUrls;
 }
 
-async function extractTitleText(page: Page, query: string): Promise<string> {
-  // Target the innermost layout div first to avoid pulling hidden accessibility tags
+// ==========================================
+// 3. Detail View Parsers
+// ==========================================
+async function extractTitleText(page: Page, fallbackQuery: string): Promise<string> {
   const titleContainer = page.locator('.adis-maintitle .html_div, #results h2 .html_div').first();
-  
   if (await titleContainer.isVisible()) {
     const rawTitle = await titleContainer.textContent() || '';
     return rawTitle.trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
   }
   
-  // Fallback to standard headings if the div matrix isn't present
   const fallbackHeader = page.locator('#results h2, h1').first();
   if (await fallbackHeader.isVisible()) {
     const rawTitle = await fallbackHeader.textContent() || '';
     return rawTitle.replace(/Aktuelle Seite:\s*/gi, '').trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
   }
   
-  return query;
+  return fallbackQuery;
 }
 
 async function extractKopierlink(page: Page): Promise<string | undefined> {
@@ -97,6 +101,98 @@ async function extractKopierlink(page: Page): Promise<string | undefined> {
   } catch (e) {
     console.log(`[voebbx] Could not extract permanent Kopierlink.`);
     return undefined;
+  }
+}
+
+async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
+  const list: AvailabilityInfo[] = [];
+  const targetTable = page.locator('.register-table table, .rTable_table, #resptable-1').first();
+
+  if (!(await targetTable.isVisible())) {
+    console.log(`[voebbx] Warning: No physical availability matrix table found on page.`);
+    return list;
+  }
+  
+  try {
+    const rows = targetTable.locator('tbody tr');
+    await rows.first().waitFor({ state: 'visible', timeout: 5000 });
+    const rowCount = await rows.count();
+
+    for (let i = 0; i < rowCount; i++) {
+      const cells = rows.nth(i).locator('td');
+      if (await cells.count() < 4) continue;
+
+      const branchText = await cells.nth(0).textContent() || '';
+      const shelfmarkText = await cells.nth(2).textContent() || '';
+      const statusText = await cells.last().textContent() || '';
+
+      const cleanBranch = branchText.trim().replace(/\s+/g, ' ');
+      const cleanStatus = statusText.trim().replace(/\s+/g, ' ');
+      const cleanShelf = shelfmarkText.trim().replace(/\s+/g, ' ');
+
+      if (cleanBranch.toLowerCase().includes('kopierlink') || cleanBranch.toLowerCase().includes('[buch]')) {
+        continue;
+      }
+
+      if (cleanBranch && cleanStatus) {
+        list.push({
+          branch: cleanBranch,
+          status: cleanStatus,
+          shelfmark: cleanShelf || undefined
+        });
+      }
+    }
+  } catch (err) {
+    console.log(`[voebbx] Timeout or breakdown parsing availability rows.`);
+  }
+
+  return list;
+}
+
+// ==========================================
+// 4. Data Transformation Utilities
+// ==========================================
+function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
+  return rawAvailability
+    .map(item => {
+      const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName => 
+        item.branch.toLowerCase().includes(nearbyName.toLowerCase())
+      );
+      return { ...item, sortIndex: matchedIndex };
+    })
+    .filter(item => {
+      const isKeep = item.sortIndex !== -1;
+      // if (!isKeep) {
+      //   console.log(`[voebbx] Filtered out far branch: "${item.branch}" (>10km)`);
+      // }
+      return isKeep;
+    })
+    .sort((a, b) => a.sortIndex - b.sortIndex)
+    .map(({ sortIndex, ...cleanItem }) => cleanItem);
+}
+
+// ==========================================
+// 5. Orchestrators & Worker Methods
+// ==========================================
+async function crawlDetailPage(page: Page, url: string, query: string): Promise<SearchResult | null> {
+  try {
+    console.log(`[voebbx] Navigating to detail page: ${url}`);
+    await page.goto(url, { waitUntil: 'load', timeout: 15000 });
+    
+    const titleText = await extractTitleText(page, query);
+    const permanentUrl = await extractKopierlink(page) || url;
+    const rawAvailability = await parseAvailabilityTable(page);
+    
+    const processedAvailability = filterAndSortBranches(rawAvailability);
+
+    return {
+      title: titleText,
+      url: permanentUrl,
+      availability: processedAvailability
+    };
+  } catch (crawlError) {
+    console.error(`[voebbx] Failed tracking down assets on page ${url}:`, crawlError.message || crawlError);
+    return null;
   }
 }
 
@@ -114,118 +210,31 @@ export async function searchVoebb(query: string): Promise<SearchResult[]> {
 
     await handleCookieBanner(page);
     await executeSearchQuery(page, query);
-    await locateAndNavigateToAsset(page, query);
 
-    // Dynamic rendering buffer window
+    // Give asynchronous table listings a split second to stabilize
     await page.waitForTimeout(1000);
     await page.waitForLoadState('networkidle');
     
-    // Resolve Page Meta Attributes
-    const titleText = await extractTitleText(page, query);
-    const permanentUrl = await extractKopierlink(page);
-    console.log(`[voebbx] Active Target: "${titleText}" | Link: ${permanentUrl}`);
+    const targetUrls = await extractPrintTargetUrls(page);
+    console.log(`[voebbx] Found ${targetUrls.length} valid print item records to evaluate.`);
+    
+    const results: SearchResult[] = [];
 
-    // Parse the actual target physical table data matrix
-    const availability = await parseAvailabilityTable(page);
-    await browser.close();
-
-    if (availability.length > 0) {
-      console.log(`[voebbx] Raw scraped branches: ${availability.map(a => a.branch).join(', ')}`);
+    // Process pages sequentially over the persistent active layout view page tab context
+    for (const url of targetUrls) {
+      const searchResult = await crawlDetailPage(page, url, query);
+      if (searchResult) {
+        results.push(searchResult);
+      }
     }
 
-    // Run custom 10km Filter & Sort calculations
-    const filteredAndSortedAvailability = availability
-      .map(item => {
-        const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName => 
-          item.branch.toLowerCase().includes(nearbyName.toLowerCase())
-        );
-        return { ...item, sortIndex: matchedIndex };
-      })
-      .filter(item => {
-        const isKeep = item.sortIndex !== -1;
-        if (!isKeep) {
-          console.log(`[voebbx] Filtered out far branch: "${item.branch}" (>10km)`);
-        }
-        return isKeep;
-      })
-      .sort((a, b) => a.sortIndex - b.sortIndex)
-      .map(({ sortIndex, ...cleanItem }) => cleanItem);
-
-    return [{ 
-      title: titleText, 
-      url: permanentUrl,
-      availability: filteredAndSortedAvailability
-    }];
+    await browser.close();
+    return results;
 
   } catch (error) {
     await page.screenshot({ path: 'error-screenshot.png' }).catch(() => {});
     await browser.close();
-    console.error('[voebbx] Pipeline Execution Failed:', error.message || error);
+    console.error('[voebbx] General Execution Failure:', error.message || error);
     throw error;
   }
-}
-
-/**
- * Processes the explicit responsive data table on the item detail page.
- */
-async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
-  const list: AvailabilityInfo[] = [];
-
-  console.log(`[voebbx] Looking specifically for the real branch asset table...`);
-  
-  // Strict selector targeting ONLY the real inventory grid, ignoring the header tables
-  const targetTable = page.locator('.register-table table, .rTable_table, #resptable-1').first();
-
-  if (await targetTable.isVisible()) {
-    console.log(`[voebbx] Found real branch availability grid. Waiting for data...`);
-    
-    try {
-      // Wait for an actual row with a link inside the body to ensure it's painted
-      const firstDataRow = targetTable.locator('tbody tr').first();
-      await firstDataRow.waitFor({ state: 'visible', timeout: 5000 });
-      
-      const rows = targetTable.locator('tbody tr');
-      const rowCount = await rows.count();
-      console.log(`[voebbx] Processing ${rowCount} physical branch rows...`);
-
-      for (let i = 0; i < rowCount; i++) {
-        const row = rows.nth(i);
-        const cells = row.locator('td');
-        const cellCount = await cells.count();
-
-        // Skip layout rows or empty state updates
-        if (cellCount < 4) continue;
-
-        // Using explicit column mappings matching the real grid layout
-        const branchText = await cells.nth(0).textContent() || '';
-        const shelfmarkText = await cells.nth(2).textContent() || '';
-        const statusText = await cells.last().textContent() || ''; // Grab the last cell (Availability)
-
-        const cleanBranch = branchText.trim().replace(/\s+/g, ' ');
-        const cleanStatus = statusText.trim().replace(/\s+/g, ' ');
-        const cleanShelf = shelfmarkText.trim().replace(/\s+/g, ' ');
-
-        // Skip accidental meta headers if they somehow bypass selectors
-        if (cleanBranch.toLowerCase().includes('kopierlink') || cleanBranch.toLowerCase().includes('[buch]')) {
-          continue;
-        }
-
-        //console.log(`[voebbx] Live Asset Row ${i + 1} -> Branch: "${cleanBranch}", Status: "${cleanStatus}"`);
-
-        if (cleanBranch && cleanStatus) {
-          list.push({
-            branch: cleanBranch,
-            status: cleanStatus,
-            shelfmark: cleanShelf || undefined
-          });
-        }
-      }
-    } catch (waitError) {
-      console.log(`[voebbx] Timeout waiting for real table rows to render.`);
-    }
-  } else {
-    console.log(`[voebbx] Error: Could not find a table matching the physical asset criteria.`);
-  }
-
-  return list;
 }
