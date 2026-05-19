@@ -37,7 +37,7 @@ async function locateAndNavigateToAsset(page: Page, query: string): Promise<void
   console.log(`[voebbx] Hunting for physical text matches inside container...`);
 
   const cleanQuery = query.replace(/["']/g, ''); 
-  const targetLinks = page.locator(`#container a:has-text("${cleanQuery}")`);
+  const targetLinks = page.locator(`.rList_titel a`);
   const linksCount = await targetLinks.count();
 
   let targetLink = targetLinks.first();
