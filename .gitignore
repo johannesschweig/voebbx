@@ -2,6 +2,9 @@
 .swp
 *.swp
 *~
+*.png
+TODO.md
+saved_records.json
 
 node_modules/
 res/

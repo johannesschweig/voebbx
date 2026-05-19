@@ -45,26 +45,29 @@ async function executeSearchQuery(page: Page, query: string): Promise<void> {
 // ==========================================
 async function extractPrintTargetUrls(page: Page): Promise<string[]> {
   const linkLocator = page.locator('.rList_titel a');
-  await linkLocator.first().waitFor({ state: 'visible', timeout: 10000 }).catch(() => { });
-
+  await linkLocator.first().waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+  
   const count = await linkLocator.count();
   const targetUrls: string[] = [];
-
+  
   for (let i = 0; i < count; i++) {
     const currentLink = linkLocator.nth(i);
-
-    // Evaluate parent text context to safely filter media formats out of the pipeline
-    const rowText = await currentLink.evaluate(el => el.closest('.rList_li, tr, li')?.textContent || '');
-    const lowerText = rowText.toLowerCase();
-
-    if (
-      lowerText.includes('e-medium') ||
-      lowerText.includes('online-ressource') ||
-      lowerText.includes('download') ||
-      lowerText.includes('e-book')
-    ) {
-      console.log(`[voebbx] Skipping digital asset row at listing index ${i + 1}`);
-      continue;
+    
+    // Find the enclosing grid/row wrapper for this single search result item
+    const rowContainer = currentLink.locator('xpath=ancestor::div[contains(@class, "rList_grid_wrapper")]');
+    
+    if (await rowContainer.count() > 0) {
+      // Look explicitly for the indicator icon in the availability column of this specific row
+      const availabilityImg = rowContainer.locator('.rList_availability img');
+      
+      if (await availabilityImg.count() > 0) {
+        const altText = await availabilityImg.getAttribute('alt') || '';
+        
+        if (altText.toLowerCase().includes('siehe vollanzeige')) {
+          console.log(`[voebbx] Skipping record at index ${i + 1} ("siehe Vollanzeige" detected - e-media/series/no-live-branch-state)`);
+          continue;
+        }
+      }
     }
 
     const href = await currentLink.getAttribute('href');
