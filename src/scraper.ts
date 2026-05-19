@@ -13,6 +13,8 @@ export interface AvailabilityInfo {
 export interface SearchResult {
   title: string;
   url?: string;
+  mediaType?: string; // Added
+  author?: string;    // Added
   availability: AvailabilityInfo[];
 }
 
@@ -33,7 +35,7 @@ async function executeSearchQuery(page: Page, query: string): Promise<void> {
 
   console.log(`[voebbx] Submitting query...`);
   await Promise.all([
-    page.waitForNavigation({ waitUntil: 'load', timeout: 15000 }).catch(() => {}),
+    page.waitForNavigation({ waitUntil: 'load', timeout: 15000 }).catch(() => { }),
     searchInput.press('Enter')
   ]);
 }
@@ -43,22 +45,22 @@ async function executeSearchQuery(page: Page, query: string): Promise<void> {
 // ==========================================
 async function extractPrintTargetUrls(page: Page): Promise<string[]> {
   const linkLocator = page.locator('.rList_titel a');
-  await linkLocator.first().waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
-  
+  await linkLocator.first().waitFor({ state: 'visible', timeout: 10000 }).catch(() => { });
+
   const count = await linkLocator.count();
   const targetUrls: string[] = [];
-  
+
   for (let i = 0; i < count; i++) {
     const currentLink = linkLocator.nth(i);
-    
+
     // Evaluate parent text context to safely filter media formats out of the pipeline
     const rowText = await currentLink.evaluate(el => el.closest('.rList_li, tr, li')?.textContent || '');
     const lowerText = rowText.toLowerCase();
 
     if (
-      lowerText.includes('e-medium') || 
-      lowerText.includes('online-ressource') || 
-      lowerText.includes('download') || 
+      lowerText.includes('e-medium') ||
+      lowerText.includes('online-ressource') ||
+      lowerText.includes('download') ||
       lowerText.includes('e-book')
     ) {
       console.log(`[voebbx] Skipping digital asset row at listing index ${i + 1}`);
@@ -83,14 +85,49 @@ async function extractTitleText(page: Page, fallbackQuery: string): Promise<stri
     const rawTitle = await titleContainer.textContent() || '';
     return rawTitle.trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
   }
-  
+
   const fallbackHeader = page.locator('#results h2, h1').first();
   if (await fallbackHeader.isVisible()) {
     const rawTitle = await fallbackHeader.textContent() || '';
     return rawTitle.replace(/Aktuelle Seite:\s*/gi, '').trim().replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
   }
-  
+
   return fallbackQuery;
+}
+
+async function extractDetailMetadata(page: Page): Promise<{ mediaType?: string; author?: string }> {
+  const metadata: { mediaType?: string; author?: string } = {};
+  
+  // Scope the lookups inside the specific #R06 structural container rows
+  const rows = page.locator('#R06 table.gi tr');
+  const count = await rows.count();
+
+  for (let i = 0; i < count; i++) {
+    const row = rows.nth(i);
+    const th = row.locator('th');
+    const td = row.locator('td');
+
+    // Skip the row if it doesn't contain both a header and a cell
+    if (await th.count() === 0 || await td.count() === 0) continue;
+
+    const leftText = (await th.textContent() || '').trim();
+    let rightText = (await td.textContent() || '').trim();
+
+    // Clean up double-spacing and newlines common to aDIS layouts
+    rightText = rightText.replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ');
+
+    if (leftText.includes('Medienart')) {
+      // Extract clean text inside brackets if present (e.g. "[Konventionelles Spiel]" -> "Konventionelles Spiel")
+      const bracketMatch = rightText.match(/\[(.*?)\]/);
+      metadata.mediaType = bracketMatch ? bracketMatch[1].trim() : rightText;
+    } 
+    else if (leftText.includes('Verfasser') || leftText.includes('Person')) {
+      // Note: Your HTML sample lists author relationships under the "Person" label row
+      metadata.author = rightText;
+    }
+  }
+
+  return metadata;
 }
 
 async function extractKopierlink(page: Page): Promise<string | undefined> {
@@ -112,7 +149,7 @@ async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
     console.log(`[voebbx] Warning: No physical availability matrix table found on page.`);
     return list;
   }
-  
+
   try {
     const rows = targetTable.locator('tbody tr');
     await rows.first().waitFor({ state: 'visible', timeout: 5000 });
@@ -155,17 +192,13 @@ async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
 function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
   return rawAvailability
     .map(item => {
-      const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName => 
+      const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName =>
         item.branch.toLowerCase().includes(nearbyName.toLowerCase())
       );
       return { ...item, sortIndex: matchedIndex };
     })
     .filter(item => {
-      const isKeep = item.sortIndex !== -1;
-      // if (!isKeep) {
-      //   console.log(`[voebbx] Filtered out far branch: "${item.branch}" (>10km)`);
-      // }
-      return isKeep;
+      return item.sortIndex !== -1;
     })
     .sort((a, b) => a.sortIndex - b.sortIndex)
     .map(({ sortIndex, ...cleanItem }) => cleanItem);
@@ -181,6 +214,7 @@ async function crawlDetailPage(page: Page, url: string, query: string): Promise<
     
     const titleText = await extractTitleText(page, query);
     const permanentUrl = await extractKopierlink(page) || url;
+    const metadata = await extractDetailMetadata(page); // Added extraction call
     const rawAvailability = await parseAvailabilityTable(page);
     
     const processedAvailability = filterAndSortBranches(rawAvailability);
@@ -188,6 +222,8 @@ async function crawlDetailPage(page: Page, url: string, query: string): Promise<
     return {
       title: titleText,
       url: permanentUrl,
+      mediaType: metadata.mediaType, // Bound data payload
+      author: metadata.author,       // Bound data payload
       availability: processedAvailability
     };
   } catch (crawlError) {
@@ -197,9 +233,9 @@ async function crawlDetailPage(page: Page, url: string, query: string): Promise<
 }
 
 export async function searchVoebb(query: string): Promise<SearchResult[]> {
-  const browser = await chromium.launch({ headless: true });  
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
-    viewport: { width: 1280, height: 800 }, 
+    viewport: { width: 1280, height: 800 },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   });
   const page = await context.newPage();
@@ -214,10 +250,10 @@ export async function searchVoebb(query: string): Promise<SearchResult[]> {
     // Give asynchronous table listings a split second to stabilize
     await page.waitForTimeout(1000);
     await page.waitForLoadState('networkidle');
-    
+
     const targetUrls = await extractPrintTargetUrls(page);
     console.log(`[voebbx] Found ${targetUrls.length} valid print item records to evaluate.`);
-    
+
     const results: SearchResult[] = [];
 
     // Process pages sequentially over the persistent active layout view page tab context
@@ -232,7 +268,7 @@ export async function searchVoebb(query: string): Promise<SearchResult[]> {
     return results;
 
   } catch (error) {
-    await page.screenshot({ path: 'error-screenshot.png' }).catch(() => {});
+    await page.screenshot({ path: 'error-screenshot.png' }).catch(() => { });
     await browser.close();
     console.error('[voebbx] General Execution Failure:', error.message || error);
     throw error;

@@ -13,11 +13,16 @@ async function main() {
       return;
     }
 
-    console.log(`\n📚 Found ${results.length} unique book records. Parsing closest physical locations:\n`);
+    console.log(`\n📚 Found ${results.length} unique records. Parsing metadata and closest physical locations:\n`);
 
     results.forEach((book, index) => {
       console.log(` [Record #${index + 1}] 📖 Title: ${book.title}`);
       console.log(` 🔗 Permanent Link: ${book.url || 'N/A'}`);
+      
+      // NEW: Print out the metadata fields if extracted from the detail view page
+      if (book.mediaType) console.log(` 📦 Media Type: ${book.mediaType}`);
+      if (book.author)    console.log(` 👤 Author/Person: ${book.author}`);
+      
       console.log('─'.repeat(60));
 
       if (book.availability.length === 0) {
