@@ -1,5 +1,5 @@
 import { chromium, Page } from '@playwright/test';
-import { NEARBY_LIBRARIES_ORDER } from './distanceConfig';
+import { LIBRARY_DISTANCES } from './distanceConfig';
 
 // ==========================================
 // Type Definitions
@@ -195,15 +195,28 @@ async function parseAvailabilityTable(page: Page): Promise<AvailabilityInfo[]> {
 function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
   return rawAvailability
     .map(item => {
-      const matchedIndex = NEARBY_LIBRARIES_ORDER.findIndex(nearbyName =>
-        item.branch.toLowerCase().includes(nearbyName.toLowerCase())
-      );
+      // 1. Entferne den Bezirks-Präfix vor dem Doppelpunkt (z.B. "mitte:")
+      const parts = item.branch.split(':');
+      const rawBranchName = parts.length > 1 ? parts[1] : parts[0];
+
+      // 2. Bereinige alle unsichtbaren Whitespaces (&nbsp; / \u00a0)
+      const cleanScrapedName = rawBranchName.replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
+
+      // 3. Suche den Index im neuen LIBRARY_DISTANCES Objekt-Array über die Eigenschaft '.name'
+      const matchedIndex = LIBRARY_DISTANCES.findIndex(lib => {
+        const cleanConfigName = lib.name.replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
+        return cleanScrapedName.includes(cleanConfigName) || cleanConfigName.includes(cleanScrapedName);
+      });
+
       return { ...item, sortIndex: matchedIndex };
     })
     .filter(item => {
+      // Behalte nur Filialen, die in deiner Konfiguration existieren
       return item.sortIndex !== -1;
     })
+    // Sortiere nach der Entfernung (da LIBRARY_DISTANCES bereits nach Entfernung aufsteigend sortiert ist)
     .sort((a, b) => a.sortIndex - b.sortIndex)
+    // Entferne den temporären sortIndex wieder aus dem Ausgabe-Objekt
     .map(({ sortIndex, ...cleanItem }) => cleanItem);
 }
 

@@ -4,7 +4,7 @@
 *~
 *.png
 TODO.md
-saved_records.json
+saved*.json
 
 node_modules/
 res/

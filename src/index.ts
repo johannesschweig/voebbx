@@ -1,6 +1,7 @@
 import { searchVoebb, SearchResult } from './scraper.js';
 import { getSavedRecords, saveRecords, deleteRecord } from './storage.js';
 import * as readline from 'readline';
+import { LIBRARY_DISTANCES } from './distanceConfig.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -12,41 +13,87 @@ const askQuestion = (query: string): Promise<string> => {
 };
 
 /**
- * Renders a consistent formatted overview block for search item records.
+ * Renders an overview block for item records, sorting by physical kilometer proximity 
+ * and showing at most the top 3 nearest available branches.
  */
 function displayBookRecords(records: SearchResult[]): void {
   records.forEach((book, index) => {
     console.log(` [Record #${index + 1}] 📖 Title: ${book.title}`);
     console.log(` 🔗 Permanent Link: ${book.url || 'N/A'}`);
     if (book.mediaType) console.log(` 📦 Media Type: ${book.mediaType}`);
-    if (book.author)    console.log(` 👤 Author/Person: ${book.author}`);
+    if (book.author) console.log(` 👤 Author/Person: ${book.author}`);
     console.log('─'.repeat(60));
 
+    // 1. Map ALL branches to attach distance configurations, and sort ascending by km
+    const sortedLocations = book.availability
+      .map((loc) => {
+        // 1a. Split by colon to remove the district prefix (e.g., "tempelhof-schoeneberg:")
+        const parts = loc.branch.split(':');
+        const rawBranchName = parts.length > 1 ? parts[1] : parts[0];
+
+        // 1b. Clean out all spaces, tabs, and non-breaking spaces (\u00a0 / &nbsp;)
+        const cleanScrapedName = rawBranchName.replace(/[\s\u00a0]+/g, ' ').trim();
+
+        // 1c. Find the matched library inside your array structure
+        const matchedLib = LIBRARY_DISTANCES.find(
+          (lib) => lib.name.replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase() === cleanScrapedName.toLowerCase()
+        );
+
+        const distance = matchedLib ? matchedLib.distanceKm : 99.0;
+
+        // Check if this specific branch has the item available
+        const statusLower = loc.status.toLowerCase();
+        const isAvailable = statusLower.includes('verfügbar') || statusLower.includes('ausleihbar');
+
+        return { ...loc, distanceKm: distance, isAvailable };
+      })
+      .sort((a, b) => a.distanceKm - b.distanceKm);
+
+    // 2. Separate into available ones and general ones for dynamic counting
+    const availableLocations = sortedLocations.filter(loc => loc.isAvailable);
+
     if (book.availability.length === 0) {
-      console.log(' ❌ No nearby physical branch availability data matched your criteria.');
+      console.log(' ❌ Error. Something is wrong.');
     } else {
-      book.availability.forEach((loc) => {
-        const isAvailable = loc.status.toLowerCase().includes('verfügbar') || loc.status.toLowerCase().includes('ausleihbar');
-        const statusIcon = isAvailable ? '🟢 [Available]' : '🔴 [Checked Out]';
-        
-        console.log(` 📍 ${loc.branch}`);
-        console.log(`    Status: ${statusIcon} ${loc.status}`);
-        if (loc.shelfmark) console.log(`    Shelfmark: ${loc.shelfmark}`);
+      if (availableLocations.length === 0) {
+        console.log(' 📍 Nearest Branches:');
+      } else {
+        console.log(' 📍 Nearest Available Branches:');
+      }
+
+      // 3. Select only the top 3 closest options (regardless of availability status)
+      const targetLocations = availableLocations.length > 0 ? availableLocations : sortedLocations;
+      const displayedLocations = targetLocations.slice(0, 3);
+
+      displayedLocations.forEach((loc) => {
+        const distanceLabel = loc.distanceKm === 99.0 ? 'unknown distance' : `${Math.round(loc.distanceKm)} km away`;
+        const statusIcon = loc.isAvailable ? '🟢 [Available]' : '🔴 [Checked Out]';
+
+        console.log(`    ${statusIcon}`);
+        console.log(`    ${loc.branch} (${distanceLabel})`);
+        console.log(`       Status: ${loc.status}`);
+        if (loc.shelfmark && loc.isAvailable) console.log(`       Shelfmark: ${loc.shelfmark}`);
       });
+
+      // 4. Provide a clean summary if other matching properties exist further out
+      const hiddenCount = targetLocations.length - displayedLocations.length;
+      if (hiddenCount > 0) {
+        const branchTypeLabel = availableLocations.length > 0 ? 'available branch(es)' : 'branch(es)';
+        console.log(`    👉 (Plus ${hiddenCount} other ${branchTypeLabel} further away)`);
+      }
     }
     console.log('═'.repeat(60) + '\n');
   });
 }
-
 /**
  * Handles executing the scraping pipeline and prompts user selection rules afterwards.
  */
 async function runSearchPipeline(query: string) {
   console.log(`\n🔍 voebbx: Querying Berlin libraries for physical print editions of "${query}"...`);
-  
+
   try {
     const results = await searchVoebb(query);
-    
+
     if (!results || results.length === 0) {
       console.log('⚠️ No print matches found for that query on VÖBB.');
       rl.close();
@@ -58,7 +105,7 @@ async function runSearchPipeline(query: string) {
 
     // Dynamic extraction parser targeting multiple indices separated by spaces or commas
     const inputSelection = await askQuestion('❓ Which records do you want to save for later? (e.g. "1 2 4" or press Enter to skip): ');
-    
+
     // Split on whitespace or commas, map integers, filter invalid outputs
     const selectedIndices = inputSelection
       .replace(/,/g, ' ')
@@ -101,28 +148,39 @@ async function handleSavedRecordsManagement() {
 
   const action = await askQuestion('\n👉 Choose an action: ');
   const cleanAction = action.trim().toLowerCase();
-  
+
   if (cleanAction === 'r') {
     console.log(`\n🔄 Initiating live status refetch for ALL (${saved.length}) record(s)...`);
-    
+
     for (const targetRecord of saved) {
-      console.log(`\n📡 Re-polling: "${targetRecord.title}"...`);
-      
+      // 1. Extract ONLY the numeric ID following 'AK' or 'SAK' from the permanent URL
+      const idMatch = targetRecord.url ? targetRecord.url.match(/(?:S?AK)(\d+)/i) : null;
+      const uniqueId = idMatch ? idMatch[1] : null; // Contains only the digits (e.g. "35033692")
+
+      if (!uniqueId) {
+        console.log(`⚠️ Skip: No valid numeric system ID found in URL for "${targetRecord.title.substring(0, 30)}..."`);
+        continue;
+      }
+
+      console.log(`\n📡 Re-polling via unique ID: [${uniqueId}] for "${targetRecord.title.substring(0, 30)}..."`);
+
       try {
-        const freshLiveResults = await searchVoebb(targetRecord.title);
+        // 2. Query searchVoebb using the clean numeric ID
+        const freshLiveResults = await searchVoebb(uniqueId);
+
         if (freshLiveResults && freshLiveResults.length > 0) {
-          console.log(`\n🟢 Fresh data received for "${targetRecord.title}":`);
+          console.log(`\n🟢 Fresh data received for ID [${uniqueId}]:`);
           displayBookRecords([freshLiveResults[0]]);
           saveRecords([freshLiveResults[0]]);
         } else {
-          console.log(`⚠️ Could not find live print records matching "${targetRecord.title}" right now.`);
+          console.log(`⚠️ Could not find live print records matching ID "${uniqueId}" right now.`);
         }
       } catch (err) {
-        console.error(`❌ Failed to re-fetch live data for "${targetRecord.title}"`);
+        console.error(`❌ Failed to re-fetch live data for ID "${uniqueId}" (${targetRecord.title.substring(0, 20)}...)`);
       }
     }
     console.log('\n✅ All saved records have been successfully refreshed.');
-  } 
+  }
   // Added deletion execution block
   else if (cleanAction === 'd') {
     const selectToDelete = await askQuestion('❓ Enter the record number you want to delete: ');
@@ -155,9 +213,9 @@ async function main() {
   console.log('\n✨ VÖBBX CLI Options:');
   console.log(' [1] Run a completely new live search query');
   console.log(' [2] View & Re-fetch/Refresh saved records'); // Updated text label
-  
+
   const initialChoice = await askQuestion('\n👉 Select an option: ');
-  
+
   if (initialChoice.trim() === '2') {
     await handleSavedRecordsManagement(); // Updated route
   } else {
