@@ -26,26 +26,26 @@ export function getSavedRecords(): SearchResult[] {
 export function saveRecords(recordsToSave: SearchResult[]): void {
   try {
     const existingRecords = getSavedRecords();
-    let savedCount = 0;
+    let updatedCount = 0;
+    let addedCount = 0;
 
     for (const record of recordsToSave) {
-      // Check duplicate against URL if present, otherwise fallback to title matching
-      const isDuplicate = existingRecords.some(r => 
+      // Find if the record already exists by comparing URLs or matching titles
+      const existingIndex = existingRecords.findIndex(r => 
         (r.url && r.url === record.url) || r.title.toLowerCase() === record.title.toLowerCase()
       );
 
-      if (!isDuplicate) {
-        existingRecords.push(record);
-        savedCount++;
+      if (existingIndex !== -1) {
+        existingRecords[existingIndex] = record; // Overwrite with fresh live data
+        updatedCount++;
+      } else {
+        existingRecords.push(record); // Add as new record
+        addedCount++;
       }
     }
 
-    if (savedCount > 0) {
-      fs.writeFileSync(STORAGE_FILE, JSON.stringify(existingRecords, null, 2), 'utf8');
-      console.log(`💾 Successfully saved ${savedCount} new record(s) to your list.`);
-    } else {
-      console.log(`ℹ️ All selected records were already saved previously.`);
-    }
+    fs.writeFileSync(STORAGE_FILE, JSON.stringify(existingRecords, null, 2), 'utf8');
+    console.log(`💾 Storage Updated: ${updatedCount} refreshed, ${addedCount} newly added.`);
   } catch (error: any) {
     console.error('⚠️ Failed to write records to storage:', error.message);
   }

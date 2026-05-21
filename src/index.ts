@@ -80,6 +80,50 @@ async function runSearchPipeline(query: string) {
   }
 }
 
+async function handleSavedRecordsManagement() {
+  const saved = getSavedRecords();
+  if (saved.length === 0) {
+    console.log('\n🔖 Your saved library records vault is currently empty.');
+    rl.close();
+    return;
+  }
+
+  console.log(`\n🔖 Displaying ${saved.length} Saved Records:\n`);
+  displayBookRecords(saved);
+
+  console.log('✨ Options:');
+  console.log(' [R] Re-fetch/Refresh ALL saved records live');
+  console.log(' [Enter] Exit');
+
+  const action = await askQuestion('\n👉 Choose an action: ');
+  
+  if (action.trim().toLowerCase() === 'r') {
+    console.log(`\n🔄 Initiating live status refetch for ALL (${saved.length}) record(s)...`);
+    
+    for (const targetRecord of saved) {
+      console.log(`\n📡 Re-polling: "${targetRecord.title}"...`);
+      
+      try {
+        const freshLiveResults = await searchVoebb(targetRecord.title);
+        if (freshLiveResults && freshLiveResults.length > 0) {
+          // Display the refreshed status immediately
+          console.log(`\n🟢 Fresh data received for "${targetRecord.title}":`);
+          displayBookRecords([freshLiveResults[0]]);
+          
+          // Save/Overwrite the fresh record data into the persistent file
+          saveRecords([freshLiveResults[0]]);
+        } else {
+          console.log(`⚠️ Could not find live print records matching "${targetRecord.title}" right now.`);
+        }
+      } catch (err) {
+        console.error(`❌ Failed to re-fetch live data for "${targetRecord.title}"`);
+      }
+    }
+    console.log('\n✅ All saved records have been successfully refreshed.');
+  }
+
+  rl.close();
+}
 /**
  * Main command router supporting directly running inline args or managing viewed collection vaults
  */
@@ -88,37 +132,21 @@ async function main() {
 
   if (inlineArgument) {
     if (inlineArgument.trim().toLowerCase() === '--view-saved') {
-      const saved = getSavedRecords();
-      if (saved.length === 0) {
-        console.log('\n🔖 Your saved library records collection vault is currently empty.');
-      } else {
-        console.log(`\n🔖 Displaying ${saved.length} Saved Records from local vault:\n`);
-        displayBookRecords(saved);
-      }
-      rl.close();
+      await handleSavedRecordsManagement(); // Updated route
       return;
     }
-
     await runSearchPipeline(inlineArgument.trim());
     return;
   }
 
-  // Fallback interactive option sequence if zero arguments provided
   console.log('\n✨ VÖBBX CLI Options:');
   console.log(' [1] Run a completely new live search query');
-  console.log(' [2] View previously saved individual records');
+  console.log(' [2] View & Re-fetch/Refresh saved records'); // Updated text label
   
   const initialChoice = await askQuestion('\n👉 Select an option: ');
   
   if (initialChoice.trim() === '2') {
-    const saved = getSavedRecords();
-    if (saved.length === 0) {
-      console.log('\n🔖 Your saved library records collection vault is currently empty.');
-    } else {
-      console.log(`\n🔖 Displaying ${saved.length} Saved Records from local vault:\n`);
-      displayBookRecords(saved);
-    }
-    rl.close();
+    await handleSavedRecordsManagement(); // Updated route
   } else {
     const newQuery = await askQuestion('✍️ Enter a book title to search: ');
     if (!newQuery.trim()) {
