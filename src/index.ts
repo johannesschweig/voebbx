@@ -1,5 +1,5 @@
 import { searchVoebb, SearchResult } from './scraper.js';
-import { getSavedRecords, saveRecords } from './storage.js';
+import { getSavedRecords, saveRecords, deleteRecord } from './storage.js';
 import * as readline from 'readline';
 
 const rl = readline.createInterface({
@@ -80,6 +80,9 @@ async function runSearchPipeline(query: string) {
   }
 }
 
+/**
+ * Displays saved records and automatically re-fetches all live statuses on command.
+ */
 async function handleSavedRecordsManagement() {
   const saved = getSavedRecords();
   if (saved.length === 0) {
@@ -93,11 +96,13 @@ async function handleSavedRecordsManagement() {
 
   console.log('✨ Options:');
   console.log(' [R] Re-fetch/Refresh ALL saved records live');
+  console.log(' [D] Delete a specific record'); // Added option
   console.log(' [Enter] Exit');
 
   const action = await askQuestion('\n👉 Choose an action: ');
+  const cleanAction = action.trim().toLowerCase();
   
-  if (action.trim().toLowerCase() === 'r') {
+  if (cleanAction === 'r') {
     console.log(`\n🔄 Initiating live status refetch for ALL (${saved.length}) record(s)...`);
     
     for (const targetRecord of saved) {
@@ -106,11 +111,8 @@ async function handleSavedRecordsManagement() {
       try {
         const freshLiveResults = await searchVoebb(targetRecord.title);
         if (freshLiveResults && freshLiveResults.length > 0) {
-          // Display the refreshed status immediately
           console.log(`\n🟢 Fresh data received for "${targetRecord.title}":`);
           displayBookRecords([freshLiveResults[0]]);
-          
-          // Save/Overwrite the fresh record data into the persistent file
           saveRecords([freshLiveResults[0]]);
         } else {
           console.log(`⚠️ Could not find live print records matching "${targetRecord.title}" right now.`);
@@ -120,6 +122,17 @@ async function handleSavedRecordsManagement() {
       }
     }
     console.log('\n✅ All saved records have been successfully refreshed.');
+  } 
+  // Added deletion execution block
+  else if (cleanAction === 'd') {
+    const selectToDelete = await askQuestion('❓ Enter the record number you want to delete: ');
+    const idx = parseInt(selectToDelete.trim(), 10) - 1;
+
+    if (!isNaN(idx) && saved[idx]) {
+      deleteRecord(saved[idx]);
+    } else {
+      console.log('❌ Invalid record selection.');
+    }
   }
 
   rl.close();

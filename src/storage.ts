@@ -50,3 +50,23 @@ export function saveRecords(recordsToSave: SearchResult[]): void {
     console.error('⚠️ Failed to write records to storage:', error.message);
   }
 }
+/**
+ * Deletes a specific record from storage by matching its title or URL.
+ */
+export function deleteRecord(record: SearchResult): void {
+  try {
+    const existingRecords = getSavedRecords();
+    const filteredRecords = existingRecords.filter(r => 
+      !((r.url && r.url === record.url) || r.title.toLowerCase() === record.title.toLowerCase())
+    );
+
+    if (existingRecords.length !== filteredRecords.length) {
+      fs.writeFileSync(STORAGE_FILE, JSON.stringify(filteredRecords, null, 2), 'utf8');
+      console.log(`🗑️ Successfully deleted "${record.title}" from storage.`);
+    } else {
+      console.log(`⚠️ Record could not be found in storage.`);
+    }
+  } catch (error: any) {
+    console.error('⚠️ Failed to delete record from storage:', error.message);
+  }
+}
