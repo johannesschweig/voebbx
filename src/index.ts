@@ -21,13 +21,13 @@ function displayBookRecords(records: SearchResult[]): void {
     console.log(` [Record #${index + 1}] 📖 Title: ${book.title}`);
     console.log(` 🔗 Permanent Link: ${book.url || 'N/A'}`);
     if (book.mediaType) console.log(` 📦 Media Type: ${book.mediaType}`);
-    if (book.author) console.log(` 👤 Author/Person: ${book.author}`);
+    if (book.author)    console.log(` 👤 Author/Person: ${book.author}`);
     console.log('─'.repeat(60));
 
-    // 1. Map ALL branches to attach distance configurations, and sort ascending by km
-    const sortedLocations = book.availability
+    // 1. Map ALL branches, attach distance, and calculate opportunity priority score
+    const hybridSortedLocations = book.availability
       .map((loc) => {
-        // 1a. Split by colon to remove the district prefix (e.g., "tempelhof-schoeneberg:")
+        // 1a. Split by colon to remove the district prefix
         const parts = loc.branch.split(':');
         const rawBranchName = parts.length > 1 ? parts[1] : parts[0];
 
@@ -45,40 +45,59 @@ function displayBookRecords(records: SearchResult[]): void {
         const statusLower = loc.status.toLowerCase();
         const isAvailable = statusLower.includes('verfügbar') || statusLower.includes('ausleihbar');
 
-        return { ...loc, distanceKm: distance, isAvailable };
-      })
-      .sort((a, b) => a.distanceKm - b.distanceKm);
+        // 1d. Calculate Priority Score based on the opportunity matrix tiers
+        let priorityScore = 6; // Default fallback (far away & checked out)
+        
+        if (distance < 5) {
+          priorityScore = isAvailable ? 1 : 2; // Under 5km: Available (1), Checked Out (2)
+        } else if (distance <= 10) {
+          priorityScore = isAvailable ? 3 : 4; // 5-10km: Available (3), Checked Out (4)
+        } else {
+          priorityScore = isAvailable ? 5 : 6; // Over 10km: Available (5), Checked Out (6)
+        }
 
-    // 2. Separate into available ones and general ones for dynamic counting
-    const availableLocations = sortedLocations.filter(loc => loc.isAvailable);
+        return { ...loc, distanceKm: distance, isAvailable, priorityScore };
+      })
+      .sort((a, b) => {
+        // Primary sort: Best opportunity tier score
+        if (a.priorityScore !== b.priorityScore) {
+          return a.priorityScore - b.priorityScore;
+        }
+        // Secondary sort: Absolute distance as tie-breaker within the same tier
+        return a.distanceKm - b.distanceKm;
+      });
+
+    // 2. Track total available count purely for dynamic labels and summary strings
+    const availableCount = hybridSortedLocations.filter(loc => loc.isAvailable).length;
 
     if (book.availability.length === 0) {
       console.log(' ❌ Error. Something is wrong.');
     } else {
-      if (availableLocations.length === 0) {
+      // Retained your explicit text choices here
+      if (availableCount === 0) {
         console.log(' 📍 Nearest Branches:');
       } else {
         console.log(' 📍 Nearest Available Branches:');
       }
 
-      // 3. Select only the top 3 closest options (regardless of availability status)
-      const targetLocations = availableLocations.length > 0 ? availableLocations : sortedLocations;
-      const displayedLocations = targetLocations.slice(0, 3);
+      // 3. Select the top 3 best mixed opportunities from our matrix
+      const displayedLocations = hybridSortedLocations.slice(0, 3);
 
       displayedLocations.forEach((loc) => {
         const distanceLabel = loc.distanceKm === 99.0 ? 'unknown distance' : `${Math.round(loc.distanceKm)} km away`;
         const statusIcon = loc.isAvailable ? '🟢 [Available]' : '🔴 [Checked Out]';
 
+        // Maintained your multi-line print layout
         console.log(`    ${statusIcon}`);
         console.log(`    ${loc.branch} (${distanceLabel})`);
         console.log(`       Status: ${loc.status}`);
         if (loc.shelfmark && loc.isAvailable) console.log(`       Shelfmark: ${loc.shelfmark}`);
       });
 
-      // 4. Provide a clean summary if other matching properties exist further out
-      const hiddenCount = targetLocations.length - displayedLocations.length;
+      // 4. Provide a clean summary if other options exist further down the list
+      const hiddenCount = hybridSortedLocations.length - displayedLocations.length;
       if (hiddenCount > 0) {
-        const branchTypeLabel = availableLocations.length > 0 ? 'available branch(es)' : 'branch(es)';
+        const branchTypeLabel = availableCount > 0 ? 'available branch(es)' : 'branch(es)';
         console.log(`    👉 (Plus ${hiddenCount} other ${branchTypeLabel} further away)`);
       }
     }
