@@ -44,11 +44,7 @@
         <div class="flex justify-between items-start gap-2">
           <div>
             <h3 class="font-bold text-gray-900 hover:text-blue-600 transition">{{ item.title }}</h3>
-            <p class="text-xs text-gray-500 mt-1">✍️ {{ item.author }}</p>
           </div>
-          <span class="bg-gray-100 text-gray-700 text-xs px-2.5 py-1 rounded font-medium whitespace-nowrap">
-            {{ item.mediaType }}
-          </span>
         </div>
       </div>
     </div>
@@ -65,28 +61,25 @@ const loading = ref(false)
 const results = ref([])
 
 async function handleSearch() {
-  if (!searchQuery.value.trim()) return
-  loading.value = true
+  if (!searchQuery.value.trim()) return;
+  loading.value = true;
+  results.value = []; // Vorherige Ergebnisse leeren
   
-  // Temporäre Dummy-Ergebnisse, damit du das Frontend testen kannst.
-  // Sobald wir die echte Suche haben, ersetzen wir das durch ein echtes $fetch!
-  setTimeout(() => {
-    results.value = [
-      {
-        id: '35233179',
-        title: 'Dorfromantik Duell',
-        author: 'Wiese, Jens [Illustrator/in]',
-        mediaType: 'Konventionelles Spiel'
-      },
-      {
-        id: '12345678', // Nur ein Platzhalter
-        title: 'Catan - Das Spiel',
-        author: 'Teuber, Klaus',
-        mediaType: 'Konventionelles Spiel'
-      }
-    ]
-    loading.value = false
-  }, 800)
+  try {
+    const data = await $fetch('/api/search', {
+      query: { q: searchQuery.value }
+    });
+    
+    if (data.success) {
+      results.value = data.results;
+    } else {
+      alert(`Fehler bei der Suche: ${data.error}`);
+    }
+  } catch (err) {
+    alert('Verbindung zum Suchserver fehlgeschlagen.');
+  } finally {
+    loading.value = false;
+  }
 }
 
 function goToMedia(id) {
