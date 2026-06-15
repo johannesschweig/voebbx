@@ -10,7 +10,15 @@ app.get('/search', async (req, res) => {
   // Starten von Playwright mit sandboxed Flags für Docker/Cloud-Umgebungen
   const browser = await chromium.launch({ 
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage', // Zwingt Chrome, den normalen Speicher statt /dev/shm zu nutzen
+      '--disable-gpu',            // Deaktiviert Hardware-Beschleunigung (spart RAM)
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process'          // Verhindert, dass zu viele Unterprozesse den Render-RAM sprengen
+    ] 
   });
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
@@ -98,4 +106,6 @@ app.get('/search', async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => console.log(`Scraper running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Scraper API is listening on port ${PORT}`);
+});

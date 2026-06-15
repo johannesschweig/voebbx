@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.42.1-jammy
+FROM mcr.microsoft.com/playwright:v1.61.0-jammy
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
