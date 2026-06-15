@@ -108,7 +108,7 @@ function displayBookRecords(records: SearchResult[]): void {
  * Handles executing the scraping pipeline and prompts user selection rules afterwards.
  */
 async function runSearchPipeline(query: string) {
-  console.log(`\n🔍 voebbx: Querying Berlin libraries for physical print editions of "${query}"...`);
+  console.log(`\n🔍 voebbx: Querying Berlin libraries for physical editions of "${query}"...`);
 
   try {
     const results = await searchVoebb(query);
@@ -238,7 +238,7 @@ async function main() {
   if (initialChoice.trim() === '2') {
     await handleSavedRecordsManagement(); // Updated route
   } else {
-    const newQuery = await askQuestion('✍️ Enter a book title to search: ');
+    const newQuery = await askQuestion('✍️ Enter a title to search: ');
     if (!newQuery.trim()) {
       console.log('Cancelled.');
       rl.close();

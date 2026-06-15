@@ -268,7 +268,7 @@ export async function searchVoebb(query: string): Promise<SearchResult[]> {
     await page.waitForLoadState('networkidle');
 
     const targetUrls = await extractPrintTargetUrls(page);
-    console.log(`[voebbx] Found ${targetUrls.length} valid print item records to evaluate.`);
+    console.log(`[voebbx] Found ${targetUrls.length} valid physical item records to evaluate.`);
 
     const results: SearchResult[] = [];
 
