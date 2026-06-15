@@ -1,0 +1,12 @@
+{
+  "name": "voebbx-scraper-api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "playwright": "^1.42.1"
+  }
+}
