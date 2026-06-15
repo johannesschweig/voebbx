@@ -1,22 +1,19 @@
 {
   "name": "voebbx",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "tsx src/index.ts",
-    "build": "tsc"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@playwright/test": "^1.60.0"
-  },
-  "devDependencies": {
-    "@types/node": "^25.8.0",
-    "tsx": "^4.22.1",
-    "typescript": "^6.0.3"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "cheerio": "^1.2.0",
+    "nuxt": "^4.4.8",
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
   }
 }

@@ -1,10 +1,27 @@
-.DS_Store
-.swp
-*.swp
-*~
-*.png
-TODO.md
-saved*.json
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
 
-node_modules/
-res/
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# my edits
+legacy-cli/
