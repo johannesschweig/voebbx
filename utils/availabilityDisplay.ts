@@ -1,4 +1,5 @@
-import { LIBRARY_DISTANCES } from './distanceConfig'
+import libraryData from '~/assets/libraries.json'
+import { calculateHaversineDistance } from './distance'
 
 export interface AvailabilityInfo {
   branch: string;
@@ -11,12 +12,12 @@ export interface StatusBadgeConfig {
   color: string;
 }
 
-export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined): StatusBadgeConfig {
+export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined, userCoords: { lat: number; lon: number }): StatusBadgeConfig {
   // Stufe 5: Gar keine Daten oder leere Tabelle -> Nicht im Bestand
   if (!availability || availability.length === 0) {
-    return { 
-      label: '🔴 Nicht im Bestand', 
-      color: 'bg-red-50 text-red-700 border-red-200' 
+    return {
+      label: '🔴 Nicht im Bestand',
+      color: 'bg-red-50 text-red-700 border-red-200'
     }
   }
 
@@ -26,18 +27,20 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
     const rawBranchName = parts.length > 1 ? parts[1] : parts[0]
     const cleanScrapedName = rawBranchName.replace(/[\s\u00a0]+/g, ' ').trim()
 
-    const matchedLib = LIBRARY_DISTANCES.find(
+    const matchedLib = libraryData.find(
       lib => lib.name.replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase() === cleanScrapedName.toLowerCase()
     )
-    
-    const distance = matchedLib ? matchedLib.distanceKm : 99.0
+
+    const distance = matchedLib
+      ? calculateHaversineDistance(userCoords.lat, userCoords.lon, matchedLib.lat, matchedLib.lon)
+      : 99.0
     const statusLower = loc.status.toLowerCase()
-    
+
     const isAvailable = (
-      statusLower.includes('verfügbar') || 
-      statusLower.includes('ausleihbar') || 
+      statusLower.includes('verfügbar') ||
+      statusLower.includes('ausleihbar') ||
       statusLower.includes('am regal')
-    ) && !statusLower.includes('verloren') && !statusLower.includes('nicht im regal') 
+    ) && !statusLower.includes('verloren') && !statusLower.includes('nicht im regal')
 
     return { distance, isAvailable }
   })

@@ -1,0 +1,618 @@
+[
+  {
+    "id": "fahrbibliothek-mitte-5",
+    "name": "Fahrbibliothek Mitte 5",
+    "address": "Perleberger Str. 33,10559 Berlin",
+    "lat": 52.5313701,
+    "lon": 13.3476131
+  },
+  {
+    "id": "bruno-loesche-bibliothek",
+    "name": "Bruno-Loesche-Bibliothek",
+    "address": "Bruno-Lösche,Perleberger Str. 33,10559 Berlin",
+    "lat": 52.5313186,
+    "lon": 13.3477286
+  },
+  {
+    "id": "hansabibliothek",
+    "name": "Hansabibliothek",
+    "address": "Altonaer Str. 15,10557 Berlin",
+    "lat": 52.5153194,
+    "lon": 13.34917
+  },
+  {
+    "id": "kurt-tucholsky-bibliothek-mitte",
+    "name": "Kurt-Tucholsky-Bibliothek (Mitte)",
+    "address": "Rostocker Str. 32b,10553 Berlin",
+    "lat": 52.5316337,
+    "lon": 13.3261038
+  },
+  {
+    "id": "bibliothek-tiergarten-s-d",
+    "name": "Bibliothek Tiergarten Süd",
+    "address": "Tiergarten Süd,Lützowstr. 27,10785 Berlin",
+    "lat": 52.5037472,
+    "lon": 13.3634802
+  },
+  {
+    "id": "bezirkszentralbibliothek-philipp-schaeffer",
+    "name": "Bezirkszentralbibliothek Philipp Schaeffer",
+    "address": "Philipp Schaeffer,Brunnenstr. 181,10119 Berlin",
+    "lat": 52.5318068,
+    "lon": 13.3988819
+  },
+  {
+    "id": "schiller-bibliothek",
+    "name": "Schiller-Bibliothek",
+    "address": "Müllerstr. 149,13353 Berlin",
+    "lat": 52.546673,
+    "lon": 13.357519
+  },
+  {
+    "id": "stadtteilbibliothek-sch-neberg-nord",
+    "name": "Stadtteilbibliothek Schöneberg-Nord",
+    "address": "Pallasstr. 27,10781 Berlin",
+    "lat": 52.4943729,
+    "lon": 13.35776
+  },
+  {
+    "id": "berliner-stadtbibliothek-bstb",
+    "name": "Berliner Stadtbibliothek (BStB)",
+    "address": "Breite Str. 30-36,10178 Berlin,",
+    "lat": 52.5154723,
+    "lon": 13.4041719
+  },
+  {
+    "id": "berlin-sammlungen",
+    "name": "Berlin-Sammlungen",
+    "address": "Breite Str. 30/31,10178 Berlin,",
+    "lat": 52.515317,
+    "lon": 13.4044386
+  },
+  {
+    "id": "amerika-gedenkbibliothek-agb",
+    "name": "Amerika-Gedenkbibliothek (AGB)",
+    "address": "Blücherplatz 1,10961 Berlin,",
+    "lat": 52.496565,
+    "lon": 13.3924947
+  },
+  {
+    "id": "au-enmagazin",
+    "name": "Außenmagazin",
+    "address": "Blücherplatz 1,10961 Berlin,",
+    "lat": 52.496565,
+    "lon": 13.3924947
+  },
+  {
+    "id": "thomas-dehler-bibliothek",
+    "name": "Thomas-Dehler-Bibliothek",
+    "address": "Martin-Luther-Str. 77, 10825 Berlin-Bezirk Tempelhof-Schöneberg",
+    "lat": 52.4882627,
+    "lon": 13.3459152
+  },
+  {
+    "id": "kinder-und-jugendbibliothek-mit-lernzentrum",
+    "name": "Kinder- und Jugendbibliothek mit Lernzentrum",
+    "address": "Blücherplatz 1,10961 Berlin",
+    "lat": 52.496565,
+    "lon": 13.3924947
+  },
+  {
+    "id": "heinrich-schulz-bibliothek-mit-musikabteilung",
+    "name": "Heinrich-Schulz-Bibliothek mit Musikabteilung",
+    "address": "Otto-Suhr-Allee 98,10585 Berlin",
+    "lat": 52.5170575,
+    "lon": 13.3086639
+  },
+  {
+    "id": "mittelpunktbibliothek-sch-neberg",
+    "name": "Mittelpunktbibliothek Schöneberg",
+    "address": "Hauptstr. 40,10827 Berlin",
+    "lat": 52.4840679,
+    "lon": 13.350545
+  },
+  {
+    "id": "bibliothek-am-luisenbad",
+    "name": "Bibliothek am Luisenbad",
+    "address": "Badstr. 39,13357 Berlin",
+    "lat": 52.5536841,
+    "lon": 13.3783035
+  },
+  {
+    "id": "fahrbibliothek-mitte-bus-1",
+    "name": "Fahrbibliothek Mitte Bus 1",
+    "address": "Badstr. 39,13357 Berlin",
+    "lat": 52.5536841,
+    "lon": 13.3783035
+  },
+  {
+    "id": "fahrbibliothek-mitte-bus-2",
+    "name": "Fahrbibliothek Mitte Bus 2",
+    "address": "Badstr. 39,13357 Berlin",
+    "lat": 52.5536841,
+    "lon": 13.3783035
+  },
+  {
+    "id": "fahrbibliothek-mitte-bus-3",
+    "name": "Fahrbibliothek Mitte Bus 3",
+    "address": "Badstr. 39,13357 Berlin",
+    "lat": 52.5536841,
+    "lon": 13.3783035
+  },
+  {
+    "id": "dietrich-bonhoeffer-bibliothek",
+    "name": "Dietrich-Bonhoeffer-Bibliothek",
+    "address": "Brandenburgische Str. 2,10713 Berlin",
+    "lat": 52.487167,
+    "lon": 13.3200022
+  },
+  {
+    "id": "stadtteilbibliothek-friedrich-von-raumer",
+    "name": "Stadtteilbibliothek Friedrich von Raumer",
+    "address": "Dudenstr. 18 - 20,10965 Berlin",
+    "lat": 52.485185,
+    "lon": 13.3831476
+  },
+  {
+    "id": "bibliothek-am-sch-fersee-stadtteilbibliothek-reinickendorf-ost",
+    "name": "Bibliothek am Schäfersee Stadtteilbibliothek Reinickendorf-Ost",
+    "address": "Markstrasse 36,13409 Berlin",
+    "lat": 52.5611876,
+    "lon": 13.3652607
+  },
+  {
+    "id": "mittelpunktbibliothek-wilhelm-liebknecht-namik-kemal",
+    "name": "Mittelpunktbibliothek Wilhelm Liebknecht / Namik Kemal",
+    "address": "Adalbertstr. 2,10999 Berlin",
+    "lat": 52.4998388,
+    "lon": 13.4185082
+  },
+  {
+    "id": "bettina-von-arnim-bibliothek",
+    "name": "Bettina-von-Arnim-Bibliothek",
+    "address": "Schönhauser Allee 75,10439 Berlin",
+    "lat": 52.5485766,
+    "lon": 13.4135845
+  },
+  {
+    "id": "stadtteilbibliothek-halemweg",
+    "name": "Stadtteilbibliothek Halemweg",
+    "address": "Halemweg 18,13627 Berlin",
+    "lat": 52.5376047,
+    "lon": 13.2869501
+  },
+  {
+    "id": "ingeborg-bachmann-bibliothek",
+    "name": "Ingeborg-Bachmann-Bibliothek",
+    "address": "Nehringstr. 10,14059 Berlin",
+    "lat": 52.5145406,
+    "lon": 13.2938361
+  },
+  {
+    "id": "bibliothek-am-wasserturm",
+    "name": "Bibliothek am Wasserturm",
+    "address": "Prenzlauer Allee 227/228,10405 Berlin",
+    "lat": 52.5335,
+    "lon": 13.4192557
+  },
+  {
+    "id": "museum-pankow",
+    "name": "Museum Pankow",
+    "address": "Prenzlauer Allee 227/228,10405 Berlin",
+    "lat": 52.5335,
+    "lon": 13.4192557
+  },
+  {
+    "id": "familienbibliothek-else-ury",
+    "name": "Familienbibliothek Else Ury",
+    "address": "Glogauer Str. 13,10999 Berlin",
+    "lat": 52.4926125,
+    "lon": 13.4363013
+  },
+  {
+    "id": "kleiner-b-cherbus-reinickendorf",
+    "name": "Kleiner Bücherbus Reinickendorf",
+    "address": "Auguste-Viktoria-Allee 29-31,13403 Berlin",
+    "lat": 52.57141,
+    "lon": 13.3154042
+  },
+  {
+    "id": "kurt-tucholsky-bibliothek-pankow",
+    "name": "Kurt-Tucholsky-Bibliothek (Pankow)",
+    "address": "Esmarchstr. 18,10407 Berlin",
+    "lat": 52.532909,
+    "lon": 13.4322183
+  },
+  {
+    "id": "heinrich-b-ll-bibliothek",
+    "name": "Heinrich-Böll-Bibliothek",
+    "address": "Bezirkszentralbibliothek,Greifswalder Str. 87,10409 Berlin",
+    "lat": 52.5421611,
+    "lon": 13.4411415
+  },
+  {
+    "id": "bibl-reinickendorf-west",
+    "name": "Bibl. Reinickendorf - West",
+    "address": "Reinickendorf-West,Auguste-Viktoria-Allee 29-31,13403 Berlin",
+    "lat": 52.57141,
+    "lon": 13.3154042
+  },
+  {
+    "id": "johanna-moosdorf-bibliothek",
+    "name": "Johanna-Moosdorf-Bibliothek",
+    "address": "Westendallee 45,14052 Berlin",
+    "lat": 52.510588,
+    "lon": 13.2586538
+  },
+  {
+    "id": "adolf-reichwein-bibliothek",
+    "name": "Adolf-Reichwein-Bibliothek",
+    "address": "Berkaer Str. 7,14199 Berlin",
+    "lat": 52.4777318,
+    "lon": 13.2877326
+  },
+  {
+    "id": "bezirkszentralbibliothek-tempelhof-sch-neberg",
+    "name": "Bezirkszentralbibliothek Tempelhof-Schöneberg",
+    "address": "Götzstr. 8/10/12,12099 Berlin",
+    "lat": 52.463717,
+    "lon": 13.3878043
+  },
+  {
+    "id": "fahrbibliothek-tempelhof-sch-neberg",
+    "name": "Fahrbibliothek Tempelhof-Schöneberg",
+    "address": "Götzstr. 8/10/12,12099 Berlin",
+    "lat": 52.463717,
+    "lon": 13.3878043
+  },
+  {
+    "id": "helene-nathan-bibliothek",
+    "name": "Helene-Nathan-Bibliothek",
+    "address": "Karl-Marx-Straße 66,Parkdeck 4,12043 Berlin",
+    "lat": 52.4820379,
+    "lon": 13.4322987
+  },
+  {
+    "id": "eberhard-alexander-burgh-bibliothek",
+    "name": "Eberhard-Alexander-Burgh-Bibliothek",
+    "address": "Rüdesheimer Str. 14,14197 Berlin",
+    "lat": 52.4713903,
+    "lon": 13.3134919
+  },
+  {
+    "id": "janusz-korczak-bibliothek",
+    "name": "Janusz-Korczak-Bibliothek",
+    "address": "Berliner Str. 120/121,13187 Berlin",
+    "lat": 52.5686092,
+    "lon": 13.4122028
+  },
+  {
+    "id": "bezirkszentralbibliothek-pablo-neruda",
+    "name": "Bezirkszentralbibliothek Pablo Neruda",
+    "address": "Frankfurter Allee 14 A,10247 Berlin",
+    "lat": 52.5146002,
+    "lon": 13.4570448
+  },
+  {
+    "id": "bibobike-mobile-bibliotheksstation",
+    "name": "BiboBike (mobile Bibliotheksstation)",
+    "address": "Frankfurter Allee 14a,10247 Berlin",
+    "lat": 52.5146002,
+    "lon": 13.4570448
+  },
+  {
+    "id": "fahrbibliothek-steglitz-zehlendorf",
+    "name": "Fahrbibliothek Steglitz-Zehlendorf",
+    "address": "Lauenburger Str. 19, 12157 Berlin",
+    "lat": 52.4623099,
+    "lon": 13.3379172
+  },
+  {
+    "id": "wolfdietrich-schnurre-bibliothek",
+    "name": "Wolfdietrich-Schnurre-Bibliothek",
+    "address": "Bizetstraße 41,13088 Berlin",
+    "lat": 52.5477354,
+    "lon": 13.4526704
+  },
+  {
+    "id": "stadtteilbibliothek-alt-treptow-manfred-bofinger",
+    "name": "Stadtteilbibliothek Alt-Treptow Manfred Bofinger",
+    "address": "Karl-Kunger-Str. 30,12435 Berlin",
+    "lat": 52.4887284,
+    "lon": 13.450422
+  },
+  {
+    "id": "ingeborg-drewitz-bibliothek",
+    "name": "Ingeborg-Drewitz-Bibliothek",
+    "address": "Grunewaldstr. 3,12165 Berlin",
+    "lat": 52.4578262,
+    "lon": 13.3203876
+  },
+  {
+    "id": "blindenbibliothek-betty-hirsch",
+    "name": "Blindenbibliothek Betty Hirsch",
+    "address": "Rothenburgstr. 14,12165 BERLIN",
+    "lat": 52.4556756,
+    "lon": 13.314331
+  },
+  {
+    "id": "egon-erwin-kisch-bibliothek",
+    "name": "Egon-Erwin-Kisch-Bibliothek",
+    "address": "Frankfurter Allee 149,10365 Berlin",
+    "lat": 52.5133827,
+    "lon": 13.4807688
+  },
+  {
+    "id": "stadtteilbibliothek-haselhorst",
+    "name": "Stadtteilbibliothek Haselhorst",
+    "address": "Gartenfelder Str. 104,13599 Berlin",
+    "lat": 52.5429472,
+    "lon": 13.2391773
+  },
+  {
+    "id": "anton-saefkow-bibliothek",
+    "name": "Anton-Saefkow-Bibliothek",
+    "address": "Anton-Saefkow-Platz 14,10369 Berlin",
+    "lat": 52.5305752,
+    "lon": 13.4709538
+  },
+  {
+    "id": "grosser-b-cherbus-reinickendorf",
+    "name": "Grosser Bücherbus Reinickendorf",
+    "address": "Königshorster Str. 6,13439 Berlin",
+    "lat": 52.5982033,
+    "lon": 13.3505022
+  },
+  {
+    "id": "bib-bee-reinickendorf",
+    "name": "Bib Bee Reinickendorf",
+    "address": "Karolinenstr. 19,13507 Berlin",
+    "lat": 52.5919452,
+    "lon": 13.2806035
+  },
+  {
+    "id": "humboldt-bibliothek",
+    "name": "Humboldt-Bibliothek",
+    "address": "Humboldt-Bibliothek,Karolinenstraße 19,13507 Berlin",
+    "lat": 52.5919003,
+    "lon": 13.2805964
+  },
+  {
+    "id": "heimatmuseum-neuk-lln-kein-ausgabeort",
+    "name": "Heimatmuseum Neukölln (kein Ausgabeort)",
+    "address": "Alt Britz 81,12359 Berlin",
+    "lat": 52.4459291,
+    "lon": 13.4378259
+  },
+  {
+    "id": "fahrbibliothek-spandau",
+    "name": "Fahrbibliothek Spandau",
+    "address": "Carl-Schurz-Str. 13,13597 Berlin",
+    "lat": 52.536132,
+    "lon": 13.2013533
+  },
+  {
+    "id": "hauptbibliothek-spandau",
+    "name": "Hauptbibliothek Spandau",
+    "address": "Carl-Schurz-Strasse 13,13597 Berlin",
+    "lat": 52.536132,
+    "lon": 13.2013533
+  },
+  {
+    "id": "bibliothek-m-rkisches-viertel",
+    "name": "Bibliothek Märkisches Viertel",
+    "address": "Wilhelmsruher Damm 142 C,13439 Berlin",
+    "lat": 52.5979125,
+    "lon": 13.3523303
+  },
+  {
+    "id": "stadtteilbibliothek-lankwitz",
+    "name": "Stadtteilbibliothek Lankwitz",
+    "address": "Bruchwitzstr. 37,12247 Berlin",
+    "lat": 52.4360723,
+    "lon": 13.3506193
+  },
+  {
+    "id": "stadtteilbibliothek-hakenfelde",
+    "name": "Stadtteilbibliothek Hakenfelde",
+    "address": "Iznikstr. 2,13587 Berlin",
+    "lat": 52.5601505,
+    "lon": 13.2215369
+  },
+  {
+    "id": "margarete-kubicka-bibliothek",
+    "name": "Margarete-Kubicka-Bibliothek",
+    "address": "Gutschmidtstr. 33,12359 Berlin",
+    "lat": 52.4367269,
+    "lon": 13.4461009
+  },
+  {
+    "id": "gottfried-benn-bibliothek",
+    "name": "Gottfried-Benn-Bibliothek",
+    "address": "Nentershäuser Platz 1,14163 Berlin",
+    "lat": 52.4320744,
+    "lon": 13.2553953
+  },
+  {
+    "id": "stadtteilbibliothek-falkenhagener-feld",
+    "name": "Stadtteilbibliothek Falkenhagener Feld",
+    "address": "Falkenhagener Feld,Westerwaldstr. 9,13589 Berlin",
+    "lat": 52.550079,
+    "lon": 13.1779583
+  },
+  {
+    "id": "bodo-uhse-bibliothek",
+    "name": "Bodo-Uhse-Bibliothek",
+    "address": "Erich-Kurz-Str. 9,10319 Berlin",
+    "lat": 52.4976732,
+    "lon": 13.5203346
+  },
+  {
+    "id": "anna-seghers-bibliothek",
+    "name": "Anna-Seghers-Bibliothek",
+    "address": "Prerower Platz 2,13051 Berlin",
+    "lat": 52.564801,
+    "lon": 13.505755
+  },
+  {
+    "id": "mittelpunktbibliothek-treptow-alte-feuerwache",
+    "name": "Mittelpunktbibliothek Treptow Alte Feuerwache",
+    "address": "Michael-Brückner-Str. 9,12439 Berlin",
+    "lat": 52.4540551,
+    "lon": 13.5139087
+  },
+  {
+    "id": "gertrud-junge-bibliothek",
+    "name": "Gertrud-Junge-Bibliothek",
+    "address": "Gemeinschaftshaus,Bat-Yam-Platz 1,12353 Berlin",
+    "lat": 52.4256906,
+    "lon": 13.4627589
+  },
+  {
+    "id": "stadtteilbibliothek-marienfelde",
+    "name": "Stadtteilbibliothek Marienfelde",
+    "address": "Marienfelder Allee 107, 12277 Berlin",
+    "lat": 52.4168431,
+    "lon": 13.3665881
+  },
+  {
+    "id": "stadtteilbibliothek-erich-weinert",
+    "name": "Stadtteilbibliothek Erich Weinert",
+    "address": "Helene-Weigel-Platz 4,12681 Berlin",
+    "lat": 52.5281781,
+    "lon": 13.5381417
+  },
+  {
+    "id": "bezirkszentralbibliothek-mark-twain",
+    "name": "Bezirkszentralbibliothek Mark Twain",
+    "address": "Marzahner Promenade 54,12679 Berlin",
+    "lat": 52.546976,
+    "lon": 13.5569384
+  },
+  {
+    "id": "musikbibliothek-in-der-mark-twain-bibliothek",
+    "name": "Musikbibliothek (in der Mark-Twain-Bibliothek)",
+    "address": "Marzahner Promenade 54,12679 Berlin",
+    "lat": 52.546976,
+    "lon": 13.5569384
+  },
+  {
+    "id": "bibliothek-frohnau",
+    "name": "Bibliothek Frohnau",
+    "address": "Fuchssteinerweg 17,13465 Berlin",
+    "lat": 52.6354524,
+    "lon": 13.2951387
+  },
+  {
+    "id": "gertrud-ha-bibliothek",
+    "name": "Gertrud-Haß-Bibliothek",
+    "address": "Alt-Rudow 45,12357 Berlin",
+    "lat": 52.4189604,
+    "lon": 13.4942709
+  },
+  {
+    "id": "stadtteilbibliothek-heerstrasse",
+    "name": "Stadtteilbibliothek Heerstrasse",
+    "address": "Obstallee 22F,13593 Berlin",
+    "lat": 52.5222515,
+    "lon": 13.1652726
+  },
+  {
+    "id": "stadtteilbibliothek-lichtenrade",
+    "name": "Stadtteilbibliothek Lichtenrade",
+    "address": "Steinstraße 41,12307 Berlin",
+    "lat": 52.3878917,
+    "lon": 13.397116
+  },
+  {
+    "id": "stadtteilbibliothek-adlershof-stefan-heym",
+    "name": "Stadtteilbibliothek Adlershof Stefan Heym",
+    "address": "Dörpfeldstr. 52/56,12489 Berlin",
+    "lat": 52.4386377,
+    "lon": 13.5494383
+  },
+  {
+    "id": "mittelpunktbibliothek-ehm-welk",
+    "name": "Mittelpunktbibliothek Ehm Welk",
+    "address": "Alte Hellersdorfer Str. 125,12629 Berlin",
+    "lat": 52.5469627,
+    "lon": 13.5922373
+  },
+  {
+    "id": "bibliothek-karow",
+    "name": "Bibliothek Karow",
+    "address": "Achillesstraße 77,13125 Berlin",
+    "lat": 52.6165876,
+    "lon": 13.4915523
+  },
+  {
+    "id": "stadtteilbibliothek-mahlsdorf",
+    "name": "Stadtteilbibliothek Mahlsdorf",
+    "address": "Alt-Mahlsdorf 24-26,12623 Berlin",
+    "lat": 52.505632,
+    "lon": 13.6092991
+  },
+  {
+    "id": "stadtteilbibliothek-heinrich-von-kleist",
+    "name": "Stadtteilbibliothek Heinrich von Kleist",
+    "address": "Havemannstr. 17B,12689 Berlin",
+    "lat": 52.5682148,
+    "lon": 13.5738621
+  },
+  {
+    "id": "mittelpunktbibliothek-k-penick-alter-markt",
+    "name": "Mittelpunktbibliothek Köpenick Alter Markt",
+    "address": "Alter Markt 2,12555 Berlin",
+    "lat": 52.4457578,
+    "lon": 13.5786008
+  },
+  {
+    "id": "bibliothek-buch",
+    "name": "Bibliothek Buch",
+    "address": "Wiltbergstr. 19-23,13125 Berlin-Buch",
+    "lat": 52.6356478,
+    "lon": 13.4942881
+  },
+  {
+    "id": "stadtteilbibliothek-altglienicke",
+    "name": "Stadtteilbibliothek Altglienicke",
+    "address": "Ortolfstr. 182-184,12524 Berlin",
+    "lat": 52.4033691,
+    "lon": 13.5281708
+  },
+  {
+    "id": "fahrbibliothek-treptow-k-penick",
+    "name": "Fahrbibliothek Treptow-Köpenick",
+    "address": "An Ihrer Haltestelle,12555 Berlin",
+    "lat": 52.4622442,
+    "lon": 13.5867593
+  },
+  {
+    "id": "fahrbibliothek-treptow-k-penick-kleiner-bus",
+    "name": "Fahrbibliothek Treptow-Köpenick Kleiner Bus",
+    "address": "An Ihrer Haltestelle,12555 Berlin",
+    "lat": 52.4622442,
+    "lon": 13.5867593
+  },
+  {
+    "id": "stadtteilbibliothek-kaulsdorf-nord",
+    "name": "Stadtteilbibliothek Kaulsdorf - Nord",
+    "address": "Neue Grottkauer Str. 5,12619 Berlin",
+    "lat": 52.5292289,
+    "lon": 13.5930636
+  },
+  {
+    "id": "stadtteilbibliothek-kladow",
+    "name": "Stadtteilbibliothek Kladow",
+    "address": "Sakrower Landstraße 2,14089 Berlin",
+    "lat": 52.4533504,
+    "lon": 13.1430742
+  },
+  {
+    "id": "stadtteilbibliothek-friedrichshagen",
+    "name": "Stadtteilbibliothek Friedrichshagen",
+    "address": "Peter-Hille-Str.1,12587 Berlin",
+    "lat": 52.4548895,
+    "lon": 13.6214551
+  }
+]

@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useMediaStore } from '~/stores/mediaStore'
+import { useWatchlistStore } from '~/stores/watchlistStore'
 import { calculateStatusInfo } from '../../utils/availabilityDisplay'
 
 const props = defineProps({
@@ -11,6 +12,7 @@ const props = defineProps({
 })
 
 const mediaStore = useMediaStore()
+const watchlistStore = useWatchlistStore()
 
 // Nutzt den Cheerio-Endpunkt /api/detail
 const { data, pending } = await useFetch('/api/detail', {
@@ -30,7 +32,7 @@ const { data, pending } = await useFetch('/api/detail', {
   }
 })
 
-const statusInfo = computed(() => calculateStatusInfo(data.value?.data?.availability))
+const statusInfo = computed(() => calculateStatusInfo(data.value?.data?.availability, watchlistStore.userCoords))
 </script>
 
 <template>

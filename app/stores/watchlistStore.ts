@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import berlinZips from '~/assets/berlinZipCodes.json'
 
 export interface WatchlistItem {
   media_id: string;
@@ -12,7 +13,10 @@ export const useWatchlistStore = defineStore('watchlist', {
   state: () => ({
     items: [] as WatchlistItem[],
     loading: false,
-    showAuthModal: false // 🟢 Zentraler Schalter für das Login-Modal
+    showAuthModal: false,
+    userZip: '10178',
+    userCoords: { lat: 52.5219, lon: 13.4132 },
+    isGeocoding: false
   }),
 
   getters: {
@@ -31,16 +35,16 @@ export const useWatchlistStore = defineStore('watchlist', {
     // 1. Merkliste laden
     async fetchWatchlist() {
       if (import.meta.server) return
-      
+
       const userId = await this.getUserId()
       if (!userId) {
         this.items = [] // Liste leeren wenn ausgeloggt
         return
       }
-      
+
       const supabase = useSupabaseClient()
       this.loading = true
-      
+
       const { data, error } = await supabase
         .from('voebbx_watchlist')
         .select('media_id, title, author, media_type, user_id')
@@ -56,9 +60,9 @@ export const useWatchlistStore = defineStore('watchlist', {
     // 2. Bookmark hinzufügen/entfernen mit Login-Prüfung
     async toggleBookmark(mediaItem: { id: string; title: string; author: string; mediaType: string }) {
       if (import.meta.server) return
-      
+
       const userId = await this.getUserId()
-      
+
       // 🔒 Falls nicht eingeloggt: Vorgang abbrechen und Modal öffnen!
       if (!userId) {
         this.showAuthModal = true
@@ -95,6 +99,26 @@ export const useWatchlistStore = defineStore('watchlist', {
           this.items.unshift(newItem)
         }
       }
-    }
+    },
+
+    updateLocation(zipCode: string) {
+      const cleanZip = zipCode.trim()
+      if (!cleanZip) return
+
+      // TypeScript-Sicherung für den JSON-Zugriff
+      const lookup = berlinZips as Record<string, { lat: number; lon: number }>
+
+      if (lookup[cleanZip]) {
+        this.userZip = cleanZip
+        this.userCoords = {
+          lat: lookup[cleanZip].lat,
+          lon: lookup[cleanZip].lon
+        }
+        console.log(`📍 Standort lokal aktualisiert auf PLZ ${cleanZip}:`, this.userCoords)
+      } else {
+        // Wenn der Nutzer z. B. Quatsch eintippt oder eine PLZ außerhalb Berlins
+        alert('Diese Postleitzahl wurde in der Berliner Datenbank nicht gefunden. Nutze Standard-Mitte.')
+      }
+    },
   }
 })

@@ -1,6 +1,6 @@
 // utils/branchSorter.ts
-import { LIBRARY_DISTANCES } from './distanceConfig';
 import type { AvailabilityInfo } from '~/server/api/detail.get';
+import libraryData from '~/assets/libraries.json'
 
 export function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
   return rawAvailability
@@ -16,8 +16,8 @@ export function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): Avai
         .trim()
         .toLowerCase();
 
-      // 3. Match in LIBRARY_DISTANCES suchen[cite: 1]
-      const matchedIndex = LIBRARY_DISTANCES.findIndex(lib => {
+      // 3. Match in libraryData suchen[cite: 1]
+      const matchedIndex = libraryData.findIndex(lib => {
         const cleanConfigName = lib.name.replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
         return cleanScrapedName.includes(cleanConfigName) || cleanConfigName.includes(cleanScrapedName);
       });
