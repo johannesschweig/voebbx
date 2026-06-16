@@ -37,7 +37,7 @@ const statusInfo = computed(() => calculateStatusInfo(data.value?.data?.availabi
   <div class="mt-2 flex items-center">
     <div v-if="pending" class="flex items-center gap-2 animate-pulse">
       <div class="h-5 w-36 bg-gray-200 rounded-full"></div>
-      <span class="text-xs text-gray-400">Prüfe Distanzen...</span>
+      <span class="text-xs text-gray-400">Prüfe Verfügbarkeit...</span>
     </div>
 
     <div v-else-if="data?.success" class="flex items-center gap-2">

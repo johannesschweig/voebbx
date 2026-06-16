@@ -1,90 +1,125 @@
 <!-- pages/index.vue -->
 <template>
-  <div class="max-w-2xl mx-auto p-4 font-sans text-gray-800">
-    <header class="text-center my-12">
-      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-2">
-        📚 VÖBB<span class="text-blue-600">x</span>
-      </h1>
-      <p class="text-gray-500 text-sm">Finde Medien in deiner Nähe – schnell und ohne Overhead.</p>
-    </header>
+  <div class="min-h-screen">
+    <div class="max-w-2xl mx-auto px-4 py-12">
 
-    <!-- Suchformular -->
-    <form @submit.prevent="handleSearch" class="flex gap-2 mb-8">
-      <input v-model="searchQuery" type="text" placeholder="Titel, Autor oder Spiel suchen..."
-        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
-        :disabled="loading" />
-      <button type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition shadow-sm disabled:bg-blue-400"
-        :disabled="loading || !searchQuery.trim()">
-        {{ loading ? 'Sucht...' : 'Suchen' }}
-      </button>
-    </form>
+      <!-- Suchformular -->
+      <form @submit.prevent="handleSearch" class="flex gap-2 mb-10">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Titel, Autor, Spiel …"
+          class="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm placeholder:text-gray-400"
+          :disabled="loading"
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors shadow-sm"
+          :disabled="loading || !searchQuery.trim()"
+        >
+          {{ loading ? '…' : 'Suchen' }}
+        </button>
+      </form>
 
-    <!-- Lade-Zustand -->
-    <div v-if="loading" class="text-center py-12 text-gray-500 animate-pulse">
-      <p class="text-lg">Frage VÖBB-Katalog ab...</p>
-    </div>
-
-    <!-- Ergebnisse aus dem Pinia Store -->
-    <div v-else-if="mediaStore.searchResults.length > 0" class="space-y-4">
-      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Suchergebnisse</h2>
-
-      <div v-for="item in mediaStore.searchResults" :key="item.id"
-        class="border rounded-lg p-4 bg-white shadow-sm hover:border-blue-400 transition cursor-pointer"
-        @click="goToMedia(item.id)">
-        <div class="flex justify-between items-start gap-2">
-          <div>
-            <h3 class="font-bold text-gray-900 hover:text-blue-600 transition">{{ item.title }}</h3>
-            <p class="text-xs text-gray-400 mt-0.5" v-if="item.author">{{ item.author }}</p>
-            
-            <!-- Das Lazy-Badge triggert den Scraper im Hintergrund -->
-            <AvailabilityBadge :mediaId="item.id" />
-          </div>
-        </div>
+      <!-- Lade-Zustand -->
+      <div v-if="loading" class="text-center py-16 text-gray-400 text-sm animate-pulse">
+        Frage VÖBB-Katalog ab …
       </div>
+
+      <!-- Ergebnisse -->
+      <div v-else-if="mediaStore.searchResults.length > 0">
+        <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mb-4">
+          {{ mediaStore.searchResults.length }} Treffer
+        </p>
+        <ul class="space-y-2">
+          <li
+            v-for="item in mediaStore.searchResults"
+            :key="item.id"
+            class="group bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all"
+          >
+            <div class="flex items-center gap-3 p-4">
+
+              <NuxtLink
+                :to="`/media/${item.id}`"
+                class="flex-1 min-w-0"
+              >
+                <h3 class="font-semibold text-gray-900 text-sm leading-snug truncate group-hover:text-blue-600 transition-colors">
+                  {{ item.title }}
+                </h3>
+                <p v-if="item.author" class="text-xs text-gray-400 mt-0.5 truncate">
+                  {{ item.author }}
+                </p>
+                <div class="mt-2">
+                  <AvailabilityBadge :mediaId="item.id" />
+                </div>
+              </NuxtLink>
+
+              <!-- Merken-Button (stoppt Event-Bubbling) -->
+              <button
+                @click.stop="watchlistStore.toggleBookmark(item)"
+                class="shrink-0 flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all"
+                :class="watchlistStore.isBookmarked(item.id)
+                  ? 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100'
+                  : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100 hover:text-gray-700'"
+              >
+                <span>{{ watchlistStore.isBookmarked(item.id) ? '★' : '☆' }}</span>
+                <span class="hidden sm:inline">{{ watchlistStore.isBookmarked(item.id) ? 'Gemerkt' : 'Merken' }}</span>
+              </button>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Leer-Zustand nach Suche -->
+      <div v-else-if="hasSearched" class="text-center py-16 text-gray-400 text-sm">
+        Keine Treffer für „{{ lastQuery }}" gefunden.
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
+import { useWatchlistStore } from '~/stores/watchlistStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
 const route = useRoute()
 const router = useRouter()
 const mediaStore = useMediaStore()
+const watchlistStore = useWatchlistStore()
 
 const searchQuery = ref('')
 const loading = ref(false)
+const hasSearched = ref(false)
+const lastQuery = ref('')
 
 onMounted(() => {
   if (route.query.q && typeof route.query.q === 'string') {
     searchQuery.value = route.query.q
     handleSearch()
   }
+  watchlistStore.fetchWatchlist()
 })
 
 async function handleSearch() {
   if (!searchQuery.value.trim()) return
-
   loading.value = true
-  
-  // URL-Parameter aktualisieren, ohne die Seite neu zu laden
+  hasSearched.value = false
+  lastQuery.value = searchQuery.value
   router.replace({ query: { q: searchQuery.value } })
-
   try {
-    const mediaStore = useMediaStore()
     await mediaStore.executeSearch(searchQuery.value)
   } catch (error) {
     console.error('Fehler bei der VÖBB-Suche:', error)
   } finally {
     loading.value = false
+    hasSearched.value = true
   }
 }
 
-function goToMedia(id: string) {
-  router.push(`/media/${id}`)
-}
+
 </script>

@@ -1,6 +1,8 @@
 <!-- app.vue -->
 <template>
   <div>
-    <NuxtPage :keepalive="{ max: 5 }" />
+    <NuxtLayout>
+      <NuxtPage :keepalive="{ max: 5 }" />
+    </NuxtLayout>
   </div>
 </template>
