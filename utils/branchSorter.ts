@@ -1,6 +1,6 @@
 // utils/branchSorter.ts
 import { LIBRARY_DISTANCES } from './distanceConfig';
-import type { AvailabilityInfo } from '~/server/api/scrape.get';
+import type { AvailabilityInfo } from '~/server/api/detail.get';
 
 export function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
   return rawAvailability

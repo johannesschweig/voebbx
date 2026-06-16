@@ -1,4 +1,3 @@
-// server/api/scrape.get.ts
 import { defineEventHandler, getQuery, createError } from 'h3';
 import * as cheerio from 'cheerio';
 import { filterAndSortBranches } from '../../utils/branchSorter'

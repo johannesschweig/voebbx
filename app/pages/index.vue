@@ -10,18 +10,12 @@
 
     <!-- Suchformular -->
     <form @submit.prevent="handleSearch" class="flex gap-2 mb-8">
-      <input 
-        v-model="searchQuery"
-        type="text" 
-        placeholder="Titel, Autor oder Spiel suchen..." 
+      <input v-model="searchQuery" type="text" placeholder="Titel, Autor oder Spiel suchen..."
         class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
-        :disabled="loading"
-      />
-      <button 
-        type="submit" 
+        :disabled="loading" />
+      <button type="submit"
         class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition shadow-sm disabled:bg-blue-400"
-        :disabled="loading || !searchQuery.trim()"
-      >
+        :disabled="loading || !searchQuery.trim()">
         {{ loading ? 'Sucht...' : 'Suchen' }}
       </button>
     </form>
@@ -31,19 +25,20 @@
       <p class="text-lg">Frage VÖBB-Katalog ab...</p>
     </div>
 
-    <!-- Dummy-Ergebnisse (Bis wir die Playwright-Suche anbinden) -->
-    <div v-else-if="results.length > 0" class="space-y-4">
+    <!-- Ergebnisse aus dem Pinia Store -->
+    <div v-else-if="mediaStore.searchResults.length > 0" class="space-y-4">
       <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Suchergebnisse</h2>
-      
-      <div 
-        v-for="item in results" 
-        :key="item.id"
+
+      <div v-for="item in mediaStore.searchResults" :key="item.id"
         class="border rounded-lg p-4 bg-white shadow-sm hover:border-blue-400 transition cursor-pointer"
-        @click="goToMedia(item.id)"
-      >
+        @click="goToMedia(item.id)">
         <div class="flex justify-between items-start gap-2">
           <div>
             <h3 class="font-bold text-gray-900 hover:text-blue-600 transition">{{ item.title }}</h3>
+            <p class="text-xs text-gray-400 mt-0.5" v-if="item.author">{{ item.author }}</p>
+            
+            <!-- Das Lazy-Badge triggert den Scraper im Hintergrund -->
+            <AvailabilityBadge :mediaId="item.id" />
           </div>
         </div>
       </div>
@@ -51,38 +46,45 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useMediaStore } from '~/stores/mediaStore'
+import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
+const route = useRoute()
 const router = useRouter()
+const mediaStore = useMediaStore()
+
 const searchQuery = ref('')
 const loading = ref(false)
-const results = ref([])
+
+onMounted(() => {
+  if (route.query.q && typeof route.query.q === 'string') {
+    searchQuery.value = route.query.q
+    handleSearch()
+  }
+})
 
 async function handleSearch() {
-  if (!searchQuery.value.trim()) return;
-  loading.value = true;
-  results.value = []; // Vorherige Ergebnisse leeren
+  if (!searchQuery.value.trim()) return
+
+  loading.value = true
   
+  // URL-Parameter aktualisieren, ohne die Seite neu zu laden
+  router.replace({ query: { q: searchQuery.value } })
+
   try {
-    const data = await $fetch('/api/search', {
-      query: { q: searchQuery.value }
-    });
-    
-    if (data.success) {
-      results.value = data.results;
-    } else {
-      alert(`Fehler bei der Suche: ${data.error}`);
-    }
-  } catch (err) {
-    alert('Verbindung zum Suchserver fehlgeschlagen.');
+    const mediaStore = useMediaStore()
+    await mediaStore.executeSearch(searchQuery.value)
+  } catch (error) {
+    console.error('Fehler bei der VÖBB-Suche:', error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
 }
 
-function goToMedia(id) {
+function goToMedia(id: string) {
   router.push(`/media/${id}`)
 }
 </script>

@@ -68,30 +68,9 @@ app.get('/search', async (req, res) => {
         }
       }
 
-      let author = 'Unbekannter Verfasser';
-      let mediaType = 'Medium';
-      let availabilityText = 'Status unbekannt';
-
-      try {
-        if (await rowContainer.count() > 0) {
-          const cells = rowContainer.locator('td');
-          if (await cells.count() > 2) {
-            author = await cells.nth(1).textContent() || author;
-            mediaType = await cells.nth(2).textContent() || mediaType;
-          }
-          const availElement = rowContainer.locator('.rList_availability');
-          if (await availElement.count() > 0) {
-            availabilityText = await availElement.textContent() || availabilityText;
-          }
-        }
-      } catch (e) {}
-
       searchResults.push({
         id,
         title: titleText.trim().replace(/\s+/g, ' '),
-        author: author.trim().replace(/\s+/g, ' '),
-        mediaType: mediaType.trim().replace(/\s+/g, ' '),
-        availabilityText: availabilityText.trim().replace(/\s+/g, ' ')
       });
     }
 

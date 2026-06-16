@@ -84,13 +84,13 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const mediaId = route.params.id
 
-const { data, pending, error } = await useFetch(`/api/scrape`, {
+const { data, pending, error } = await useFetch(`/api/detail`, {
   query: { id: mediaId }
 })
 
 function getStatusClass(status) {
   const s = status.toLowerCase()
-  if (s.includes('verfügbar') || s.includes('im regal')) {
+  if (s.includes('verfügbar')) {
     return 'bg-green-100 text-green-800'
   }
   if (s.includes('ausgeliehen')) {
