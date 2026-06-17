@@ -2,6 +2,7 @@
 - show bestellmöglichkeit für magazin
 - plz refresh does only work after relogin
 - add link to google maps to library selection
+- nette berlin illustration, die zeigt, wo man ist
 
 # DONE
 - Standort-Abfrage dynamisieren: Die HTML5 Geolocation API im Frontend integrieren, um die Distanzen zu den Bibliotheken anhand deiner echten aktuellen Koordinaten zu berechnen, statt feste Werte zu nutzen.

@@ -8,7 +8,7 @@ app.get('/search', async (req, res) => {
   if (!q) return res.status(400).json({ error: 'Query required' });
 
   // Starten von Playwright mit sandboxed Flags für Docker/Cloud-Umgebungen
-  const browser = await chromium.launch({ 
+  const browser = await chromium.launch({
     headless: true,
     args: [
       '--no-sandbox',
@@ -18,7 +18,7 @@ app.get('/search', async (req, res) => {
       '--no-first-run',
       '--no-zygote',
       '--single-process'          // Verhindert, dass zu viele Unterprozesse den Render-RAM sprengen
-    ] 
+    ]
   });
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
@@ -28,6 +28,15 @@ app.get('/search', async (req, res) => {
 
   try {
     await page.goto('https://www.voebb.de/', { waitUntil: 'load' });
+
+    await page.route('**/*', (route) => {
+      const type = route.request().resourceType();
+      if (['image', 'media', 'font', 'stylesheet'].includes(type)) {
+        route.abort();
+      } else {
+        route.continue();
+      }
+    });
 
     const cookieButton = page.locator('button:has-text("Akzeptieren"), button:has-text("Erlauben"), button:has-text("Alles akzeptieren")').first();
     if (await cookieButton.isVisible()) {
