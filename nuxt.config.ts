@@ -9,5 +9,11 @@ export default defineNuxtConfig({
       callback: '/confirm',
       exclude: ['/*']
     }
+  },
+  nitro: {
+    // Zwingt Nitro, diese Pakete im Vercel-Build komplett zu ignorieren
+    externals: {
+      external: ['axios', 'tough-cookie', 'axios-cookiejar-support', 'http-cookie-agent']
+    }
   }
 })

@@ -78,7 +78,7 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
   } else {
     // Stufe 4: Nur weit weg gelistet und dort auch noch weg
     return {
-      label: '🟠 Schwer zu bekommen (Weit weg / Belegt)',
+      label: '🟠 Schwer zu bekommen',
       color: 'bg-orange-50 text-orange-700 border-orange-200'
     }
   }
