@@ -1,5 +1,7 @@
 // plugins/vercel-analytics.client.ts
 export default defineNuxtPlugin(() => {
+  if (localStorage.getItem('dev_mode') === 'true') return
+
   useHead({
     script: [
       {

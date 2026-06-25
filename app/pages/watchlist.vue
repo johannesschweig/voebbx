@@ -13,7 +13,7 @@ onMounted(async () => {
   watchlistStore.fetchWatchlist()
 
   // 1. Beim Laden schauen, ob der User eine PLZ in den Supabase-Metadaten hat
-  console.log('Aktueller User:', user.value) // Debug-Ausgabe
+  // console.log('Aktueller User:', user.value) // Debug-Ausgabe
   if (user.value?.user_metadata?.zip_code) {
     const savedZip = user.value.user_metadata.zip_code
     localZipInput.value = savedZip
