@@ -3,7 +3,7 @@
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
       
       <NuxtLink to="/" class="text-xl font-black tracking-tight text-gray-900 hover:opacity-80 transition-opacity">
-        VÖBB<span class="text-blue-600">x</span>
+        BibBlitz
       </NuxtLink>
 
       <div class="flex items-center gap-2 sm:gap-3">
