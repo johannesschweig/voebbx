@@ -80,12 +80,37 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { useMediaStore } from '@/stores/mediaStore' 
+import { useWatchlistStore } from '@/stores/watchlistStore'
 
 const route = useRoute()
 const mediaId = route.params.id
+const mediaStore = useMediaStore()
+const watchlistStore = useWatchlistStore()
 
-const { data, pending, error } = useFetch(`/api/detail`, {
-  query: { id: mediaId }
+const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
+  // 1. Prüfen: Ist das Item im Store UND hat es bereits die Detail-Daten (availability)?
+  const mediaItem = mediaStore.searchResults.find(m => m.id === mediaId)
+  const watchlistItem = watchlistStore.items.find(m => m.id === mediaId)
+  const item = mediaItem || watchlistItem
+  console.log('Cached Item:', item)
+
+  if (item && item.availability) {
+    return {
+      success: true,
+      data: {
+        title: item.title,
+        author: item.author,
+        mediaType: item.mediaType,
+        availability: item.availability,
+      }
+    }
+  }
+
+  // 3. Cache-Miss (z.B. direkter URL-Aufruf): Daten frisch vom Backend holen
+  return await $fetch(`/api/detail`, {
+    query: { id: mediaId }
+  })
 })
 
 function getStatusClass(status) {

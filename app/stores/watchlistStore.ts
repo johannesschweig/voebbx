@@ -1,17 +1,21 @@
 import { defineStore } from 'pinia'
 import berlinZips from '~/assets/berlinZipCodes.json'
+import type { MediaItem } from './mediaStore'
 
-export interface WatchlistItem {
-  media_id: string;
-  title: string;
-  author?: string;
-  media_type?: string;
-  user_id: string;
+
+function toMediaItem(row: any): MediaItem {
+  return {
+    id: row.media_id,
+    title: row.title,
+    author: row.author,
+    mediaType: row.media_type,
+    loadingDetails: false,
+  }
 }
 
 export const useWatchlistStore = defineStore('watchlist', {
   state: () => ({
-    items: [] as WatchlistItem[],
+    items: [] as MediaItem[],
     loading: false,
     showAuthModal: false,
     userZip: '10178',
@@ -20,7 +24,7 @@ export const useWatchlistStore = defineStore('watchlist', {
   }),
 
   getters: {
-    isBookmarked: (state) => (mediaId: string) => state.items.some(item => item.media_id === mediaId)
+    isBookmarked: (state) => (mediaId: string) => state.items.some(item => item.id === mediaId)
   },
 
   actions: {
@@ -34,7 +38,9 @@ export const useWatchlistStore = defineStore('watchlist', {
 
     // 1. Merkliste laden
     async fetchWatchlist() {
-      if (import.meta.server) return
+      if (import.meta.server || this.loading || this.items.length > 0) return
+
+      this.loading = true
 
       const userId = await this.getUserId()
       if (!userId) {
@@ -43,7 +49,6 @@ export const useWatchlistStore = defineStore('watchlist', {
       }
 
       const supabase = useSupabaseClient()
-      this.loading = true
 
       const { data, error } = await supabase
         .from('voebbx_watchlist')
@@ -52,7 +57,7 @@ export const useWatchlistStore = defineStore('watchlist', {
         .order('created_at', { ascending: false })
 
       if (!error && data) {
-        this.items = data
+        this.items = data.map(toMediaItem)
       }
       this.loading = false
     },
@@ -80,20 +85,27 @@ export const useWatchlistStore = defineStore('watchlist', {
           .eq('user_id', userId)
 
         if (!error) {
-          this.items = this.items.filter(item => item.media_id !== mediaItem.id)
+          this.items = this.items.filter(item => item.id !== mediaItem.id)
         }
       } else {
-        const newItem: WatchlistItem = {
-          media_id: mediaItem.id,
+        const newItem: MediaItem = {
+          id: mediaItem.id,
           title: mediaItem.title,
           author: mediaItem.author,
-          media_type: mediaItem.mediaType,
-          user_id: userId
+          mediaType: mediaItem.mediaType,
+          loadingDetails: false
         }
 
+        // insert with correct supabase table name and fields
         const { error } = await supabase
           .from('voebbx_watchlist')
-          .insert([newItem])
+          .insert([{
+            media_id: mediaItem.id,
+            title: mediaItem.title,
+            author: mediaItem.author,
+            media_type: mediaItem.mediaType,
+            user_id: userId,
+          }])
 
         if (!error) {
           this.items.unshift(newItem)
@@ -120,5 +132,14 @@ export const useWatchlistStore = defineStore('watchlist', {
         alert('Diese Postleitzahl wurde in der Berliner Datenbank nicht gefunden. Nutze Standard-Mitte.')
       }
     },
+
+    enrichMediaItem(id: string, scrapedData: { availability: AvailabilityInfo[], author?: string, mediaType?: string }) {
+      const item = this.items.find(m => m.id === id);
+      if (item) {
+        item.availability = scrapedData.availability;
+        if (scrapedData.author) item.author = scrapedData.author;
+        if (scrapedData.mediaType) item.mediaType = scrapedData.mediaType;
+      }
+    }
   }
 })

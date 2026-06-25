@@ -81,19 +81,19 @@ function handleSaveLocation() {
     </div>
 
     <div v-else class="space-y-4">
-      <NuxtLink v-for="item in watchlistStore.items" :key="item.media_id" :to="`/media/${item.media_id}`"
+      <NuxtLink v-for="item in watchlistStore.items" :key="item.id" :to="`/media/${item.id}`"
         class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl flex flex-col gap-2 sm:flex-row justify-between sm:items-start">
         <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">{{ item.media_type || 'Buch'
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">{{ item.mediaType || 'Buch'
           }}</span>
           <h3 class="font-bold text-lg text-gray-900 mt-0.5">{{ item.title }}</h3>
           <p class="text-sm text-gray-500">{{ item.author || 'Unbekannter Autor' }}</p>
 
-          <AvailabilityBadge :media-id="item.media_id" />
+          <AvailabilityBadge :media-id="item.id" />
         </div>
 
         <button
-          @click="watchlistStore.toggleBookmark({ id: item.media_id, title: item.title, author: item.author || '', mediaType: item.media_type || '' })"
+          @click="watchlistStore.toggleBookmark(item)"
           class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
           Entfernen
         </button>

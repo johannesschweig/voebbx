@@ -4,9 +4,10 @@
 - add link to google maps to library selection
 - nette berlin illustration, die zeigt, wo man ist
 - docker ausbauen, falls alles stabil im backend läuft
-- kein detail fetch, wenn schon im store
+- better analytics for ref=sticker
 
 # DONE
+- kein detail fetch, wenn schon im store
 - suchperformance verbessern / playwright ablösen
 - Standort-Abfrage dynamisieren: Die HTML5 Geolocation API im Frontend integrieren, um die Distanzen zu den Bibliotheken anhand deiner echten aktuellen Koordinaten zu berechnen, statt feste Werte zu nutzen.
   - users have to input their district

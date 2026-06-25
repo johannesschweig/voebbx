@@ -32,6 +32,11 @@ const { data, pending, execute } = useFetch('/api/detail', {
         author: vobbData.author,
         mediaType: vobbData.mediaType
       })
+      watchlistStore.enrichMediaItem(props.mediaId, {
+        availability: vobbData.availability,
+        author: vobbData.author,
+        mediaType: vobbData.mediaType
+      })
     }
   }
 })
@@ -45,7 +50,7 @@ onMounted(() => {
       observer.disconnect() // Beobachtung beenden, wir brauchen die Daten nur einmal
     }
   }, {
-    rootMargin: '0px' 
+    rootMargin: '0px'
   })
 
   if (targetElement.value) {
@@ -64,7 +69,7 @@ const statusInfo = computed(() => calculateStatusInfo(data.value?.data?.availabi
 <template>
   <!-- ref="targetElement" verbindet das HTML mit unserem Observer -->
   <div ref="targetElement" class="mt-2 flex items-center min-h-[24px]">
-    
+
     <!-- Lade-Zustand: Wird erst angezeigt, wenn das Element fast im Viewport ist -->
     <div v-if="pending" class="flex items-center gap-2 animate-pulse">
       <div class="h-5 w-36 bg-gray-200 rounded-full"></div>
@@ -73,11 +78,12 @@ const statusInfo = computed(() => calculateStatusInfo(data.value?.data?.availabi
 
     <!-- Anzeige nach erfolgreichem Fetch -->
     <div v-else-if="data?.success" class="flex items-center gap-2">
-      <span :class="['px-2.5 py-0.5 text-xs font-bold rounded-full border transition-all duration-300', statusInfo.color]">
+      <span
+        :class="['px-2.5 py-0.5 text-xs font-bold rounded-full border transition-all duration-300', statusInfo.color]">
         {{ statusInfo.label }}
       </span>
     </div>
-    
+
     <!-- Platzhalter für Elemente, die noch ganz weit unten und ungesehen sind -->
     <div v-else-if="!data" class="h-5 w-36 bg-gray-100 rounded-full opacity-50"></div>
   </div>
