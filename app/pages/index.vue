@@ -75,6 +75,9 @@
       <div v-else-if="hasSearched" class="text-center py-16 text-gray-400 text-sm">
         Keine Treffer für „{{ lastQuery }}" gefunden.
       </div>
+      <div v-else>
+        <EmptyState />
+      </div>
 
     </div>
   </div>
@@ -86,6 +89,7 @@ import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
 import { useWatchlistStore } from '~/stores/watchlistStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
+import EmptyState from '~/components/EmptyState.vue'
 
 const route = useRoute()
 const router = useRouter()

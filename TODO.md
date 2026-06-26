@@ -2,11 +2,12 @@
 - show bestellmöglichkeit für magazin
 - plz refresh does only work after relogin
 - add link to google maps to library selection
-- nette berlin illustration, die zeigt, wo man ist
 - docker ausbauen, falls alles stabil im backend läuft
 - better analytics for ref=sticker
+- timeout while fetching Availabilitybadge -> id page -> back. does not get resolved
 
 # DONE
+- nette illustration, die erklärt, was die app macht
 - kein detail fetch, wenn schon im store
 - suchperformance verbessern / playwright ablösen
 - Standort-Abfrage dynamisieren: Die HTML5 Geolocation API im Frontend integrieren, um die Distanzen zu den Bibliotheken anhand deiner echten aktuellen Koordinaten zu berechnen, statt feste Werte zu nutzen.
