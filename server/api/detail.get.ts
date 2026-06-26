@@ -1,20 +1,7 @@
 import { defineEventHandler, getQuery, createError } from 'h3';
 import * as cheerio from 'cheerio';
 import { filterAndSortBranches } from '../../utils/branchSorter';
-
-export interface AvailabilityInfo {
-  branch: string;
-  status: string;
-  shelfmark?: string;
-}
-
-export interface SearchResult {
-  title: string;
-  url?: string;
-  mediaType?: string;
-  author?: string;
-  availability: AvailabilityInfo[];
-}
+import type { MediaItem, AvailabilityInfo } from '../../utils/types';
 
 export default defineEventHandler(async (event) => {
   const { id } = getQuery(event);
@@ -77,7 +64,9 @@ export default defineEventHandler(async (event) => {
     }
     titleText = titleText.replace(/[\n\t\r]+/g, ' ').replace(/\s+/g, ' ') || 'Unknown Title';
 
+    // https://www.voebb.de/aDISWeb/app/prod00?sp=SAK<id>
     const permanentUrl = $('.aDISListe a:contains("Kopierlink"), a.permalink-unclicked').first().attr('href') || targetUrl;
+    const mediaId = permanentUrl.match(/sp=SAK(\d+)/)?.[1];
 
     const availability: AvailabilityInfo[] = [];
     const targetTable = $('.register-table table, .rTable_table, #resptable-1').first();
@@ -105,12 +94,12 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       data: {
+        id: mediaId,
         title: titleText,
-        url: permanentUrl,
         mediaType,
         author,
         availability: processedAvailability
-      }
+      } as MediaItem
     };
 
   } catch (error: any) {

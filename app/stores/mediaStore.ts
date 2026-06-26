@@ -1,19 +1,5 @@
 import { defineStore } from 'pinia';
-
-export interface AvailabilityInfo {
-  branch: string;
-  status: string;
-  shelfmark?: string;
-}
-
-export interface MediaItem {
-  id: string;
-  title: string;
-  author: string;
-  mediaType: string;
-  availability?: AvailabilityInfo[];
-  loadingDetails: boolean;
-}
+import type { MediaItem, AvailabilityInfo } from '../../utils/types';
 
 export const useMediaStore = defineStore('media', {
   state: () => ({

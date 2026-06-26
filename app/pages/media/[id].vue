@@ -67,7 +67,7 @@
       <!-- VÖBB-Direktlink -->
       <footer class="mt-8 text-center">
         <a 
-          :href="data.data.url" 
+          :href="getPermanentUrlFromId(data.data.id)" 
           target="_blank" 
           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition"
         >
@@ -82,6 +82,7 @@
 import { useRoute } from 'vue-router'
 import { useMediaStore } from '@/stores/mediaStore' 
 import { useWatchlistStore } from '@/stores/watchlistStore'
+import { getPermanentUrlFromId } from '../../../utils/index.ts'
 
 const route = useRoute()
 const mediaId = route.params.id
@@ -99,6 +100,7 @@ const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
     return {
       success: true,
       data: {
+        id: item.id,
         title: item.title,
         author: item.author,
         mediaType: item.mediaType,

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'BibBlitz',
+      title: 'BibBlitz - Suchen. Finden. Ausleihen.',
       link: [
         {
           rel: 'icon',
