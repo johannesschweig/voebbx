@@ -24,9 +24,8 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    // Zwingt Nitro, diese Pakete im Vercel-Build komplett zu ignorieren
     externals: {
-      external: ['axios', 'tough-cookie', 'axios-cookiejar-support', 'http-cookie-agent']
+      inline: ['axios', 'tough-cookie', 'axios-cookiejar-support', 'http-cookie-agent']
     }
   }
 })

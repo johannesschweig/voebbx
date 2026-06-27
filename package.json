@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
-    "dev:scraper": "cd scraper-api && npm install && node index.js",
+    "dev": "npm run dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -14,8 +13,12 @@
     "@nuxtjs/supabase": "^2.0.9",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^0.11.3",
+    "axios": "^1.18.1",
+    "axios-cookiejar-support": "^7.0.0",
     "cheerio": "^1.2.0",
     "nuxt": "^4.4.8",
+    "tough-cookie": "^6.0.1",
+    "vercel": "^54.18.0",
     "vue": "^3.5.35",
     "vue-router": "^5.1.0"
   }
