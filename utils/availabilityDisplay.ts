@@ -13,11 +13,12 @@ export interface StatusBadgeConfig {
 }
 
 export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined, userCoords: { lat: number; lon: number }): StatusBadgeConfig {
-  // Stufe 5: Gar keine Daten oder leere Tabelle -> Nicht im Bestand
+  // filter out media that are lost or not on shelf
+  availability = availability?.filter(item => !item.status.toLowerCase().includes('nicht im regal') && !item.status.toLowerCase().includes('verloren'))
   if (!availability || availability.length === 0) {
     return {
       label: '🔴 Nicht im Bestand',
-      color: 'bg-red-50 text-red-700 border-red-200'
+      color: 'text-red-800 border-red-100'
     }
   }
 
@@ -40,7 +41,7 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
       statusLower.includes('verfügbar') ||
       statusLower.includes('ausleihbar') ||
       statusLower.includes('am regal')
-    ) && !statusLower.includes('verloren') && !statusLower.includes('nicht im regal')
+    )
 
     return { distance, isAvailable }
   })
@@ -55,13 +56,13 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
       // Stufe 1: In deiner Nähe verfügbar
       return {
         label: `🟢 Verfügbar in deiner Nähe (< ${Math.round(minDistance)} km)`,
-        color: 'bg-emerald-100 text-emerald-800 border-emerald-300 font-extrabold'
+        color: 'text-emerald-800 bg-emerald-50 border-emerald-200'
       }
     } else {
       // Stufe 2: Weiter weg verfügbar
       return {
         label: `🟢 Verfügbar (${Math.round(minDistance)} km entfernt)`,
-        color: 'bg-green-50 text-green-700 border-green-200'
+        color: 'text-green-700 border-green-200'
       }
     }
   }
@@ -71,15 +72,41 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
 
   if (minDistanceAnywhere <= 10) {
     // Stufe 3: Ausgeliehen, aber die Stammbibliothek wäre nah dran
+    const days = getDaysFromStatusString(availability[0].status)
     return {
-      label: '🟡 Aktuell ausgeliehen',
-      color: 'bg-yellow-50 text-yellow-700 border-yellow-200'
+      label: days ? `🟡 Ausgeliehen (${days} Tage)` : '🟡 Aktuell ausgeliehen',
+      color: 'text-yellow-800 border-yellow-300'
     }
   } else {
     // Stufe 4: Nur weit weg gelistet und dort auch noch weg
     return {
       label: '🟠 Schwer zu bekommen',
-      color: 'bg-orange-50 text-orange-700 border-orange-200'
+      color: 'text-orange-700 border-orange-200'
     }
   }
+}
+
+function getDaysFromStatusString(statusString: string): number | null {
+  // 1. Regex fängt Tag, Monat und Jahr getrennt ab
+  // Ausgeliehen - Fällig am: 1.7.2026
+  if (statusString.includes('Reserviert')) return null
+  const dateMatch = statusString.match(/Fällig am:\s+(\d{1,2})\.(\d{1,2})\.(\d{4})/i);
+
+  if (!dateMatch) {
+    console.warn("Kein fälliges Datum im Status-String gefunden:", statusString);
+    return null;
+  }
+
+  // 2. String-Teile extrahieren und parsen
+  const day = parseInt(dateMatch[1], 10);
+  const month = parseInt(dateMatch[2], 10) - 1; // ⚠️ Wichtig: Monate sind im JS-Date-Objekt 0-basiert
+  const year = parseInt(dateMatch[3], 10);
+
+  // 3. Gültiges JavaScript-Datum erzeugen
+  const dueDay = new Date(year, month, day);
+  const today = new Date();
+
+  // 4. Differenz berechnen und in Tage umrechnen
+  const differenceInMs = dueDay.getTime() - today.getTime();
+  return Math.round(differenceInMs / (1000 * 60 * 60 * 24)) + 1;
 }

@@ -1,5 +1,4 @@
 # TODO
-- add link to google maps to library selection
 
 # DONE
 - timeout while fetching Availabilitybadge -> id page -> back. does not get resolved
@@ -32,3 +31,4 @@
 - job to check them regularly: watchlist is convenient enough
 - show bestellmöglichkeit für magazin
   - signature is not unique for magazin stuff (see http://bibblitz.vercel.app/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
+- add link to google maps to library selection: not likely that people don't know the library they want to go to
