@@ -1,36 +1,33 @@
 import { defineStore } from 'pinia';
-import type { MediaItem, AvailabilityInfo } from '../../utils/types';
+import { useItemCacheStore } from './itemCacheStore';
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
-    searchResults: [] as MediaItem[]
+    searchIds: [] as string[]
   }),
 
   actions: {
     async executeSearch(query: string) {
-      // Alten Such-State leeren
-      this.searchResults = [];
+      this.searchIds = [];
+      const itemCache = useItemCacheStore();
       
       const data: any = await $fetch('/api/search', { query: { q: query } });
       
       if (data.success) {
-        // Basis-Resultate direkt als flaches Array speichern
-        this.searchResults = data.results.map((item: any) => ({
-          ...item,
-          loadingDetails: false,
-          availability: undefined
-        }));
-      }
-    },
+        // 1. Basis-Daten sofort in den zentralen Cache pushen
+        data.results.forEach((item: any) => {
+          itemCache.setBasicData({
+            id: item.id,
+            title: item.title,
+            author: item.author || 'Unbekannter Autor',
+            mediaType: item.mediaType || 'Buch'
+          });
+        });
 
-    // Wird vom Badge aufgerufen, um genau das eine Objekt im Array anzureichern
-    enrichMediaItem(id: string, scrapedData: { availability: AvailabilityInfo[], author?: string, mediaType?: string }) {
-      const item = this.searchResults.find(m => m.id === id);
-      if (item) {
-        item.availability = scrapedData.availability;
-        if (scrapedData.author) item.author = scrapedData.author;
-        if (scrapedData.mediaType) item.mediaType = scrapedData.mediaType;
+        // 2. Im eigenen Store nur die IDs abspeichern
+        this.searchIds = data.results.map((item: any) => item.id);
       }
     }
+
   }
 });

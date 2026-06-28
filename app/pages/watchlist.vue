@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useItemCacheStore } from '~/stores/itemCacheStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
 const watchlistStore = useWatchlistStore()
+const itemCacheStore = useItemCacheStore()
 const localZipInput = ref('')
 const isSavingDb = ref(false)
 const user = useSupabaseUser()
@@ -75,25 +77,29 @@ function handleSaveLocation() {
       Lade Merkliste aus Supabase...
     </div>
 
-    <div v-else-if="watchlistStore.items.length === 0"
+    <div v-else-if="watchlistStore.watchlistIds.length === 0"
       class="text-center py-12 border-2 border-dashed rounded-xl text-gray-400">
       Deine Merkliste ist noch leer.
     </div>
 
     <div v-else class="space-y-4">
-      <NuxtLink v-for="item in watchlistStore.items" :key="item.id" :to="`/media/${item.id}`"
+      <NuxtLink v-for="id in watchlistStore.watchlistIds" :key="id" :to="`/media/${id}`"
         class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl flex flex-col gap-2 sm:flex-row justify-between sm:items-start">
         <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">{{ item.mediaType || 'Buch'
-          }}</span>
-          <h3 class="font-bold text-lg text-gray-900 mt-0.5">{{ item.title }}</h3>
-          <p class="text-sm text-gray-500">{{ item.author || 'Unbekannter Autor' }}</p>
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
+            {{ itemCacheStore.items[id]?.mediaType || 'Buch' }}
+          </span>
+          <h3 class="font-bold text-lg text-gray-900 mt-0.5">
+            {{ itemCacheStore.items[id]?.title || 'Lädt Titel...' }}
+          </h3>
+          <p class="text-sm text-gray-500">
+            {{ itemCacheStore.items[id]?.author || 'Unbekannter Autor' }}
+          </p>
 
-          <AvailabilityBadge :media-id="item.id" />
+          <AvailabilityBadge :media-id="id" />
         </div>
 
-        <button
-          @click="watchlistStore.toggleBookmark(item)"
+        <button @click.prevent="watchlistStore.toggleBookmark(itemCacheStore.items[id])"
           class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
           Entfernen
         </button>

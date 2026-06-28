@@ -80,42 +80,22 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { useMediaStore } from '@/stores/mediaStore' 
-import { useWatchlistStore } from '@/stores/watchlistStore'
+import { useItemCacheStore } from '@/stores/itemCacheStore'
 import { getPermanentUrlFromId } from '../../../utils/index.ts'
 
 const route = useRoute()
 const mediaId = route.params.id
-const mediaStore = useMediaStore()
-const watchlistStore = useWatchlistStore()
+const itemCacheStore = useItemCacheStore()
 
+// Das übernimmt jetzt komplett die Logik: 
+// Gibt uns den Cache zurück oder fetcht automatisch!
 const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
-  // 1. Prüfen: Ist das Item im Store UND hat es bereits die Detail-Daten (availability)?
-  const mediaItem = mediaStore.searchResults.find(m => m.id === mediaId)
-  const watchlistItem = watchlistStore.items.find(m => m.id === mediaId)
-  const item = mediaItem || watchlistItem
-  console.log('Cached Item:', item)
-
-  if (item && item.availability) {
-    return {
-      success: true,
-      data: {
-        id: item.id,
-        title: item.title,
-        author: item.author,
-        mediaType: item.mediaType,
-        availability: item.availability,
-      }
-    }
-  }
-
-  // 3. Cache-Miss (z.B. direkter URL-Aufruf): Daten frisch vom Backend holen
-  return await $fetch(`/api/detail`, {
-    query: { id: mediaId }
-  })
+  const details = await itemCacheStore.fetchDetails(mediaId)
+  if (!details) throw new Error('Details konnten nicht geladen werden')
+  return { success: true, data: details }
 })
 
-function getStatusClass(status) {
+function getStatusClass(status ) {
   const s = status.toLowerCase()
   if (s.includes('verfügbar')) {
     return 'bg-green-100 text-green-800'

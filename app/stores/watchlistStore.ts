@@ -1,21 +1,11 @@
 import { defineStore } from 'pinia'
+import { useItemCacheStore } from './itemCacheStore'
 import berlinZips from '~/assets/berlinZipCodes.json'
-import type { MediaItem } from './mediaStore'
 
-
-function toMediaItem(row: any): MediaItem {
-  return {
-    id: row.media_id,
-    title: row.title,
-    author: row.author,
-    mediaType: row.media_type,
-    loadingDetails: false,
-  }
-}
 
 export const useWatchlistStore = defineStore('watchlist', {
   state: () => ({
-    items: [] as MediaItem[],
+    watchlistIds: [] as string[],
     loading: false,
     showAuthModal: false,
     userZip: '10178',
@@ -24,7 +14,7 @@ export const useWatchlistStore = defineStore('watchlist', {
   }),
 
   getters: {
-    isBookmarked: (state) => (mediaId: string) => state.items.some(item => item.id === mediaId)
+    isBookmarked: (state) => (mediaId: string) => state.watchlistIds.includes(mediaId)
   },
 
   actions: {
@@ -36,109 +26,95 @@ export const useWatchlistStore = defineStore('watchlist', {
       return session?.user?.id || null
     },
 
-    // 1. Merkliste laden
     async fetchWatchlist() {
-      if (import.meta.server || this.loading || this.items.length > 0) return
-
+      if (import.meta.server || this.loading || this.watchlistIds.length > 0) return
       this.loading = true
+      const itemCache = useItemCacheStore()
 
       const userId = await this.getUserId()
-      if (!userId) {
-        this.items = [] // Liste leeren wenn ausgeloggt
-        return
-      }
+      if (!userId) { this.loading = false; return }
 
       const supabase = useSupabaseClient()
-
       const { data, error } = await supabase
         .from('voebbx_watchlist')
-        .select('media_id, title, author, media_type, user_id')
+        .select('*')
         .eq('user_id', userId)
         .order('created_at', { ascending: false })
 
       if (!error && data) {
-        this.items = data.map(toMediaItem)
+        // 1. Daten in den globalen Cache einspeisen
+        data.forEach((row: any) => {
+          itemCache.setBasicData({
+            id: row.media_id,
+            title: row.title,
+            author: row.author,
+            mediaType: row.media_type
+          })
+        })
+        // 2. Nur IDs im State halten
+        this.watchlistIds = data.map((row: any) => row.media_id)
       }
       this.loading = false
     },
-
-    // 2. Bookmark hinzufügen/entfernen mit Login-Prüfung
-    async toggleBookmark(mediaItem: { id: string; title: string; author: string; mediaType: string }) {
-      if (import.meta.server) return
+    async toggleBookmark(mediaId: string) {
+      if (this.isBookmarked(mediaId)) {
+        await this.removeFromWatchlist(mediaId)
+      } else {
+        await this.addToWatchlist(mediaId)
+      }
+    },
+    async addToWatchlist(mediaId: string) {
+      const itemCache = useItemCacheStore()
+      const cachedItem = itemCache.items[mediaId]
+      if (!cachedItem) return // Sicherheitsnetz
 
       const userId = await this.getUserId()
+      if (!userId) { this.showAuthModal = true; return }
 
-      // 🔒 Falls nicht eingeloggt: Vorgang abbrechen und Modal öffnen!
-      if (!userId) {
-        this.showAuthModal = true
-        return
-      }
+      if (this.watchlistIds.includes(mediaId)) return
+
+      console.log('Adding to watchlist:', mediaId)
 
       const supabase = useSupabaseClient()
-      const alreadySaved = this.isBookmarked(mediaItem.id)
+      const { error } = await supabase
+        .from('voebbx_watchlist')
+        .insert([{
+          media_id: cachedItem.id,
+          title: cachedItem.title,
+          author: cachedItem.author,
+          media_type: cachedItem.mediaType,
+          user_id: userId
+        }])
 
-      if (alreadySaved) {
-        const { error } = await supabase
-          .from('voebbx_watchlist')
-          .delete()
-          .eq('media_id', mediaItem.id)
-          .eq('user_id', userId)
+      if (!error) {
+        this.watchlistIds.unshift(mediaId)
+      }
+    },
 
-        if (!error) {
-          this.items = this.items.filter(item => item.id !== mediaItem.id)
-        }
-      } else {
-        const newItem: MediaItem = {
-          id: mediaItem.id,
-          title: mediaItem.title,
-          author: mediaItem.author,
-          mediaType: mediaItem.mediaType,
-          loadingDetails: false
-        }
+    async removeFromWatchlist(mediaId: string) {
+      const userId = await this.getUserId()
+      if (!userId) return
 
-        // insert with correct supabase table name and fields
-        const { error } = await supabase
-          .from('voebbx_watchlist')
-          .insert([{
-            media_id: mediaItem.id,
-            title: mediaItem.title,
-            author: mediaItem.author,
-            media_type: mediaItem.mediaType,
-            user_id: userId,
-          }])
+      const supabase = useSupabaseClient()
+      const { error } = await supabase
+        .from('voebbx_watchlist')
+        .delete()
+        .eq('media_id', mediaId)
+        .eq('user_id', userId)
 
-        if (!error) {
-          this.items.unshift(newItem)
-        }
+      if (!error) {
+        this.watchlistIds = this.watchlistIds.filter(id => id !== mediaId)
       }
     },
 
     updateLocation(zipCode: string) {
       const cleanZip = zipCode.trim()
       if (!cleanZip) return
-
-      // TypeScript-Sicherung für den JSON-Zugriff
       const lookup = berlinZips as Record<string, { lat: number; lon: number }>
 
       if (lookup[cleanZip]) {
         this.userZip = cleanZip
-        this.userCoords = {
-          lat: lookup[cleanZip].lat,
-          lon: lookup[cleanZip].lon
-        }
-        console.log(`📍 Standort lokal aktualisiert auf PLZ ${cleanZip}:`, this.userCoords)
-      } else {
-        // Wenn der Nutzer z. B. Quatsch eintippt oder eine PLZ außerhalb Berlins
-        alert('Diese Postleitzahl wurde in der Berliner Datenbank nicht gefunden. Nutze Standard-Mitte.')
-      }
-    },
-
-    enrichMediaItem(id: string, scrapedData: { availability: AvailabilityInfo[], author?: string, mediaType?: string }) {
-      const item = this.items.find(m => m.id === id);
-      if (item) {
-        item.availability = scrapedData.availability;
-        if (scrapedData.author) item.author = scrapedData.author;
-        if (scrapedData.mediaType) item.mediaType = scrapedData.mediaType;
+        this.userCoords = { lat: lookup[cleanZip].lat, lon: lookup[cleanZip].lon }
       }
     }
   }

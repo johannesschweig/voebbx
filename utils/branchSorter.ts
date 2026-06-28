@@ -1,5 +1,5 @@
 // utils/branchSorter.ts
-import type { AvailabilityInfo } from '~/server/api/detail.get';
+import type { AvailabilityInfo } from '../types/types';
 import libraryData from '~/assets/libraries.json'
 
 export function filterAndSortBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {

@@ -1,16 +1,16 @@
 <template>
   <nav class="sticky top-0 z-[900] border-b border-gray-100 bg-white/80 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+    <div class="mx-auto flex max-w-7xl watchlistIds-center justify-between px-4 py-3 sm:px-6">
       
       <NuxtLink to="/" class="text-xl font-black tracking-tight text-gray-900 hover:opacity-80 transition-opacity">
         BibBlitz
       </NuxtLink>
 
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex watchlistIds-center gap-2 sm:gap-3">
         
         <NuxtLink 
           to="/" 
-          class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
           active-class="bg-blue-50 text-blue-600 hover:bg-blue-50 hover:text-blue-600"
         >
           <span>🔍</span>
@@ -19,16 +19,16 @@
 
         <button 
           @click="handleWatchlistClick"
-          class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
           :class="{ 'bg-blue-50 text-blue-600': route.path === '/watchlist' }"
         >
           <span>⭐</span>
           <span>Merkliste</span>
           <span 
-            v-if="user && store.items.length > 0" 
+            v-if="user && store.watchlistIds.length > 0" 
             class="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-black text-white"
           >
-            {{ store.items.length }}
+            {{ store.watchlistIds.length }}
           </span>
         </button>
 
@@ -75,7 +75,7 @@ watch(user, (newUser) => {
   if (newUser) {
     store.fetchWatchlist()
   } else {
-    store.items = []
+    store.watchlistIds = []
   }
 })
 
