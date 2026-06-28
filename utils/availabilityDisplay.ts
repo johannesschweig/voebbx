@@ -52,16 +52,16 @@ export function calculateStatusInfo(availability: AvailabilityInfo[] | undefined
   if (availableLocations.length > 0) {
     const minDistance = Math.min(...availableLocations.map(l => l.distance))
 
-    if (minDistance < 5) {
+    if (minDistance < 3) {
       // Stufe 1: In deiner Nähe verfügbar
       return {
-        label: `🟢 Verfügbar in deiner Nähe (< ${Math.round(minDistance)} km)`,
+        label: `🟢 Verfügbar in deiner Nähe`,
         color: 'text-emerald-800 bg-emerald-50 border-emerald-200'
       }
     } else {
       // Stufe 2: Weiter weg verfügbar
       return {
-        label: `🟢 Verfügbar (${Math.round(minDistance)} km entfernt)`,
+        label: `🟢 Verfügbar (${Math.ceil(minDistance)} km entfernt)`,
         color: 'text-green-700 border-green-200'
       }
     }

@@ -6,24 +6,16 @@ import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
 const watchlistStore = useWatchlistStore()
 const itemCacheStore = useItemCacheStore()
-const localZipInput = ref('')
 const isSavingDb = ref(false)
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 
-onMounted(async () => {
-  watchlistStore.fetchWatchlist()
+// 1. Initialisiere das Input-Feld direkt mit dem, was aktuell im Store steht (Default oder geladen)
+const localZipInput = ref(watchlistStore.userZip)
 
-  // 1. Beim Laden schauen, ob der User eine PLZ in den Supabase-Metadaten hat
-  // console.log('Aktueller User:', user.value) // Debug-Ausgabe
-  if (user.value?.user_metadata?.zip_code) {
-    const savedZip = user.value.user_metadata.zip_code
-    localZipInput.value = savedZip
-    watchlistStore.updateLocation(savedZip) // Store füttern
-  } else {
-    // Fallback auf das Store-Default (10178)
-    localZipInput.value = watchlistStore.userZip
-  }
+// 2. Falls Supabase die PLZ im Hintergrund asynchron lädt, aktualisieren wir das Input-Feld automatisch
+watch(() => watchlistStore.userZip, (newZip) => {
+  localZipInput.value = newZip
 })
 
 function handleSaveLocation() {

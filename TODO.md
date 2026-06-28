@@ -1,6 +1,7 @@
 # TODO
 
 # DONE
+- display due days
 - timeout while fetching Availabilitybadge -> id page -> back. does not get resolved
   - better caching handling. ask if data available, if not, get it and store it
   - detail: send 500. VÖBB Fetch Failed
