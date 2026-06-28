@@ -1,13 +1,13 @@
 # TODO
 - plz refresh does only work after relogin
 - add link to google maps to library selection
-- docker ausbauen, falls alles stabil im backend läuft
 - better analytics for ref=sticker
 - timeout while fetching Availabilitybadge -> id page -> back. does not get resolved
   - better caching handling. ask if data available, if not, get it and store it
   - detail: send 500. VÖBB Fetch Failed
 
 # DONE
+- docker ausbauen, falls alles stabil im backend läuft
 - nette illustration, die erklärt, was die app macht
 - kein detail fetch, wenn schon im store
 - suchperformance verbessern / playwright ablösen
