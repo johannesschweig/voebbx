@@ -1,7 +1,7 @@
 <!-- pages/index.vue -->
 <template>
   <div class="min-h-screen">
-    <div class="max-w-2xl mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto md:py-12">
 
       <!-- Suchformular -->
       <form @submit.prevent="handleSearch" class="flex gap-2 mb-10">
@@ -65,6 +65,9 @@
         <EmptyState />
       </div>
 
+      <div class="text-center text-sm text-gray-400 mt-8">
+        Feedback? Email an <a href="mailto:feedback@voebbx.de" class="text-blue-500 hover:text-blue-700">bibblitz@proton.me</a>
+      </div>
     </div>
   </div>
 </template>

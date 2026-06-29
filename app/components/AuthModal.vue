@@ -17,7 +17,7 @@
         {{ isSignUp ? 'Konto erstellen' : 'Anmelden' }}
       </h2>
       <p class="mt-1 text-sm text-gray-500 mb-6">
-        Melde dich an, um deine Merkliste geräteübergreifend zu synchronisieren.
+        {{ isSignUp ? 'Erstelle ein kostenloses Konto, um deine Merkliste zu speichern.' : 'Melde dich an, um deine Merkliste zu speichern.' }}
       </p>
 
       <form @submit.prevent="handleAuth" class="space-y-4">

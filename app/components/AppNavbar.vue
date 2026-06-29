@@ -35,16 +35,16 @@
         <button 
           v-if="user" 
           @click="handleLogout"
-          class="ml-2 rounded-lg p-1.5 text-xs font-semibold text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors"
+          class="ml-2 rounded-lg p-1.5 text-xs font-semibold text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors hidden md:inline"
           title="Abmelden"
         >
-          <span class="hidden md:inline">Abmelden</span>
+          <span>Abmelden</span>
         </button>
 
         <button 
           v-else
           @click="store.showAuthModal = true"
-          class="ml-2 rounded-xl bg-gray-950 px-3.5 py-1.5 text-sm font-bold text-white shadow-sm hover:bg-gray-800 transition-all"
+          class="ml-2 rounded-xl bg-gray-950 px-3.5 py-1.5 text-sm font-bold text-white shadow-sm hover:bg-gray-800 transition-all hidden md:inline"
         >
           Anmelden
         </button>

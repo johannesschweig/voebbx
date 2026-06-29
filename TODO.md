@@ -1,6 +1,8 @@
 # TODO
 
 # DONE
+- navbar overflow mobile
+- contact email
 - display due days
 - timeout while fetching Availabilitybadge -> id page -> back. does not get resolved
   - better caching handling. ask if data available, if not, get it and store it
