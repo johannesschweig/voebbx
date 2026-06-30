@@ -2,8 +2,9 @@
 <template>
   <div class="max-w-2xl mx-auto p-4 font-sans text-gray-800">
     <!-- Zurück-Button & Status -->
-    <div class="mb-6">
+    <div class="mb-6 flex justify-between items-center">
       <NuxtLink @click="$router.back()" class="text-sm text-blue-600 hover:underline">← Zurück</NuxtLink>
+      <BookmarkButton :mediaId="mediaId" :context="'detail'"/>
     </div>
 
     <!-- Lade-Zustand -->
@@ -82,6 +83,7 @@
 import { useRoute } from 'vue-router'
 import { useItemCacheStore } from '@/stores/itemCacheStore'
 import { getPermanentUrlFromId } from '../../../utils/index.ts'
+import BookmarkButton from '~/components/BookmarkButton.vue'
 
 const route = useRoute()
 const mediaId = route.params.id

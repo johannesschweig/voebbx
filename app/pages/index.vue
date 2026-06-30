@@ -43,15 +43,7 @@
                 </div>
               </NuxtLink>
 
-              <button @click.stop="watchlistStore.toggleBookmark(itemCacheStore.items[id].id)"
-                class="shrink-0 flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all"
-                :class="watchlistStore.isBookmarked(id)
-                  ? 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100'
-                  : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100 hover:text-gray-700'">
-                <span>{{ watchlistStore.isBookmarked(id) ? '★' : '☆' }}</span>
-                <span class="hidden sm:inline">{{ watchlistStore.isBookmarked(id) ? 'Gemerkt' : 'Merken' }}</span>
-              </button>
-
+              <BookmarkButton :mediaId="id" :context="'list'" />
             </div>
           </li>
         </ul>
@@ -80,6 +72,7 @@ import { useItemCacheStore } from '~/stores/itemCacheStore'
 import { useWatchlistStore } from '~/stores/watchlistStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 import EmptyState from '~/components/EmptyState.vue'
+import BookmarkButton from '~/components/BookmarkButton.vue'
 
 const route = useRoute()
 const router = useRouter()

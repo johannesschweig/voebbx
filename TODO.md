@@ -1,6 +1,10 @@
 # TODO
 
+# Ideas
+- instant notifications when available: in app (native) or via email or in telegram
+
 # DONE
+- bookmark button on detail page
 - navbar overflow mobile
 - contact email
 - display due days
