@@ -91,7 +91,7 @@ function handleSaveLocation() {
           <AvailabilityBadge :media-id="id" />
         </div>
 
-        <button @click.prevent="watchlistStore.toggleBookmark(itemCacheStore.items[id])"
+        <button @click.prevent="watchlistStore.toggleBookmark(id)"
           class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
           Entfernen
         </button>
