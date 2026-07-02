@@ -53,12 +53,15 @@
       <div v-else-if="hasSearched" class="text-center py-16 text-gray-400 text-sm">
         Keine Treffer für „{{ lastQuery }}" gefunden.
       </div>
-      <div v-else>
+      <div v-else class="flex flex-col gap-8">
         <EmptyState />
+        <Faq />
       </div>
 
+
       <div class="text-center text-sm text-gray-400 mt-8">
-        Feedback? Email an <a href="mailto:bibblitz@proton.me" class="text-blue-500 hover:text-blue-700">bibblitz@proton.me</a>
+        Feedback? Email an <a href="mailto:bibblitz@proton.me"
+          class="text-blue-500 hover:text-blue-700">bibblitz@proton.me</a>
       </div>
 
       <div class="mt-12 flex gap-3 text-xs">
@@ -78,6 +81,7 @@ import { useWatchlistStore } from '~/stores/watchlistStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 import EmptyState from '~/components/EmptyState.vue'
 import BookmarkButton from '~/components/BookmarkButton.vue'
+import Faq from '~/components/Faq.vue'
 
 const route = useRoute()
 const router = useRouter()
