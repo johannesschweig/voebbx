@@ -1,4 +1,6 @@
 # TODO
+- better sorting of branches (see branchSorter)
+- /detail fails we need a refetch button or something
 
 # Ideas
 - instant notifications when available: in app (native) or via email or in telegram

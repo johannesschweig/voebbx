@@ -104,6 +104,7 @@ export const useWatchlistStore = defineStore('watchlist', {
 
       if (!error) {
         this.watchlistIds = this.watchlistIds.filter(id => id !== mediaId)
+        console.log('Removing from watchlist:', mediaId)
       }
     },
 

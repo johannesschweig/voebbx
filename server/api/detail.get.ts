@@ -1,7 +1,7 @@
 import { defineEventHandler, getQuery, createError } from 'h3';
 import * as cheerio from 'cheerio';
 import { filterAndSortBranches } from '../../utils/branchSorter';
-import type { MediaItem, AvailabilityInfo } from '../../utils/types';
+import type { MediaItem, AvailabilityInfo } from '../../types/types';
 
 export default defineEventHandler(async (event) => {
   const { id } = getQuery(event);
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
       // Nuxt übernimmt das automatische Retry-Handling ressourcenschonend im Hintergrund
       retry: 1, 
       retryDelay: 300,
-      timeout: 7000 // Bleibt sicher unter dem harten 10-Sekunden-Limit von Vercel
+      timeout: 4500 // Bleibt sicher unter dem harten 10-Sekunden-Limit von Vercel
     });
 
     if (!htmlContent || !htmlContent.includes('aDISWeb')) {
