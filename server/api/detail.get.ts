@@ -1,6 +1,6 @@
 import { defineEventHandler, getQuery, createError } from 'h3';
 import * as cheerio from 'cheerio';
-import { filterAndSortBranches } from '../../utils/branchSorter';
+import { filterAndEnrichBranches } from '../../utils/availability';
 import type { MediaItem, AvailabilityInfo } from '../../types/types';
 
 export default defineEventHandler(async (event) => {
@@ -89,7 +89,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const processedAvailability = filterAndSortBranches(availability); 
+    const processedAvailability = filterAndEnrichBranches(availability); 
 
     return {
       success: true,

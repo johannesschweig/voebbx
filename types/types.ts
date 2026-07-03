@@ -2,6 +2,9 @@ export interface AvailabilityInfo {
   branch: string;
   status: string;
   shelfmark?: string;
+  lat?: number;
+  lon?: number;
+  daysToWait?: number;
 }
 
 export interface MediaItem {

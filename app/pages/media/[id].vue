@@ -43,7 +43,7 @@
 
         <div v-else class="space-y-3">
           <div 
-            v-for="(item, index) in data.data.availability" 
+            v-for="(item, index) in sortedAvailability" 
             :key="index"
             class="border rounded-lg p-4 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
           >
@@ -59,7 +59,7 @@
               class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-center"
               :class="getStatusClass(item.status)"
             >
-              {{ item.status }}
+              {{ item.daysToWait > 0 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` : item.status }}
             </span>
           </div>
         </div>
@@ -84,10 +84,13 @@ import { useRoute } from 'vue-router'
 import { useItemCacheStore } from '@/stores/itemCacheStore'
 import { getPermanentUrlFromId } from '../../../utils/index.ts'
 import BookmarkButton from '~/components/BookmarkButton.vue'
+import { sortBranchesByDistance } from '../../../utils/availability'
+import { useWatchlistStore } from '@/stores/watchlistStore'
 
 const route = useRoute()
 const mediaId = route.params.id
 const itemCacheStore = useItemCacheStore()
+const watchlistStore = useWatchlistStore()
 
 // Das übernimmt jetzt komplett die Logik: 
 // Gibt uns den Cache zurück oder fetcht automatisch!
@@ -95,6 +98,16 @@ const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
   const details = await itemCacheStore.fetchDetails(mediaId)
   if (!details) throw new Error('Details konnten nicht geladen werden')
   return { success: true, data: details }
+})
+
+const sortedAvailability = computed(() => {
+  // Wenn useFetch noch lädt oder die API fehlschlug, leeres Array zurückgeben
+  if (!data.value?.success || !data.value?.data?.availability) {
+    return []
+  }
+
+  // Unsere neue, defensive Sortierfunktion aufrufen
+  return sortBranchesByDistance(data.value.data.availability, watchlistStore.userCoords)
 })
 
 function getStatusClass(status ) {

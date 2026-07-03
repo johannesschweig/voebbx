@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
 import { useWatchlistStore } from '~/stores/watchlistStore'
-import { calculateStatusInfo } from '../../utils/availabilityDisplay'
+import { calculateStatusInfo } from '../../utils/availability'
 
 const props = defineProps({
   mediaId: { type: String, required: true }
