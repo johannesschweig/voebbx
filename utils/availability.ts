@@ -172,11 +172,21 @@ export function filterAndEnrichBranches(rawAvailability: AvailabilityInfo[]): Av
 }
 
 export function sortBranchesByDistance(availability: AvailabilityInfo[], userCoords: { lat: number; lon: number }): AvailabilityInfo[] {
-  return [...availability].sort((a, b) => {
-    // Haversine-Distanz berechnen
-    const distanceA = calculateHaversineDistance(userCoords.lat, userCoords.lon, a.lat!, a.lon!);
-    const distanceB = calculateHaversineDistance(userCoords.lat, userCoords.lon, b.lat!, b.lon!);
+  const mappedAvailability = availability.map(item => {
+    const hasGeo = typeof item.lat === 'number' && typeof item.lon === 'number';
+    
+    const distance = calculateHaversineDistance(userCoords.lat, userCoords.lon, item.lat!, item.lon!)
 
-    return distanceA - distanceB; // Die kürzere Distanz rutscht nach oben
+    return {
+      ...item,
+      distance: distance !== undefined ? Math.round(distance * 10) / 10 : undefined
+    };
+  });
+
+  return mappedAvailability.sort((a, b) => {
+    const distA = a.distance ?? 999;
+    const distB = b.distance ?? 999;
+
+    return distA - distB; // Die kürzeste Distanz steht ganz oben
   });
 }

@@ -4,6 +4,7 @@ export interface AvailabilityInfo {
   shelfmark?: string;
   lat?: number;
   lon?: number;
+  distance?: number;
   daysToWait?: number;
 }
 

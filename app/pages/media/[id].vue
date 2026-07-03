@@ -1,10 +1,10 @@
 <!-- pages/media/[id].vue -->
 <template>
-  <div class="max-w-2xl mx-auto p-4 font-sans text-gray-800">
+  <div class="max-w-2xl mx-auto font-sans text-gray-800">
     <!-- Zurück-Button & Status -->
     <div class="mb-6 flex justify-between items-center">
       <NuxtLink @click="$router.back()" class="text-sm text-blue-600 hover:underline">← Zurück</NuxtLink>
-      <BookmarkButton :mediaId="mediaId" :context="'detail'"/>
+      <BookmarkButton :mediaId="mediaId" :context="'detail'" />
     </div>
 
     <!-- Lade-Zustand -->
@@ -42,36 +42,38 @@
         </div>
 
         <div v-else class="space-y-3">
-          <div 
-            v-for="(item, index) in sortedAvailability" 
-            :key="index"
-            class="border rounded-lg p-4 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
-          >
+          <div v-for="(item, index) in displayedBranches" :key="index"
+            class="border rounded-lg p-4 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <h3 class="font-medium text-gray-900">{{ item.branch }}</h3>
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
-                Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border rounded text-gray-700">{{ item.shelfmark }}</span>
+                Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border rounded text-gray-700">{{ item.shelfmark
+                  }}</span>
               </p>
             </div>
-            
+
             <!-- Status Badge -->
-            <span 
-              class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-center"
-              :class="getStatusClass(item.status)"
-            >
-              {{ item.daysToWait > 0 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` : item.status }}
+            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-center"
+              :class="getStatusClass(item.status)">
+              {{
+                item.daysToWait === 1 ? '⏳ 1 Tag' :
+                  item.daysToWait > 1 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` :
+                    item.status
+              }}
             </span>
           </div>
+          <button v-if="hiddenBranchesCount > 0" @click="showAllBranches = true"
+            class="mt-4 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">
+            {{ hiddenBranchesCount }} entferntere
+            {{ hiddenBranchesCount === 1 ? 'Bibliothek' : 'Bibliotheken' }} anzeigen
+          </button>
         </div>
       </section>
 
       <!-- VÖBB-Direktlink -->
       <footer class="mt-8 text-center">
-        <a 
-          :href="getPermanentUrlFromId(data.data.id)" 
-          target="_blank" 
-          class="inline-block border border-1 border-blue-600 bg-white hover:bg-blue-100 text-blue-700 font-medium text-sm px-5 py-2.5 rounded-lg transition"
-        >
+        <a :href="getPermanentUrlFromId(data.data.id)" target="_blank"
+          class="inline-block border border-1 border-blue-600 bg-white hover:bg-blue-100 text-blue-700 font-medium text-sm px-5 py-2.5 rounded-lg transition">
           Im VÖBB-Katalog öffnen ↗
         </a>
       </footer>
@@ -86,11 +88,13 @@ import { getPermanentUrlFromId } from '../../../utils/index.ts'
 import BookmarkButton from '~/components/BookmarkButton.vue'
 import { sortBranchesByDistance } from '../../../utils/availability'
 import { useWatchlistStore } from '@/stores/watchlistStore'
+import { ref, computed } from 'vue'
 
 const route = useRoute()
 const mediaId = route.params.id
 const itemCacheStore = useItemCacheStore()
 const watchlistStore = useWatchlistStore()
+const showAllBranches = ref(false)
 
 // Das übernimmt jetzt komplett die Logik: 
 // Gibt uns den Cache zurück oder fetcht automatisch!
@@ -100,17 +104,32 @@ const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
   return { success: true, data: details }
 })
 
-const sortedAvailability = computed(() => {
-  // Wenn useFetch noch lädt oder die API fehlschlug, leeres Array zurückgeben
+const displayedBranches = computed(() => {
+  const branches = sortedBranches.value
+
+  if (branches.length <= 3 || showAllBranches.value) {
+    return branches
+  }
+
+  return branches.filter(item => {
+    const dist = item.distance ?? 999
+    return dist <= 7
+  })
+})
+
+const hiddenBranchesCount = computed(() => {
+  return sortedBranches.value.length - displayedBranches.value.length
+})
+
+const sortedBranches = computed(() => {
   if (!data.value?.success || !data.value?.data?.availability) {
     return []
   }
 
-  // Unsere neue, defensive Sortierfunktion aufrufen
   return sortBranchesByDistance(data.value.data.availability, watchlistStore.userCoords)
 })
 
-function getStatusClass(status ) {
+function getStatusClass(status) {
   const s = status.toLowerCase()
   if (s.includes('verfügbar')) {
     return 'bg-green-100 text-green-800'
