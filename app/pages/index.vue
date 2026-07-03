@@ -107,6 +107,7 @@ async function handleSearch() {
   hasSearched.value = false
   lastQuery.value = searchQuery.value
   router.replace({ query: { q: searchQuery.value } })
+  ; (window as any).umami?.track('search-started', { query: searchQuery.value })
   try {
     await mediaStore.executeSearch(searchQuery.value)
   } catch (error) {
