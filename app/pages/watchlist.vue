@@ -5,8 +5,10 @@ import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
 const userStore = useUserStore()
 const itemCacheStore = useItemCacheStore()
-
+const supabase = useSupabaseClient()
+const router = useRouter()
 const localZipInput = ref(userStore.userZip)
+const user = useSupabaseUser()
 
 watch(() => userStore.userZip, (newZip) => {
   localZipInput.value = newZip
@@ -16,18 +18,22 @@ function saveLocation() {
   ; (window as any).umami?.track('zip-save', { query: localZipInput.value.substring(0, 2) })
   userStore.saveLocation(localZipInput.value)
 }
+
+async function handleLogout() {
+  await supabase.auth.signOut()
+}
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto p-6">
+  <div class="max-w-4xl mx-auto space-y-8">
     <div
-      class="mb-6 p-4 bg-blue-50/50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      class="p-4 bg-blue-50/50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
         <h3 class="font-bold text-gray-900 text-sm flex items-center gap-1.5">
           <span>📍</span> Dein Standort (PLZ)
         </h3>
         <p class="text-xs text-gray-500 mt-0.5">
-          Aktueller Filter: <span class="font-bold text-blue-700">{{ userStore.userZip }}</span>
+          Aktuell: <span class="font-bold text-blue-700">{{ userStore.userZip }}</span>
         </p>
         <p class="text-xs text-gray-500 mt-0.5">
           Wir nutzen diese Information, um die Bibliotheken nach Entfernung zu sortieren.
@@ -45,41 +51,63 @@ function saveLocation() {
     </div>
 
 
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-black">Deine Merkliste</h1>
+    <div>
+      <h1 class="text-2xl font-black mb-4">Deine Merkliste</h1>
+
+      <div v-if="userStore.loading" class="text-center py-8 text-gray-500">
+        Lade Merkliste aus Supabase...
+      </div>
+
+      <div v-else-if="userStore.watchlistIds.length === 0"
+        class="text-center py-12 border-2 border-dashed rounded-xl text-gray-400">
+        Deine Merkliste ist noch leer.
+      </div>
+
+      <div v-else class="space-y-4">
+        <NuxtLink v-for="id in userStore.watchlistIds" :key="id" :to="`/media/${id}`"
+          class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl flex flex-col gap-2 sm:flex-row justify-between sm:items-start">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
+              {{ itemCacheStore.items[id]?.mediaType || 'Buch' }}
+            </span>
+            <h3 class="font-bold text-lg text-gray-900 mt-0.5">
+              {{ itemCacheStore.items[id]?.title || 'Lädt Titel...' }}
+            </h3>
+            <p class="text-sm text-gray-500">
+              {{ itemCacheStore.items[id]?.author || 'Unbekannter Autor' }}
+            </p>
+
+            <AvailabilityBadge :media-id="id" />
+          </div>
+
+          <button @click.prevent="userStore.toggleBookmark(id)"
+            class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
+            Entfernen
+          </button>
+        </NuxtLink>
+      </div>
     </div>
 
-    <div v-if="userStore.loading" class="text-center py-8 text-gray-500">
-      Lade Merkliste aus Supabase...
-    </div>
-
-    <div v-else-if="userStore.watchlistIds.length === 0"
-      class="text-center py-12 border-2 border-dashed rounded-xl text-gray-400">
-      Deine Merkliste ist noch leer.
-    </div>
-
-    <div v-else class="space-y-4">
-      <NuxtLink v-for="id in userStore.watchlistIds" :key="id" :to="`/media/${id}`"
-        class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl flex flex-col gap-2 sm:flex-row justify-between sm:items-start">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
-            {{ itemCacheStore.items[id]?.mediaType || 'Buch' }}
-          </span>
-          <h3 class="font-bold text-lg text-gray-900 mt-0.5">
-            {{ itemCacheStore.items[id]?.title || 'Lädt Titel...' }}
-          </h3>
-          <p class="text-sm text-gray-500">
-            {{ itemCacheStore.items[id]?.author || 'Unbekannter Autor' }}
-          </p>
-
-          <AvailabilityBadge :media-id="id" />
-        </div>
-
-        <button @click.prevent="userStore.toggleBookmark(id)"
-          class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
-          Entfernen
+    <div>
+      <h2 class="text-xl font-black mb-2">Account Sync</h2>
+      <p class="text-xs text-gray-500 mb-4">
+        Erstelle dir einen kostenlosten Account, um deine Merkliste auf allen Geräten zu synchronisieren.
+      </p>
+      <div v-if="user" class="flex flex-col gap-2">
+        <p class="text-sm text-gray-700">
+          Angemeldet als <span class="font-bold">{{ user.email }}</span>
+        </p>
+        <button @click="handleLogout"
+          class="md:self-start bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors shadow-sm">
+          Abmelden
         </button>
-      </NuxtLink>
+      </div>
+      <div v-else class="flex flex-col gap-2">
+        <button @click="userStore.showAuthModal = true"
+          class="md:self-start bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors shadow-sm">
+          Anmelden
+        </button>
+      </div>
     </div>
   </div>
 </template>

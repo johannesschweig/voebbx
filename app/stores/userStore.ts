@@ -25,7 +25,8 @@ export const useUserStore = defineStore('user', {
     loading: false,
     userZip: (import.meta.client ? localStorage.getItem(LOCAL_ZIP_KEY) : null) || '10178',
     userCoords: { lat: 52.5219, lon: 13.4132 },
-    isGeocoding: false
+    isGeocoding: false,
+    showAuthModal: false,
   }),
   getters: {
     isBookmarked: (state) => (mediaId: string) => state.watchlistIds.includes(mediaId)

@@ -1,14 +1,11 @@
 # TODO
-- /detail fails we need a refetch button or something
-- saving user location and watchlist w/o account
+- /detail fails: we need a refetch button or something
 - show people recent searches
 - reduce bounce rate before searching: suggestions for searches or sth
 - rework navbar to header and menubar. authmodal as page. add login to merkliste page as "Sync option"
 
-# Ideas
-- instant notifications when available: in app (native) or via email or in telegram
-
 # DONE
+- saving user location and watchlist w/o account
 - better sorting of branches (see branchSorter)
 - bookmark button on detail page
 - navbar overflow mobile
@@ -45,3 +42,4 @@
 - show bestellmöglichkeit für magazin
   - signature is not unique for magazin stuff (see http://bibblitz.vercel.app/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
+- instant notifications when available: in app (native) or via email or in telegram
