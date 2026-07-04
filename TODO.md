@@ -2,9 +2,10 @@
 - /detail fails: we need a refetch button or something
 - show people recent searches
 - reduce bounce rate before searching: suggestions for searches or sth
-- rework navbar to header and menubar. authmodal as page. add login to merkliste page as "Sync option"
+- rework navbar to header and menubar. authmodal as page. 
 
 # DONE
+- add login to merkliste page as "Sync option"
 - saving user location and watchlist w/o account
 - better sorting of branches (see branchSorter)
 - bookmark button on detail page

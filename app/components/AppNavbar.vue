@@ -10,8 +10,10 @@
         
         <NuxtLink 
           to="/" 
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 transition-all"
-          active-class="bg-blue-100 text-blue-600"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
+          inactive-class="text-gray-700"
+          active-class="bg-blue-100 text-blue-700"
+
         >
           <span>🔍</span>
           <span>Suche</span>
@@ -19,8 +21,9 @@
 
         <NuxtLink 
           to="/watchlist"
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 transition-all"
-          active-class="bg-blue-100 text-blue-600"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
+          inactive-class="text-gray-700"
+          active-class="bg-blue-100 text-blue-700"
         >
           <span>⭐</span>
           <span>Merkliste</span>
