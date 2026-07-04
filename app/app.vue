@@ -8,19 +8,23 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
-import { useSupabaseUser } from '#imports'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
+
+const userStore = useUserStore()
+
+onMounted(() => {
+  userStore.fetchUserData()
+})
 
 const user = useSupabaseUser()
-const watchlistStore = useWatchlistStore()
 
-// 🌟 Überwache den User global. Sobald Supabase die Session geladen hat,
-// wird die PLB sofort im Store hinterlegt.
-watch(user, (newUser) => {
-  if (newUser?.user_metadata?.zip_code) {
-    watchlistStore.updateLocation(newUser.user_metadata.zip_code)
-    console.log('PLZ aus Supabase geladen:', newUser.user_metadata.zip_code)
-  }
-}, { immediate: true })
+watch(user, (newUser, oldUser) => {
+  const newSub = newUser?.sub
+  const oldSub = oldUser?.sub
+  if (newSub === oldSub) return
+  
+  userStore.watchlistIds = []
+  userStore.loading = false
+  userStore.fetchUserData()
+}) 
 </script>

@@ -49,6 +49,7 @@
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
                 Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border rounded text-gray-700">{{ item.shelfmark
                   }}</span>
+                  <!-- {{ item.distance }}km -->
               </p>
             </div>
 
@@ -87,13 +88,13 @@ import { useItemCacheStore } from '@/stores/itemCacheStore'
 import { getPermanentUrlFromId } from '../../../utils/index.ts'
 import BookmarkButton from '~/components/BookmarkButton.vue'
 import { sortBranchesByDistance } from '../../../utils/availability'
-import { useWatchlistStore } from '@/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore.js'
 import { ref, computed } from 'vue'
 
 const route = useRoute()
 const mediaId = route.params.id
 const itemCacheStore = useItemCacheStore()
-const watchlistStore = useWatchlistStore()
+const userStore = useUserStore()
 const showAllBranches = ref(false)
 
 // Das übernimmt jetzt komplett die Logik: 
@@ -126,7 +127,7 @@ const sortedBranches = computed(() => {
     return []
   }
 
-  return sortBranchesByDistance(data.value.data.availability, watchlistStore.userCoords)
+  return sortBranchesByDistance(data.value.data.availability, userStore.userCoords)
 })
 
 function getStatusClass(status) {

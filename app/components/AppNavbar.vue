@@ -10,27 +10,27 @@
         
         <NuxtLink 
           to="/" 
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
-          active-class="bg-blue-50 text-blue-600 hover:bg-blue-50 hover:text-blue-600"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 transition-all"
+          active-class="bg-blue-100 text-blue-600"
         >
           <span>🔍</span>
           <span>Suche</span>
         </NuxtLink>
 
-        <button 
-          @click="handleWatchlistClick"
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all"
-          :class="{ 'bg-blue-50 text-blue-600': route.path === '/watchlist' }"
+        <NuxtLink 
+          to="/watchlist"
+          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold text-gray-700 transition-all"
+          active-class="bg-blue-100 text-blue-600"
         >
           <span>⭐</span>
           <span>Merkliste</span>
           <span 
-            v-if="user && store.watchlistIds.length > 0" 
+            v-if="store.watchlistIds.length > 0" 
             class="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-black text-white"
           >
             {{ store.watchlistIds.length }}
           </span>
-        </button>
+        </NuxtLink>
 
         <button 
           v-if="user" 
@@ -56,36 +56,12 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
 
-const store = useWatchlistStore()
+const store = useUserStore()
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const router = useRouter()
-const route = useRoute() // 🟢 Neu hinzugefügt, um den aktiven State für die Merkliste zu tracken
-
-onMounted(() => {
-  if (user.value) {
-    store.fetchWatchlist()
-  }
-})
-
-watch(user, (newUser) => {
-  if (newUser) {
-    store.fetchWatchlist()
-  } else {
-    store.watchlistIds = []
-  }
-})
-
-function handleWatchlistClick() {
-  if (!user.value) {
-    store.showAuthModal = true
-  } else {
-    router.push('/watchlist')
-  }
-}
 
 async function handleLogout() {
   await supabase.auth.signOut()

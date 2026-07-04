@@ -1,36 +1,20 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 
-const watchlistStore = useWatchlistStore()
+const userStore = useUserStore()
 const itemCacheStore = useItemCacheStore()
-const isSavingDb = ref(false)
-const user = useSupabaseUser()
-const supabase = useSupabaseClient()
 
-// 1. Initialisiere das Input-Feld direkt mit dem, was aktuell im Store steht (Default oder geladen)
-const localZipInput = ref(watchlistStore.userZip)
+const localZipInput = ref(userStore.userZip)
 
-// 2. Falls Supabase die PLZ im Hintergrund asynchron lädt, aktualisieren wir das Input-Feld automatisch
-watch(() => watchlistStore.userZip, (newZip) => {
+watch(() => userStore.userZip, (newZip) => {
   localZipInput.value = newZip
-})
+}, { immediate: true })
 
-function handleSaveLocation() {
-  const input = localZipInput.value.trim()
-  if (!input) return
-
-  // 1. Lokal im Store die Koordinaten austauschen (Sortierung triggert SOFORT)
-  watchlistStore.updateLocation(input)
-
-  // 2. Nur wenn der User eingeloggt ist, sichern wir es im Hintergrund in Supabase ab
-  if (user.value) {
-    supabase.auth.updateUser({
-      data: { zip_code: input }
-    }).catch(err => console.error('Fehler beim DB-Backup der PLZ:', err))
-  }
+function saveLocation() {
+  ; (window as any).umami?.track('zip-save', { query: localZipInput.value.substring(0, 2) })
+  userStore.saveLocation(localZipInput.value)
 }
 </script>
 
@@ -43,7 +27,7 @@ function handleSaveLocation() {
           <span>📍</span> Dein Standort (PLZ)
         </h3>
         <p class="text-xs text-gray-500 mt-0.5">
-          Aktueller Filter: <span class="font-bold text-blue-700">{{ watchlistStore.userZip }}</span>
+          Aktueller Filter: <span class="font-bold text-blue-700">{{ userStore.userZip }}</span>
         </p>
         <p class="text-xs text-gray-500 mt-0.5">
           Wir nutzen diese Information, um die Bibliotheken nach Entfernung zu sortieren.
@@ -51,11 +35,11 @@ function handleSaveLocation() {
       </div>
 
       <div class="flex gap-2 self-start sm:self-auto">
-        <input v-model="localZipInput" type="text" placeholder="z.B. 10559" @keyup.enter="handleSaveLocation"
-          class="w-28 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-center font-bold定位 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
-        <button @click="handleSaveLocation" :disabled="watchlistStore.isGeocoding || isSavingDb"
+        <input v-model="localZipInput" type="text" placeholder="z.B. 10559" @keyup.enter="saveLocation"
+          class="w-28 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-center font-bold outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+        <button @click="saveLocation" :disabled="userStore.isGeocoding"
           class="rounded-xl bg-gray-900 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-gray-800 transition-all disabled:opacity-50">
-          {{ watchlistStore.isGeocoding || isSavingDb ? 'Lädt...' : 'Speichern' }}
+          {{ userStore.isGeocoding ? 'Lädt...' : 'Speichern' }}
         </button>
       </div>
     </div>
@@ -65,17 +49,17 @@ function handleSaveLocation() {
       <h1 class="text-2xl font-black">Deine Merkliste</h1>
     </div>
 
-    <div v-if="watchlistStore.loading" class="text-center py-8 text-gray-500">
+    <div v-if="userStore.loading" class="text-center py-8 text-gray-500">
       Lade Merkliste aus Supabase...
     </div>
 
-    <div v-else-if="watchlistStore.watchlistIds.length === 0"
+    <div v-else-if="userStore.watchlistIds.length === 0"
       class="text-center py-12 border-2 border-dashed rounded-xl text-gray-400">
       Deine Merkliste ist noch leer.
     </div>
 
     <div v-else class="space-y-4">
-      <NuxtLink v-for="id in watchlistStore.watchlistIds" :key="id" :to="`/media/${id}`"
+      <NuxtLink v-for="id in userStore.watchlistIds" :key="id" :to="`/media/${id}`"
         class="p-4 bg-white border border-gray-100 shadow-sm rounded-xl flex flex-col gap-2 sm:flex-row justify-between sm:items-start">
         <div>
           <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
@@ -91,7 +75,7 @@ function handleSaveLocation() {
           <AvailabilityBadge :media-id="id" />
         </div>
 
-        <button @click.prevent="watchlistStore.toggleBookmark(id)"
+        <button @click.prevent="userStore.toggleBookmark(id)"
           class="self-start mt-2 sm:mt-0 text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
           Entfernen
         </button>

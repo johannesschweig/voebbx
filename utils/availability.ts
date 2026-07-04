@@ -87,7 +87,7 @@ export function calculateStatusInfo(
   // 1. Ungültige/Verlorene Exemplare herausfiltern
   const validBranches = sortedAvailability?.filter(item => {
     const lower = item.status.toLowerCase()
-    return !lower.includes('nicht im regal') && !lower.includes('verloren')
+    return !lower.includes('nicht im regal') && !lower.includes('verloren') && !lower.includes('vermisst')
   }) || []
 
   // Fallback: Keine gültigen Standorte übrig

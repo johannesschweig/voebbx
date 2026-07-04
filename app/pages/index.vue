@@ -77,7 +77,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 import EmptyState from '~/components/EmptyState.vue'
 import BookmarkButton from '~/components/BookmarkButton.vue'
@@ -86,7 +86,6 @@ import Faq from '~/components/Faq.vue'
 const route = useRoute()
 const router = useRouter()
 const mediaStore = useMediaStore()
-const watchlistStore = useWatchlistStore()
 const itemCacheStore = useItemCacheStore()
 const searchQuery = ref('')
 const loading = ref(false)
@@ -98,7 +97,6 @@ onMounted(() => {
     searchQuery.value = route.query.q
     handleSearch()
   }
-  watchlistStore.fetchWatchlist()
 })
 
 async function handleSearch() {

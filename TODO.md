@@ -1,5 +1,9 @@
 # TODO
 - /detail fails we need a refetch button or something
+- saving user location and watchlist w/o account
+- show people recent searches
+- reduce bounce rate before searching: suggestions for searches or sth
+- rework navbar to header and menubar. authmodal as page. add login to merkliste page as "Sync option"
 
 # Ideas
 - instant notifications when available: in app (native) or via email or in telegram

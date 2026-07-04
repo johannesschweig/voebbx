@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
 import { calculateStatusInfo } from '../../utils/availability'
 
 const props = defineProps({
@@ -9,7 +9,7 @@ const props = defineProps({
 })
 
 const itemCacheStore = useItemCacheStore()
-const watchlistStore = useWatchlistStore()
+const userStore = useUserStore()
 const targetElement = ref(null)
 let observer = null
 
@@ -34,7 +34,7 @@ onMounted(() => {
 
 onUnmounted(() => { if (observer) observer.disconnect() })
 
-const statusInfo = computed(() => calculateStatusInfo(itemData.value?.availability, watchlistStore.userCoords))
+const statusInfo = computed(() => calculateStatusInfo(itemData.value?.availability, userStore.userCoords))
 </script>
 
 <template>

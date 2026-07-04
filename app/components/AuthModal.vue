@@ -78,9 +78,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useWatchlistStore } from '~/stores/watchlistStore'
+import { useUserStore } from '~/stores/userStore'
 
-const store = useWatchlistStore()
+const store = useUserStore()
 const supabase = useSupabaseClient()
 
 const email = ref('')
@@ -113,7 +113,7 @@ async function handleAuth() {
     if (error) {
       errorMessage.value = error.message
     } else {
-      await store.fetchWatchlist()
+      await store.fetchUserData()
       store.showAuthModal = false
     }
   }
