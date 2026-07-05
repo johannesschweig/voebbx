@@ -4,6 +4,9 @@
 - reduce bounce rate before searching: suggestions for searches or sth
 - rework navbar to header and menubar. authmodal as page. 
 
+# Ideas
+- take isbn to get cover somewhere
+
 # DONE
 - add login to merkliste page as "Sync option"
 - saving user location and watchlist w/o account

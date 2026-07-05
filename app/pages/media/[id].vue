@@ -49,7 +49,7 @@
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
                 Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border rounded text-gray-700">{{ item.shelfmark
                   }}</span>
-                  <!-- {{ item.distance }}km -->
+                  <!-- {{ item.daysToWait}} -->
               </p>
             </div>
 
@@ -57,9 +57,10 @@
             <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-center"
               :class="getStatusClass(item.status)">
               {{
-                item.daysToWait === 1 ? '⏳ 1 Tag' :
-                  item.daysToWait > 1 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` :
-                    item.status
+                item.daysToWait < 0 ? 'Rückgabe überfällig' :
+                  item.daysToWait === 1 ? '⏳ 1 Tag' :
+                    item.daysToWait > 1 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` :
+                      item.status
               }}
             </span>
           </div>

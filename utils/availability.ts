@@ -60,7 +60,7 @@ function calculateDaysToWait(status: string): number {
     const diffTime = returnDate.getTime() - today.getTime()
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     
-    return diffDays > 0 ? diffDays : 0
+    return diffDays
   }
 
   // Fall 3: Vorbestellt / Bestellt ohne konkretes Datum
@@ -173,7 +173,6 @@ export function filterAndEnrichBranches(rawAvailability: AvailabilityInfo[]): Av
 
 export function sortBranchesByDistance(availability: AvailabilityInfo[], userCoords: { lat: number; lon: number }): AvailabilityInfo[] {
   const mappedAvailability = availability.map(item => {
-    const hasGeo = typeof item.lat === 'number' && typeof item.lon === 'number';
     
     const distance = calculateHaversineDistance(userCoords.lat, userCoords.lon, item.lat!, item.lon!)
 
