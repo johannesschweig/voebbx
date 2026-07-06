@@ -8,9 +8,7 @@
         <input v-model="searchQuery" type="text" placeholder="Titel, Autor, Spiel …"
           class="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
           :disabled="loading" />
-        <button type="submit"
-          class="btn btn-md btn-accent"
-          :disabled="loading || !searchQuery.trim()">
+        <button type="submit" class="btn btn-md btn-accent" :disabled="loading || !searchQuery.trim()">
           {{ loading ? '…' : 'Suchen' }}
         </button>
       </form>
@@ -26,26 +24,7 @@
           {{ mediaStore.searchIds.length }} Treffer
         </p>
         <ul class="space-y-2">
-          <li v-for="id in mediaStore.searchIds" :key="id"
-            class="group bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all">
-            <div class="flex items-center gap-3 p-4">
-
-              <NuxtLink :to="`/media/${id}`" class="flex-1 min-w-0">
-                <h3
-                  class="font-semibold text-gray-900 text-sm leading-snug truncate group-hover:text-blue-600 transition-colors">
-                  {{ itemCacheStore.items[id]?.title || 'Lädt Titel...' }}
-                </h3>
-                <p v-if="itemCacheStore.items[id]?.author" class="text-xs text-gray-400 mt-0.5 truncate">
-                  {{ itemCacheStore.items[id]?.author }}
-                </p>
-                <div class="mt-2">
-                  <AvailabilityBadge :mediaId="id" />
-                </div>
-              </NuxtLink>
-
-              <BookmarkButton :mediaId="id" :context="'list'" />
-            </div>
-          </li>
+          <MediaItem v-for="id in mediaStore.searchIds" :key="id" :mediaId="id" />          
         </ul>
       </div>
 
@@ -76,16 +55,13 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
-import { useItemCacheStore } from '~/stores/itemCacheStore'
-import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 import EmptyState from '~/components/EmptyState.vue'
-import BookmarkButton from '~/components/BookmarkButton.vue'
 import Faq from '~/components/Faq.vue'
+import MediaItem from '~/components/MediaItem.vue'
 
 const route = useRoute()
 const router = useRouter()
 const mediaStore = useMediaStore()
-const itemCacheStore = useItemCacheStore()
 const searchQuery = ref('')
 const loading = ref(false)
 const hasSearched = ref(false)
@@ -104,7 +80,7 @@ async function handleSearch() {
   hasSearched.value = false
   lastQuery.value = searchQuery.value
   router.replace({ query: { q: searchQuery.value } })
-  ; (window as any).umami?.track('search-started', { query: searchQuery.value })
+    ; (window as any).umami?.track('search-started', { query: searchQuery.value })
   try {
     await mediaStore.executeSearch(searchQuery.value)
   } catch (error) {

@@ -6,6 +6,9 @@
 - 2nd page search
 - icons for different media types
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
+  - covers on openlibrary are super sparse
+  - voebb img needs a referrer (!headache): endpoint?
+  - check google covers with api or someo other service
 
 # Ideas
 - take isbn to get cover somewhere

@@ -12,6 +12,7 @@ export interface MediaItem {
   id: string;
   title: string;
   author: string;
+  isbn?: string;
   mediaType: string;
   availability?: AvailabilityInfo[];
   loadingDetails?: boolean;

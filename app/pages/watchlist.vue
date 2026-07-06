@@ -44,7 +44,7 @@ async function handleLogout() {
               {{ itemCacheStore.items[id]?.author || 'Unbekannter Autor' }}
             </p>
 
-            <AvailabilityBadge :media-id="id" />
+            <AvailabilityBadge :media-id="id" class="mt-2" />
           </div>
 
           <button @click.prevent="userStore.toggleBookmark(id)"

@@ -20,7 +20,7 @@ export const useMediaStore = defineStore('media', {
             id: item.id,
             title: item.title,
             author: item.author || 'Unbekannter Autor',
-            mediaType: item.mediaType || 'Buch'
+            mediaType: item.mediaType || 'Unbekannt',
           });
         });
 

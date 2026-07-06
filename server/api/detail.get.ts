@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         'Cache-Control': 'no-cache',
       },
       // Nuxt übernimmt das automatische Retry-Handling ressourcenschonend im Hintergrund
-      retry: 1, 
+      retry: 1,
       retryDelay: 300,
       timeout: 4500 // Bleibt sicher unter dem harten 10-Sekunden-Limit von Vercel
     });
@@ -42,6 +42,7 @@ export default defineEventHandler(async (event) => {
 
     let mediaType: string | undefined = undefined;
     let author: string | undefined = undefined;
+    let isbn: string | undefined = undefined;
 
     $('#R06 table.gi tr').each((_, el) => {
       const th = $(el).find('th');
@@ -52,9 +53,15 @@ export default defineEventHandler(async (event) => {
       if (leftText.includes('Medienart')) {
         const bracketMatch = rightText.match(/\[(.*?)\]/);
         mediaType = bracketMatch ? bracketMatch[1].trim() : rightText;
-      } 
+      }
       else if (leftText.includes('Verfasser') || leftText.includes('Person')) {
         author = rightText;
+      }
+      else if (leftText.includes('ISBN')) {
+        const isbnMatch = rightText.match(/[0-9Xx-]+/);
+        if (isbnMatch) {
+          isbn = isbnMatch[0].replace(/-/g, '');
+        }
       }
     });
 
@@ -89,7 +96,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const processedAvailability = filterAndEnrichBranches(availability); 
+    const processedAvailability = filterAndEnrichBranches(availability);
 
     return {
       success: true,
@@ -98,6 +105,7 @@ export default defineEventHandler(async (event) => {
         title: titleText,
         mediaType,
         author,
+        isbn,
         availability: processedAvailability
       } as MediaItem
     };
