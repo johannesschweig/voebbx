@@ -41,7 +41,7 @@ function calculateDaysToWait(status: string): number {
     cleanStatus.includes('am regal') || 
     cleanStatus.includes('ausleihbar')
   ) {
-    return 0
+    return -999
   }
 
   // Fall 2: Konkretes Rückgabedatum geparst (z.B. "Fällig am: 14.08.2026" oder "Fällig am: 05.11.")
@@ -110,9 +110,9 @@ export function calculateStatusInfo(
     : 99.0
 
   // ==========================================
-  // FALL A: Das Buch steht sofort im Regal (daysToWait === 0)
+  // FALL A: Das Buch steht sofort im Regal (daysToWait === -999)
   // ==========================================
-  if (bestMatch.daysToWait === 0) {
+  if (bestMatch.daysToWait === -999) {
     if (distance < 3) {
       return {
         label: `🟢 Verfügbar in deiner Nähe`,

@@ -37,8 +37,8 @@
           📍 Standorte <span class="text-sm font-normal text-gray-500">(nach Entfernung sortiert)</span>
         </h2>
 
-        <div v-if="data.data.availability.length === 0" class="text-gray-500 bg-gray-50 p-4 rounded text-center">
-          Keine Exemplare an deinen konfigurierten Standorten gefunden.
+        <div v-if="data.data.availability.length === 0" class="text-gray-500 p-4 text-center">
+          Keine Exemplare gefunden.
         </div>
 
         <div v-else class="space-y-3">
@@ -57,15 +57,16 @@
             <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold self-start sm:self-center"
               :class="getStatusClass(item.status)">
               {{
-                item.daysToWait < 0 ? 'Rückgabe überfällig' :
-                  item.daysToWait === 1 ? '⏳ 1 Tag' :
-                    item.daysToWait > 1 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` :
-                      item.status
+                item.daysToWait === 0 ? 'Rückgabe heute fällig' :
+                  (item.daysToWait !== -999 && item.daysToWait < 0) ? 'Rückgabe überfällig' :
+                    item.daysToWait === 1 ? '⏳ 1 Tag' :
+                      item.daysToWait > 1 && item.daysToWait !== 999 ? `⏳ ${item.daysToWait} Tage` :
+                        item.status
               }}
             </span>
           </div>
           <button v-if="hiddenBranchesCount > 0" @click="showAllBranches = true"
-            class="mt-4 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">
+            class="btn btn-md btn-secondary">
             {{ hiddenBranchesCount }} entferntere
             {{ hiddenBranchesCount === 1 ? 'Bibliothek' : 'Bibliotheken' }} anzeigen
           </button>

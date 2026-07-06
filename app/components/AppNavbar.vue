@@ -38,7 +38,7 @@
         <button 
           v-if="user" 
           @click="handleLogout"
-          class="ml-2 rounded-lg p-1.5 text-xs font-semibold text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors hidden md:inline"
+          class="ml-2 btn btn-secondary btn-md hidden md:inline"
           title="Abmelden"
         >
           <span>Abmelden</span>
@@ -47,7 +47,7 @@
         <button 
           v-else
           @click="store.showAuthModal = true"
-          class="ml-2 rounded-xl bg-gray-950 px-3.5 py-1.5 text-sm font-bold text-white shadow-sm hover:bg-gray-800 transition-all hidden md:inline"
+          class="ml-2 btn btn-primary btn-md md:self-start hidden md:inline"
         >
           Anmelden
         </button>

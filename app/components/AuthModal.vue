@@ -58,7 +58,7 @@
         <button 
           type="submit" 
           :disabled="loading" 
-          class="w-full rounded-xl bg-blue-600 py-3 text-sm font-bold text-white shadow-sm hover:bg-blue-700 focus:ring-4 focus:ring-blue-100 transition-all disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+          class="w-full btn btn-md btn-accent"
         >
           {{ loading ? 'Bitte warten...' : (isSignUp ? 'Registrieren' : 'Einloggen') }}
         </button>

@@ -6,10 +6,10 @@
       <!-- Suchformular -->
       <form @submit.prevent="handleSearch" class="flex gap-2 mb-10">
         <input v-model="searchQuery" type="text" placeholder="Titel, Autor, Spiel …"
-          class="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm placeholder:text-gray-400"
+          class="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
           :disabled="loading" />
         <button type="submit"
-          class="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors shadow-sm"
+          class="btn btn-md btn-accent"
           :disabled="loading || !searchQuery.trim()">
           {{ loading ? '…' : 'Suchen' }}
         </button>
@@ -77,7 +77,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
-import { useUserStore } from '~/stores/userStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
 import EmptyState from '~/components/EmptyState.vue'
 import BookmarkButton from '~/components/BookmarkButton.vue'

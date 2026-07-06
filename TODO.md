@@ -3,7 +3,6 @@
 - show people recent searches
 - reduce bounce rate before searching: suggestions for searches or sth
 - rework navbar to header and menubar. authmodal as page. 
-- zip code save validation
 - 2nd page search
 - icons for different media types
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
@@ -12,6 +11,7 @@
 - take isbn to get cover somewhere
 
 # DONE
+- zip code save validation
 - add login to merkliste page as "Sync option"
 - saving user location and watchlist w/o account
 - better sorting of branches (see branchSorter)
