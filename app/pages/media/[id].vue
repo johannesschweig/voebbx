@@ -21,7 +21,7 @@
     <!-- Daten-Anzeige -->
     <div v-else-if="data?.data">
       <!-- Titel & Metadaten -->
-      <header class="mb-6 border-b pb-6">
+      <header class="mb-6 border-b border-gray-200 pb-6">
         <h1 class="text-2xl font-bold leading-tight text-gray-900 mb-2">
           {{ data.data.title }}
         </h1>
@@ -43,11 +43,11 @@
 
         <div v-else class="space-y-3">
           <div v-for="(item, index) in displayedBranches" :key="index"
-            class="border rounded-lg p-4 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            class="border border-gray-200 rounded-lg p-4 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <h3 class="font-medium text-gray-900">{{ item.branch }}</h3>
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
-                Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border rounded text-gray-700">{{ item.shelfmark
+                Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border border-gray-300 rounded text-gray-700">{{ item.shelfmark
                   }}</span>
                   <!-- {{ item.daysToWait}} -->
               </p>
@@ -75,7 +75,7 @@
       <!-- VÖBB-Direktlink -->
       <footer class="mt-8 text-center">
         <a :href="getPermanentUrlFromId(data.data.id)" target="_blank"
-          class="inline-block border border-1 border-blue-600 bg-white hover:bg-blue-100 text-blue-700 font-medium text-sm px-5 py-2.5 rounded-lg transition">
+          class="inline-block border border-blue-600 bg-white hover:bg-blue-100 text-blue-700 font-medium text-sm px-5 py-2.5 rounded-lg transition">
           Im VÖBB-Katalog öffnen ↗
         </a>
       </footer>

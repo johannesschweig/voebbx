@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -22,7 +23,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@nuxtjs/supabase'],
+  modules: ['@pinia/nuxt', '@nuxtjs/supabase'],
   supabase: {
     redirectOptions: {
       login: '/login',
@@ -34,5 +35,11 @@ export default defineNuxtConfig({
     externals: {
       inline: ['axios', 'tough-cookie', 'axios-cookiejar-support', 'http-cookie-agent']
     }
-  }
+  },
+  css: ['./app/assets/style.css'],
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  },
 })

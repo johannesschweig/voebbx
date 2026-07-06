@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@source "../../utils/**/*.ts";
+
+@layer components {
+
+  /* ── Base button ─────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5
+           font-semibold rounded-xl
+           transition-all duration-150
+           disabled:opacity-40 disabled:pointer-events-none
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           cursor-pointer shadow-sm;
+  }
+
+  /* ── Sizes ───────────────────────────────────────────────── */
+  .btn-sm {
+    @apply text-xs px-3 py-1.5 rounded-lg;
+  }
+
+  .btn-md {
+    @apply text-sm px-5 py-2.5;
+  }
+
+  .btn-lg {
+    @apply text-base px-6 py-3.5 rounded-2xl;
+  }
+
+  /* ── Variants ────────────────────────────────────────────── */
+  .btn-primary {
+    @apply bg-gray-950 text-white
+           hover:bg-gray-800
+           focus-visible:ring-gray-950;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700
+           hover:bg-gray-200
+           focus-visible:ring-gray-400;
+  }
+
+  .btn-danger {
+    @apply bg-red-50 text-red-600 border border-red-100
+           hover:bg-red-100
+           focus-visible:ring-red-400;
+  }
+
+  .btn-accent {
+    @apply bg-blue-600 text-white
+           hover:bg-blue-700
+           focus-visible:ring-blue-500;
+  }
+
+}

@@ -3,6 +3,10 @@
 - show people recent searches
 - reduce bounce rate before searching: suggestions for searches or sth
 - rework navbar to header and menubar. authmodal as page. 
+- zip code save validation
+- 2nd page search
+- icons for different media types
+- covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
 
 # Ideas
 - take isbn to get cover somewhere
@@ -47,3 +51,4 @@
   - signature is not unique for magazin stuff (see http://bibblitz.vercel.app/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
 - instant notifications when available: in app (native) or via email or in telegram
+- zip code visualiziation: there are just too many zip codes. better label with district

@@ -1,521 +1,651 @@
 {
   "10115": {
+    "district": "Berlin Mitte",
     "lat": 52.5321914,
     "lon": 13.3845571
   },
   "10117": {
+    "district": "Berlin Mitte",
     "lat": 52.5169123,
     "lon": 13.3873555
   },
   "10119": {
+    "district": "Berlin Mitte",
     "lat": 52.5304785,
     "lon": 13.4053272
   },
   "10178": {
+    "district": "Berlin Mitte",
     "lat": 52.5212845,
     "lon": 13.4097989
   },
   "10179": {
+    "district": "Berlin Mitte",
     "lat": 52.5121017,
     "lon": 13.4164365
   },
   "10243": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5122697,
     "lon": 13.4394216
   },
   "10245": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5006167,
     "lon": 13.4648062
   },
   "10247": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5160829,
     "lon": 13.4654674
   },
   "10249": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5238116,
     "lon": 13.4429595
   },
   "10315": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5138679,
     "lon": 13.5149814
   },
   "10317": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.497936,
     "lon": 13.4907298
   },
   "10318": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.48346,
     "lon": 13.5288146
   },
   "10319": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.4992446,
     "lon": 13.5183632
   },
   "10365": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5208199,
     "lon": 13.495787
   },
   "10367": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.524468,
     "lon": 13.4819893
   },
   "10369": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5294386,
     "lon": 13.4693734
   },
   "10405": {
+    "district": "Pankow",
     "lat": 52.5351707,
     "lon": 13.4255542
   },
   "10407": {
+    "district": "Pankow",
     "lat": 52.5336931,
     "lon": 13.4489893
   },
   "10409": {
+    "district": "Pankow",
     "lat": 52.5442867,
     "lon": 13.4413963
   },
   "10435": {
+    "district": "Pankow",
     "lat": 52.5377689,
     "lon": 13.4111411
   },
   "10437": {
+    "district": "Pankow",
     "lat": 52.5448351,
     "lon": 13.4125567
   },
   "10439": {
+    "district": "Pankow",
     "lat": 52.5521496,
     "lon": 13.4121394
   },
   "10551": {
+    "district": "Berlin Mitte",
     "lat": 52.5307826,
     "lon": 13.3370456
   },
   "10553": {
+    "district": "Berlin Mitte",
     "lat": 52.5305273,
     "lon": 13.3214751
   },
   "10555": {
+    "district": "Berlin Mitte",
     "lat": 52.5215243,
     "lon": 13.3355118
   },
   "10557": {
+    "district": "Berlin Mitte",
     "lat": 52.52324,
     "lon": 13.359503
   },
   "10559": {
+    "district": "Berlin Mitte",
     "lat": 52.5300992,
     "lon": 13.3498858
   },
   "10585": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5152076,
     "lon": 13.3056792
   },
   "10587": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5184882,
     "lon": 13.3194602
   },
   "10589": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5275483,
     "lon": 13.3057393
   },
   "10623": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5088608,
     "lon": 13.3273465
   },
   "10625": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5094748,
     "lon": 13.314703
   },
   "10627": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5079939,
     "lon": 13.3030058
   },
   "10629": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5027773,
     "lon": 13.3085473
   },
   "10707": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4965569,
     "lon": 13.3137211
   },
   "10709": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4939311,
     "lon": 13.303047
   },
   "10711": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4981198,
     "lon": 13.2904702
   },
   "10713": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4850911,
     "lon": 13.3132512
   },
   "10715": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4824617,
     "lon": 13.3288885
   },
   "10717": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.490807,
     "lon": 13.3275252
   },
   "10719": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4988653,
     "lon": 13.3256921
   },
   "10777": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4974716,
     "lon": 13.3427239
   },
   "10779": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4921275,
     "lon": 13.3394416
   },
   "10781": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4935621,
     "lon": 13.3528953
   },
   "10783": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4964166,
     "lon": 13.362414
   },
   "10785": {
+    "district": "Berlin Mitte",
     "lat": 52.50735,
     "lon": 13.3642193
   },
   "10787": {
+    "district": "Berlin Mitte",
     "lat": 52.5078608,
     "lon": 13.3438747
   },
   "10789": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5017044,
     "lon": 13.337711
   },
   "10823": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4873283,
     "lon": 13.350962
   },
   "10825": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4838019,
     "lon": 13.3412765
   },
   "10827": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4838315,
     "lon": 13.3543216
   },
   "10829": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.476394,
     "lon": 13.3608875
   },
   "10961": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.4926376,
     "lon": 13.3974419
   },
   "10963": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5001884,
     "lon": 13.381143
   },
   "10965": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.4857603,
     "lon": 13.3943882
   },
   "10967": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.4901836,
     "lon": 13.4164423
   },
   "10969": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5024857,
     "lon": 13.401114
   },
   "10997": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.5009559,
     "lon": 13.4354965
   },
   "10999": {
+    "district": "Friedrichshain-Kreuzberg",
     "lat": 52.4969288,
     "lon": 13.4265584
   },
   "12043": {
+    "district": "Berlin Neukölln",
     "lat": 52.4799159,
     "lon": 13.4370709
   },
   "12045": {
+    "district": "Berlin Neukölln",
     "lat": 52.4854649,
     "lon": 13.4392308
   },
   "12047": {
+    "district": "Berlin Neukölln",
     "lat": 52.4905585,
     "lon": 13.4284994
   },
   "12049": {
+    "district": "Berlin Neukölln",
     "lat": 52.4762368,
     "lon": 13.422639
   },
   "12051": {
+    "district": "Berlin Neukölln",
     "lat": 52.466904,
     "lon": 13.4298638
   },
   "12053": {
+    "district": "Berlin Neukölln",
     "lat": 52.4770984,
     "lon": 13.4324541
   },
   "12055": {
+    "district": "Berlin Neukölln",
     "lat": 52.471305,
     "lon": 13.4485974
   },
   "12057": {
+    "district": "Berlin Neukölln",
     "lat": 52.4683868,
     "lon": 13.4632114
   },
   "12059": {
+    "district": "Berlin Neukölln",
     "lat": 52.4809088,
     "lon": 13.4512643
   },
   "12099": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4639497,
     "lon": 13.4029018
   },
   "12101": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4781332,
     "lon": 13.381726
   },
   "12103": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4639958,
     "lon": 13.3746306
   },
   "12105": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4492125,
     "lon": 13.3712839
   },
   "12107": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4312906,
     "lon": 13.3916814
   },
   "12109": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4464883,
     "lon": 13.399414
   },
   "12157": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4652218,
     "lon": 13.3463547
   },
   "12159": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4737042,
     "lon": 13.3369738
   },
   "12161": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4703845,
     "lon": 13.3269733
   },
   "12163": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4626394,
     "lon": 13.3184892
   },
   "12165": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4556623,
     "lon": 13.314822
   },
   "12167": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4485835,
     "lon": 13.3337712
   },
   "12169": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4547923,
     "lon": 13.3435259
   },
   "12203": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4441918,
     "lon": 13.3098135
   },
   "12205": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4340332,
     "lon": 13.2944292
   },
   "12207": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4198622,
     "lon": 13.3133462
   },
   "12209": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4174403,
     "lon": 13.3291882
   },
   "12247": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4394289,
     "lon": 13.3463231
   },
   "12249": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4263392,
     "lon": 13.351697
   },
   "12277": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.413543,
     "lon": 13.3751312
   },
   "12279": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4106112,
     "lon": 13.3530656
   },
   "12305": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4032653,
     "lon": 13.4020654
   },
   "12307": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.3888064,
     "lon": 13.3901893
   },
   "12309": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.390402,
     "lon": 13.4171073
   },
   "12347": {
+    "district": "Berlin Neukölln",
     "lat": 52.4508767,
     "lon": 13.428155
   },
   "12349": {
+    "district": "Berlin Neukölln",
     "lat": 52.4252425,
     "lon": 13.4220243
   },
   "12351": {
+    "district": "Berlin Neukölln",
     "lat": 52.4327469,
     "lon": 13.4555054
   },
   "12353": {
+    "district": "Berlin Neukölln",
     "lat": 52.422731,
     "lon": 13.4589415
   },
   "12355": {
+    "district": "Berlin Neukölln",
     "lat": 52.4110072,
     "lon": 13.4978242
   },
   "12357": {
+    "district": "Berlin Neukölln",
     "lat": 52.4293034,
     "lon": 13.4905237
   },
   "12359": {
+    "district": "Berlin Neukölln",
     "lat": 52.4473406,
     "lon": 13.4531702
   },
   "12435": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4869643,
     "lon": 13.4662697
   },
   "12437": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.462405,
     "lon": 13.482221
   },
   "12439": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4532578,
     "lon": 13.5262682
   },
   "12459": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4652506,
     "lon": 13.5280941
   },
   "12487": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4426554,
     "lon": 13.5054837
   },
   "12489": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4357512,
     "lon": 13.5431249
   },
   "12524": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4127556,
     "lon": 13.5416271
   },
   "12526": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.3976702,
     "lon": 13.5643397
   },
   "12527": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.3856201,
     "lon": 13.6337939
   },
   "12555": {
+    "district": "Treptow-Köpenick",
     "lat": 52.4628476,
     "lon": 13.57887
   },
   "12557": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4289185,
     "lon": 13.5885525
   },
   "12559": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4156295,
     "lon": 13.6619041
   },
   "12587": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4584262,
     "lon": 13.6355363
   },
   "12589": {
+    "district": "Tempelhof-Schöneberg",
     "lat": 52.4441847,
     "lon": 13.7027384
   },
   "12619": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5234056,
     "lon": 13.5884615
   },
   "12621": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5025422,
     "lon": 13.5876814
   },
   "12623": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5025905,
     "lon": 13.616542
   },
   "12627": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5371592,
     "lon": 13.613388
   },
   "12629": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5416157,
     "lon": 13.5901963
   },
   "12679": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5492521,
     "lon": 13.5638043
   },
   "12681": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5372044,
     "lon": 13.5368175
   },
   "12683": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5074501,
     "lon": 13.5591631
   },
   "12685": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5390849,
     "lon": 13.5653647
   },
   "12687": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5566368,
     "lon": 13.5655679
   },
   "12689": {
+    "district": "Marzahn-Hellersdorf",
     "lat": 52.5655248,
     "lon": 13.5688399
   },
   "13051": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5815191,
     "lon": 13.4934872
   },
   "13053": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5497674,
     "lon": 13.5061264
   },
   "13055": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5402317,
     "lon": 13.4955793
   },
   "13057": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.571656,
     "lon": 13.5417751
   },
   "13059": {
+    "district": "Lichtenberg Hohenschönhausen",
     "lat": 52.5808567,
     "lon": 13.5216889
   },
   "13086": {
+    "district": "Pankow",
     "lat": 52.5564384,
     "lon": 13.4485781
   },
@@ -524,251 +654,298 @@
     "lon": 13.4717885
   },
   "13089": {
+    "district": "Pankow",
     "lat": 52.5707554,
     "lon": 13.4410877
   },
   "13125": {
+    "district": "Pankow",
     "lat": 52.6334423,
     "lon": 13.4812367
   },
   "13127": {
+    "district": "Pankow",
     "lat": 52.6189367,
     "lon": 13.4334135
   },
   "13129": {
+    "district": "Pankow",
     "lat": 52.5906704,
     "lon": 13.4595237
   },
   "13156": {
+    "district": "Pankow",
     "lat": 52.5824656,
     "lon": 13.3999104
   },
   "13158": {
+    "district": "Pankow",
     "lat": 52.5931548,
     "lon": 13.3834312
   },
   "13159": {
+    "district": "Pankow",
     "lat": 52.6217433,
     "lon": 13.3949032
   },
   "13187": {
+    "district": "Pankow",
     "lat": 52.5695591,
     "lon": 13.4084463
   },
   "13189": {
+    "district": "Pankow",
     "lat": 52.5641454,
     "lon": 13.4218376
   },
   "13347": {
+    "district": "Berlin Mitte",
     "lat": 52.5490442,
     "lon": 13.365515
   },
   "13349": {
+    "district": "Berlin Mitte",
     "lat": 52.5579871,
     "lon": 13.347349
   },
   "13351": {
+    "district": "Berlin Mitte",
     "lat": 52.5506395,
     "lon": 13.3328478
   },
   "13353": {
+    "district": "Berlin Mitte",
     "lat": 52.5415792,
     "lon": 13.3495465
   },
   "13355": {
+    "district": "Berlin Mitte",
     "lat": 52.5418314,
     "lon": 13.3905625
   },
   "13357": {
+    "district": "Berlin Mitte",
     "lat": 52.5502808,
     "lon": 13.3825818
   },
   "13359": {
+    "district": "Berlin Mitte",
     "lat": 52.5598732,
     "lon": 13.3850984
   },
   "13403": {
+    "district": "Reinickendorf",
     "lat": 52.5739368,
     "lon": 13.3225235
   },
   "13405": {
+    "district": "Reinickendorf",
     "lat": 52.5589025,
     "lon": 13.2978794
   },
   "13407": {
+    "district": "Reinickendorf",
     "lat": 52.5726,
     "lon": 13.3509039
   },
   "13409": {
+    "district": "Reinickendorf",
     "lat": 52.5681011,
     "lon": 13.3716797
   },
   "13435": {
+    "district": "Reinickendorf",
     "lat": 52.6020566,
     "lon": 13.3455987
   },
   "13437": {
+    "district": "Reinickendorf",
     "lat": 52.5905818,
     "lon": 13.3284629
   },
   "13439": {
+    "district": "Reinickendorf",
     "lat": 52.5985349,
     "lon": 13.3587263
   },
   "13465": {
+    "district": "Reinickendorf",
     "lat": 52.6399012,
     "lon": 13.2895647
   },
   "13467": {
+    "district": "Reinickendorf",
     "lat": 52.6171017,
     "lon": 13.307504
   },
   "13469": {
+    "district": "Reinickendorf",
     "lat": 52.6119228,
     "lon": 13.3416419
   },
   "13503": {
+    "district": "Reinickendorf",
     "lat": 52.612178,
     "lon": 13.2487912
   },
   "13505": {
+    "district": "Reinickendorf",
     "lat": 52.5839128,
     "lon": 13.2404021
   },
   "13507": {
+    "district": "Reinickendorf",
     "lat": 52.5762682,
     "lon": 13.2733723
   },
   "13509": {
+    "district": "Reinickendorf",
     "lat": 52.5891435,
     "lon": 13.3007094
   },
   "13581": {
+    "district": "Spandau",
     "lat": 52.5310541,
     "lon": 13.1793679
   },
   "13583": {
+    "district": "Spandau",
     "lat": 52.5436599,
     "lon": 13.182321
   },
   "13585": {
+    "district": "Spandau",
     "lat": 52.5477295,
     "lon": 13.2049016
   },
   "13587": {
+    "district": "Spandau",
     "lat": 52.5769005,
     "lon": 13.1855967
   },
   "13589": {
+    "district": "Spandau",
     "lat": 52.5575314,
     "lon": 13.1679136
   },
   "13591": {
+    "district": "Spandau",
     "lat": 52.53455,
     "lon": 13.1406752
   },
   "13593": {
+    "district": "Spandau",
     "lat": 52.5147143,
     "lon": 13.1674731
   },
   "13595": {
+    "district": "Spandau",
     "lat": 52.511632,
     "lon": 13.1964848
   },
   "13597": {
+    "district": "Spandau",
     "lat": 52.527257,
     "lon": 13.2194875
   },
   "13599": {
+    "district": "Spandau",
     "lat": 52.5475313,
     "lon": 13.2359564
   },
   "13627": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5399025,
     "lon": 13.2994065
   },
   "13629": {
+    "district": "Spandau",
     "lat": 52.542187,
     "lon": 13.2663686
   },
   "14050": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5209723,
     "lon": 13.2686116
   },
   "14052": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5159251,
     "lon": 13.2560707
   },
   "14053": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5153573,
     "lon": 13.2381967
   },
   "14055": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.501928,
     "lon": 13.2447413
   },
   "14057": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.507254,
     "lon": 13.2879423
   },
   "14059": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.5205365,
     "lon": 13.2879135
   },
   "14089": {
+    "district": "Spandau",
     "lat": 52.470783,
     "lon": 13.1516457
   },
   "14109": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4197381,
     "lon": 13.1439961
   },
   "14129": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4462811,
     "lon": 13.2026019
   },
   "14163": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4368831,
     "lon": 13.2385492
   },
   "14165": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4175504,
     "lon": 13.2535113
   },
   "14167": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.421164,
     "lon": 13.2765595
   },
   "14169": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4496718,
     "lon": 13.2572163
   },
   "14193": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4831252,
     "lon": 13.236524
   },
   "14195": {
+    "district": "Steglitz-Zehlendorf",
     "lat": 52.4588979,
     "lon": 13.2829183
   },
   "14197": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4733609,
     "lon": 13.311789
   },
   "14199": {
+    "district": "Charlottenburg-Wilmersdorf",
     "lat": 52.4776604,
     "lon": 13.2950726
-  },
-  "15537": {
-    "lat": 52.4140973,
-    "lon": 13.865935
-  },
-  "15566": {
-    "lat": 52.4791704,
-    "lon": 13.7057065
-  },
-  "15569": {
-    "lat": 52.4491978,
-    "lon": 13.7614472
   }
 }

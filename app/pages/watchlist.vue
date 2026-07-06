@@ -2,22 +2,13 @@
 import { useUserStore } from '~/stores/userStore'
 import { useItemCacheStore } from '~/stores/itemCacheStore'
 import AvailabilityBadge from '~/components/AvailabilityBadge.vue'
+import ZipCode from '~/components/ZipCode.vue'
 
 const userStore = useUserStore()
 const itemCacheStore = useItemCacheStore()
 const supabase = useSupabaseClient()
-const router = useRouter()
-const localZipInput = ref(userStore.userZip)
 const user = useSupabaseUser()
 
-watch(() => userStore.userZip, (newZip) => {
-  localZipInput.value = newZip
-}, { immediate: true })
-
-function saveLocation() {
-  ; (window as any).umami?.track('zip-save', { query: localZipInput.value.substring(0, 2) })
-  userStore.saveLocation(localZipInput.value)
-}
 
 async function handleLogout() {
   await supabase.auth.signOut()
@@ -26,30 +17,6 @@ async function handleLogout() {
 
 <template>
   <div class="max-w-4xl mx-auto space-y-8">
-    <div
-      class="p-4 bg-blue-50/50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <h3 class="font-bold text-gray-900 text-sm flex items-center gap-1.5">
-          <span>📍</span> Dein Standort (PLZ)
-        </h3>
-        <p class="text-xs text-gray-500 mt-0.5">
-          Aktuell: <span class="font-bold text-blue-700">{{ userStore.userZip }}</span>
-        </p>
-        <p class="text-xs text-gray-500 mt-0.5">
-          Wir nutzen diese Information, um die Bibliotheken nach Entfernung zu sortieren.
-        </p>
-      </div>
-
-      <div class="flex gap-2 self-start sm:self-auto">
-        <input v-model="localZipInput" type="text" placeholder="z.B. 10559" @keyup.enter="saveLocation"
-          class="w-28 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-center font-bold outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
-        <button @click="saveLocation" :disabled="userStore.isGeocoding"
-          class="rounded-xl bg-gray-900 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-gray-800 transition-all disabled:opacity-50">
-          {{ userStore.isGeocoding ? 'Lädt...' : 'Speichern' }}
-        </button>
-      </div>
-    </div>
-
 
     <div>
       <h1 class="text-2xl font-black mb-4">Deine Merkliste</h1>
@@ -87,6 +54,8 @@ async function handleLogout() {
         </NuxtLink>
       </div>
     </div>
+
+    <ZipCode />
 
     <div>
       <h2 class="text-xl font-black mb-2">Account Sync</h2>

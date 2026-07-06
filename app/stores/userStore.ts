@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', {
     loading: false,
     userZip: (import.meta.client ? localStorage.getItem(LOCAL_ZIP_KEY) : null) || '10178',
     userCoords: { lat: 52.5219, lon: 13.4132 },
-    isGeocoding: false,
+    userZipDefault: true,
     showAuthModal: false,
   }),
   getters: {
@@ -157,6 +157,7 @@ export const useUserStore = defineStore('user', {
 
       this.userZip = cleanZip
       this.userCoords = { lat: lookup[cleanZip].lat, lon: lookup[cleanZip].lon }
+      this.userZipDefault = false
 
       if (!import.meta.client) return
       const supabase = useSupabaseClient()
