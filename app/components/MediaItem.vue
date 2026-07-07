@@ -16,6 +16,7 @@ const icon = computed(() => {
   switch (mediaType) {
     case 'buch':
     case 'band':
+    case 'hochschulschrift':
       return `${ICON_URL}buch.svg`
     case 'konventionelles spiel':
       return `${ICON_URL}brettspiel.svg`
@@ -35,6 +36,17 @@ const icon = computed(() => {
       return `${ICON_URL}lp.svg`
     case 'karte/plan':
       return `${ICON_URL}karte.svg`
+    case 'video':
+      return `${ICON_URL}video.svg`
+    case 'gerät':
+      return `${ICON_URL}datentraeger.svg`
+    case 'e-ressource':
+      return `${ICON_URL}eressource.svg`
+    case 'blu-ray disc':
+    case 'ultra hd blu-ray':
+      return `${ICON_URL}bluray.svg`
+    case 'plastik':
+      return `${ICON_URL}plastik.svg`
     default:
       console.log(`Unbekannter Medientyp: ${mediaType} für Medien-ID: ${props.mediaId}`)
       return ''
@@ -49,7 +61,7 @@ const icon = computed(() => {
       <NuxtLink :to="`/media/${props.mediaId}`" class="grid grid-cols-[52px_1fr] md:grid-cols-[72px_1fr] gap-3 min-w-0">
           <!-- alt="icon" -->
         <img :src="icon"
-          :alt="`${itemCacheStore.items[props.mediaId]?.mediaType.toLowerCase()}}`"
+          :alt="`${itemCacheStore.items[props.mediaId]?.mediaType.toLowerCase()}`"
           class="w-12 md:w-16 p-1 md:p-2 text-sm">
         <div class="flex flex-col min-w-0">
           <h3

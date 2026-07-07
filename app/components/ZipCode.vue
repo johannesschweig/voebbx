@@ -20,7 +20,7 @@ watch(() => userStore.userZip, (newZip) => {
 
 function saveLocation() {
   userStore.saveLocation(localZipInput.value)
-    (window as any).umami?.track('zip-save', { query: localZipInput.value.substring(0, 2) + 'XXXX' })
+    ; (window as any).umami?.track('zip-save', { query: localZipInput.value.substring(0, 2) + 'XXXX' })
 }
 </script>
 
@@ -34,8 +34,9 @@ function saveLocation() {
         <span :class="userStore.userZipDefault ? 'text-gray-500 italic' : 'font-bold text-blue-700'">{{
           userStore.userZip
           }}
-          {{ userStore.userZipDefault ? '(Standardwert)' : `(${(berlinZips as any)[userStore.userZip]?.district })` }}</span>
- 
+          {{ userStore.userZipDefault ? '(Standardwert)' : `(${(berlinZips as any)[userStore.userZip]?.district})`
+          }}</span>
+
       </p>
     </div>
     <p class="text-xs text-gray-500">
@@ -43,15 +44,16 @@ function saveLocation() {
     </p>
 
     <div class="flex flex-col gap-2">
-      <button v-if="!editing" @click="editing = true" class="btn btn-md md:self-start" :class="userStore.userZipDefault ? 'btn-primary' : 'btn-secondary'">Ändern</button>
+      <button v-if="!editing" @click="editing = true" class="btn btn-md md:self-start"
+        :class="userStore.userZipDefault ? 'btn-primary' : 'btn-secondary'">Ändern</button>
       <div v-else class="flex flex-col gap-2">
         <div class="flex items-center gap-2">
           <input v-model="localZipInput" type="text" placeholder="z.B. 10559" @keyup.enter="saveLocation"
+            inputmode="numeric" maxlength="5"
             class="w-28 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-center font-bold outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
           <span v-if="isValidZip">{{ (berlinZips as any)[localZipInput.trim()]?.district }}</span>
         </div>
-        <button @click="saveLocation" :disabled="!canSave"
-          class="btn btn-md md:self-start"
+        <button @click="saveLocation" :disabled="!canSave" class="btn btn-md md:self-start"
           :class="canSave ? 'btn-primary' : 'btn-secondary'">
           Speichern
         </button>

@@ -1,19 +1,32 @@
 # TODO
+- marketing first: facebook?, blog post hacker news, linkedin, more stickers
+- set zip code in search somehow
+- better aggregation if zip code is default
+- buy domain
+  - register in google search console
+
+# Contemplating / Ideas
+- where is schiller library: address on click
+- search by clicking on author
 - /detail fails: we need a refetch button or something
-- show people recent searches
-- reduce bounce rate before searching: suggestions for searches or sth
-- rework navbar to header and menubar. authmodal as page. 
 - 2nd page search
-- icons for different media types
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
   - covers on openlibrary are super sparse
   - voebb img needs a referrer (!headache): endpoint?
   - check google covers with api or someo other service
-
-# Ideas
-- take isbn to get cover somewhere
+- a share button on the detail page
+- rework navbar to header and menubar. authmodal as page. 
+- show people recent searches
+  - I would need to store those in localstorage
+- availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
+- title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 
 # DONE
+- reduce bounce rate before searching: suggestions for searches or sth
+  - 40% (61/146) of people only go to home page and never search i.e. bounce
+  -  popkultur (dune wüstenplanet) / spiele (siedler von catan) / hörbücher kinder (tonie eiskönigin)
+- input numeric zip code
+- icons for different media types
 - zip code save validation
 - add login to merkliste page as "Sync option"
 - saving user location and watchlist w/o account
@@ -55,3 +68,4 @@
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
 - instant notifications when available: in app (native) or via email or in telegram
 - zip code visualiziation: there are just too many zip codes. better label with district
+- clicking on navbar / or pressing x in search does not clear the results
