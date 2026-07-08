@@ -20,12 +20,38 @@ const quickSearches = [
   { label: '🎧 Tonie Eiskönigin', query: 'Tonie Eiskönigin' }
 ]
 
-onMounted(() => {
-  if (route.query.q && typeof route.query.q === 'string') {
-    searchQuery.value = route.query.q
-    handleSearch(searchQuery.value, 'user')
+// onMounted(() => {
+//   if (route.query.q && typeof route.query.q === 'string') {
+//     searchQuery.value = route.query.q
+//     handleSearch(searchQuery.value, 'user')
+//   }
+// })
+
+watch(
+  () => route.query.q,
+  (newQuery) => {
+    if (!newQuery) {
+      // Wenn kein 'q' in der URL (Navbar-Klick), alles auf Startzustand setzen
+      searchQuery.value = ''
+      lastQuery.value = ''
+      hasSearched.value = false
+      mediaStore.searchIds = []
+    } else if (newQuery !== searchQuery.value) {
+      // Falls via Browser-History (Zurück-Button) gesucht wird
+      searchQuery.value = String(newQuery)
+      handleSearch(searchQuery.value, 'user')
+    }
+  },
+  { immediate: true } // Ersetzt das alte onMounted komplett beim ersten Laden
+)
+
+function handleInputClear() {
+  if (searchQuery.value === '') {
+    hasSearched.value = false
+    mediaStore.searchIds = []
+    router.replace({ query: {} }) // Entfernt das ?q= aus der URL
   }
-})
+}
 
 function handleQuickSearch(query: string) {
   searchQuery.value = query
@@ -62,7 +88,8 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
       <!-- Suchformular -->
       <div class="mb-10">
         <form @submit.prevent="handleSearch(searchQuery, 'user')" class="flex gap-2 mb-3">
-          <input v-model="searchQuery" type="search" placeholder="Titel, Autor, Spiel …"
+          <input v-model="searchQuery" type="search" placeholder="Titel, Autor, Spiel …" @search="handleInputClear"
+            @input="handleInputClear"
             class="flex-1 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-gray-400"
             :disabled="loading" />
           <button type="submit" class="btn btn-md btn-accent" :disabled="loading || !searchQuery.trim()">

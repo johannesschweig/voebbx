@@ -6,6 +6,7 @@
   - register in google search console
 
 # Contemplating / Ideas
+- seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - where is schiller library: address on click
 - search by clicking on author
 - /detail fails: we need a refetch button or something
@@ -22,6 +23,7 @@
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 
 # DONE
+- clicking on navbar / or pressing x in search does not clear the results
 - reduce bounce rate before searching: suggestions for searches or sth
   - 40% (61/146) of people only go to home page and never search i.e. bounce
   -  popkultur (dune wüstenplanet) / spiele (siedler von catan) / hörbücher kinder (tonie eiskönigin)
@@ -68,4 +70,3 @@
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
 - instant notifications when available: in app (native) or via email or in telegram
 - zip code visualiziation: there are just too many zip codes. better label with district
-- clicking on navbar / or pressing x in search does not clear the results
