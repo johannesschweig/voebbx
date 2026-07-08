@@ -34,11 +34,11 @@ onMounted(() => {
 
 onUnmounted(() => { if (observer) observer.disconnect() })
 
-const statusInfo = computed(() => calculateStatusInfo(itemData.value?.availability, userStore.userCoords))
+const statusInfo = computed(() => calculateStatusInfo(itemData.value?.availability, userStore.userCoords, userStore.userZipDefault))
 </script>
 
 <template>
-  <div ref="targetElement" class="flex items-center min-h-[24px]">
+  <div ref="targetElement" class="flex items-center min-h-6">
     <div v-if="isPending" class="flex items-center gap-2 animate-pulse">
       <div class="h-5 w-36 bg-gray-200 rounded-full"></div>
       <span class="text-xs text-gray-400">Prüfe Verfügbarkeit...</span>

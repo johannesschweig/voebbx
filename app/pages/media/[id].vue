@@ -43,7 +43,7 @@
 
         <div v-else class="space-y-3">
           <div v-for="(item, index) in displayedBranches" :key="index"
-            class="border border-gray-200 rounded-lg p-4 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            class="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2" :class="item.distance < 3 ? 'bg-white' : 'bg-gray-50'">
             <div>
               <h3 class="font-medium text-gray-900">{{ item.branch }}</h3>
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
