@@ -1,14 +1,13 @@
 # TODO
 - marketing first: facebook?, blog post hacker news, linkedin, more stickers
-- set zip code in search somehow
-- better aggregation if zip code is default
 - buy domain
   - register in google search console
 
 # Contemplating / Ideas
 - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
-- where is schiller library: address on click
-- search by clicking on author
+- events for click on library and clicking on author
+  - where is schiller library: address on click
+  - search by clicking on author
 - /detail fails: we need a refetch button or something
 - 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
@@ -23,6 +22,8 @@
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 
 # DONE
+- set zip code in search somehow
+- better aggregation if zip code is default
 - clicking on navbar / or pressing x in search does not clear the results
 - reduce bounce rate before searching: suggestions for searches or sth
   - 40% (61/146) of people only go to home page and never search i.e. bounce

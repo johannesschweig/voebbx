@@ -7,6 +7,7 @@ import EmptyState from '~/components/EmptyState.vue'
 import Faq from '~/components/Faq.vue'
 import MediaItem from '~/components/MediaItem.vue'
 
+const { track } = useUmami()
 const route = useRoute()
 const router = useRouter()
 const mediaStore = useMediaStore()
@@ -65,7 +66,7 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
   hasSearched.value = false
   lastQuery.value = cleanQuery
   router.replace({ query: { q: cleanQuery } })
-    ; (window as any).umami?.track(
+    track(
       source === 'user' ? 'search-started' : 'search-quick',
       { query: cleanQuery }
     )

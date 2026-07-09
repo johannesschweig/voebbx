@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const openIndex = ref<number | null>(null)
+const { track } = useUmami()
 
 const faqs = [
   {
@@ -38,8 +39,7 @@ const faqs = [
 
 const toggleFaq = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
-  ; (window as any).umami?.track('toggle-faq', { query: faqs[index]?.id })
-
+  track('toggle-faq', { query: faqs[index]?.id ?? '' })
 }
 </script>
 

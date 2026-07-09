@@ -47,14 +47,15 @@ async function handleLogout() {
             <AvailabilityBadge :media-id="id" class="mt-2" />
           </div>
 
-          <button @click.prevent="userStore.toggleBookmark(id)"
-            class="self-start mt-2 sm:mt-0 btn btn-sm btn-danger">
+          <button @click.prevent="userStore.toggleBookmark(id)" class="self-start mt-2 sm:mt-0 btn btn-sm btn-danger">
             Entfernen
           </button>
         </NuxtLink>
       </div>
     </div>
 
+
+    <h2 class="text-xl font-black mb-2">Stammbezirk</h2>
     <ZipCode />
 
     <div>
@@ -66,14 +67,12 @@ async function handleLogout() {
         <p class="text-sm text-gray-700">
           Angemeldet als <span class="font-bold">{{ user.email }}</span>
         </p>
-        <button @click="handleLogout"
-          class="md:self-start btn btn-md btn-secondary">
+        <button @click="handleLogout" class="md:self-start btn btn-md btn-secondary">
           Abmelden
         </button>
       </div>
       <div v-else class="flex flex-col gap-2">
-        <button @click="userStore.showAuthModal = true"
-          class="md:self-start btn btn-md btn-primary">
+        <button @click="userStore.showAuthModal = true" class="md:self-start btn btn-md btn-primary">
           Anmelden
         </button>
       </div>
