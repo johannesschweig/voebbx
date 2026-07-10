@@ -8,8 +8,8 @@
       <p class="m-0">Flemingstr 6, 10557 Berlin</p>
       <p class="m-0">USt-IdNr: DE363289149</p>
       <p class="m-0">Telefon: 030/60269851</p>
-      <p class="m-0">E-Mail: bibblitz@proton.me</p>
-      <p class="m-0">Internetadresse: www.bibblitz.vercel.app</p>
+      <p class="m-0">E-Mail: info@bibblitz.de</p>
+      <p class="m-0">Internetadresse: www.bibblitz.de</p>
     </section>
 
     <section class="space-y-2">

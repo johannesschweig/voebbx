@@ -116,12 +116,12 @@ function libraryClicked(branch: string) {
         <div v-else class="space-y-3">
 
           <ZipCode v-if="userStore.userZipDefault" v-model="userStore.userZip" />
-          <div v-for="(item, index) in displayedBranches" :key="index"
+          <NuxtLink v-for="(item, index) in displayedBranches" :key="index" :to="`/library/${item.libraryId}`"
             class="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
             :class="item.distance < 3 ? 'bg-white' : 'bg-gray-50'"
-            @click="libraryClicked(item.branch)">
+            >
             <div>
-              <h3 class="font-medium text-gray-900">{{ item.branch }}</h3>
+              <h3 class="font-medium text-gray-900">{{ item.libraryName }}</h3>
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
                 Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border border-gray-300 rounded text-gray-700">{{
                   item.shelfmark
@@ -140,7 +140,7 @@ function libraryClicked(branch: string) {
                       item.status
               }}
             </span>
-          </div>
+          </NuxtLink>
           <button v-if="hiddenBranchesCount > 0" @click="showAllBranches = true" class="btn btn-md btn-secondary">
             {{ hiddenBranchesCount }} entferntere
             {{ hiddenBranchesCount === 1 ? 'Bibliothek' : 'Bibliotheken' }} anzeigen

@@ -1,0 +1,189 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import libraryData from '~/assets/libraries.json'
+import { useUserStore } from '#imports'
+import { calculateHaversineDistance } from '~~/utils/distance'
+
+const route = useRoute()
+const userStore = useUserStore()
+
+const dayLabels = {
+  monday: 'Montag',
+  tuesday: 'Dienstag',
+  wednesday: 'Mittwoch',
+  thursday: 'Donnerstag',
+  friday: 'Freitag',
+  saturday: 'Samstag',
+  sunday: 'Sonntag'
+}
+
+const libraryId = computed(() => {
+  const id = route.params.id
+  return Array.isArray(id) ? id[0] : id
+})
+
+const library = computed(() => {
+  const id = libraryId.value
+  if (!id) {
+    return {
+      name: 'Unbekannte Bibliothek',
+      district: '',
+      address: '',
+      mapsLink: '#',
+      website: '#',
+      opening_hours: []
+    }
+  }
+
+  const lib = libraryData.find(lib => lib.id === id)
+  if (!lib) {
+    return {
+      name: 'Unbekannte Bibliothek',
+      district: '',
+      address: '',
+      mapsLink: '#',
+      website: '#',
+      opening_hours: []
+    }
+  }
+  return {
+    ...lib,
+    mapsLink: `https://maps.google.com/?q=${encodeURIComponent(lib.name)}`,
+  }
+})
+
+const distanceText = computed(() => {
+  const userCoords = userStore.userCoords
+  if (!userCoords) return null
+
+  const library = libraryData.find(lib => lib.id === libraryId.value)
+  const { lat, lon } = library || { lat: undefined, lon: undefined }
+  if (!lat && !lon) return null
+
+
+  // Berechne Distanz in Kilometern
+  const km = calculateHaversineDistance(
+    userCoords.lat,
+    userCoords.lon,
+    lat,
+    lon
+  )
+
+  // Schöne Formatierung: Unter 1km in Metern, darüber in km mit einer Nachkommastelle
+  if (km < 1) {
+    return `${Math.round(km * 1000)} m von dir entfernt`
+  }
+  return `${km.toFixed(1).replace('.', ',')} km von dir entfernt`
+})
+</script>
+
+<template>
+  <div class="max-w-md mx-auto p-4">
+
+    <NuxtLink class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 mb-4 transition-colors"
+      @click="$router.go(-1)">
+      <span>← Zurück</span>
+    </NuxtLink>
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+
+      <div class="p-5 border-b border-gray-100 bg-linear-to-br from-slate-50 to-white">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
+          {{ library.district }}
+        </span>
+        <h1 class="text-xl font-extrabold text-gray-900 mt-2.5 leading-tight">
+          {{ library.name }}
+        </h1>
+      </div>
+
+      <div class="p-5 flex flex-col gap-5">
+        <div v-if="!userStore.userZipDefault && distanceText"
+          class="flex items-start gap-3 bg-blue-50/50 border border-blue-100/60 p-3 rounded-xl">
+          <div class="p-1.5 bg-blue-100 text-blue-600 rounded-lg text-xs shrink-0 mt-0.5">
+            🏃‍♂️
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wide">Entfernung</h3>
+            <p class="text-sm text-blue-900 font-bold mt-0.5">
+              {{ distanceText }}
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-gray-100 text-gray-600 rounded-lg mt-0.5 shrink-0">
+            📍
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Adresse</h3>
+            <p class="text-sm text-gray-700 font-medium mt-0.5">{{ library.address }}</p>
+            <a :href="library.mapsLink" target="_blank"
+              class="text-xs text-blue-600 font-semibold hover:underline block mt-1">
+              In Google Maps öffnen ↗
+            </a>
+          </div>
+
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-gray-100 text-gray-600 rounded-lg mt-0.5 shrink-0">
+            ⏳
+          </div>
+          <div class="w-full">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">
+              Öffnungszeiten
+            </h3>
+
+            <div class="bg-gray-50 rounded-xl p-3 text-sm flex flex-col gap-1.5">
+              <div v-for="(germanLabel, englishKey) in dayLabels" :key="englishKey"
+                class="flex justify-between border-b border-gray-200/50 last:border-none pb-1.5 last:pb-0">
+                <span class="text-gray-500 font-medium">{{ germanLabel }}</span>
+
+                <span class="text-gray-800 font-bold" :class="{
+                  'text-red-500 font-medium': !library.opening_hours?.[englishKey] || library.opening_hours?.[englishKey] === 'Geschlossen'
+                }">
+                  {{ library.opening_hours?.[englishKey] || 'Geschlossen' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-gray-100 text-gray-600 rounded-lg mt-0.5 shrink-0">
+            🙋
+          </div>
+          <div class="w-full">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">
+              Service Zeiten
+            </h3>
+            <p class="text-sm text-gray-500">Ausleihe bei Mitarbeitern (z.B. Brettspiele, Konsolenspiele, tlw. Tonies)</p>
+
+            <div class="bg-gray-50 rounded-xl p-3 text-sm flex flex-col gap-1.5">
+              <div v-for="(germanLabel, englishKey) in dayLabels" :key="englishKey"
+                class="flex justify-between border-b border-gray-200/50 last:border-none pb-1.5 last:pb-0">
+                <span class="text-gray-500 font-medium">{{ germanLabel }}</span>
+
+                <span class="text-gray-800 font-bold" :class="{
+                  'text-gray-500! font-medium': !library.service_hours?.[englishKey] || library.service_hours?.[englishKey] === 'Kein Service'
+                }">
+                  {{ library.service_hours?.[englishKey] || 'Kein Service' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="p-4 bg-gray-50 border-t border-gray-100 flex">
+        <a :href="library.website" target="_blank" class="w-full btn btn-secondary btn-md">
+          <span>Bibliothekswebsite öffnen</span>
+          <span class="text-xs opacity-70">↗</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</template>

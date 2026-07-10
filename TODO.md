@@ -1,12 +1,17 @@
 # TODO
 - marketing first: facebook?, blog post hacker news, linkedin, more stickers
 - buy domain
-  - register in google search console
+  - check in google search console
+  - check/change email
+- consisten back button styling
+- where is schiller library: address on click
+  - add data to libraries: district,opening horus, website
+  - nice map illustration
 
 # Contemplating / Ideas
+- korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
 - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - events for click on library and clicking on author
-  - where is schiller library: address on click
   - search by clicking on author
 - /detail fails: we need a refetch button or something
 - 2nd page search
@@ -67,7 +72,7 @@
     
 - job to check them regularly: watchlist is convenient enough
 - show bestellmöglichkeit für magazin
-  - signature is not unique for magazin stuff (see http://bibblitz.vercel.app/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
+  - signature is not unique for magazin stuff (see http://bibblitz.de/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
 - instant notifications when available: in app (native) or via email or in telegram
 - zip code visualiziation: there are just too many zip codes. better label with district

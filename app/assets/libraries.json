@@ -4,615 +4,1680 @@
     "name": "Fahrbibliothek Mitte 5",
     "address": "Perleberger Str. 33,10559 Berlin",
     "lat": 52.5313701,
-    "lon": 13.3476131
+    "lon": 13.3476131,
+    "phone": "(030) / 9018 33025",
+    "email": "Fahrbibliothek@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/fahrbibliothek/",
+    "service_hours": null
   },
   {
     "id": "bruno-loesche-bibliothek",
     "name": "Bruno-Loesche-Bibliothek",
     "address": "Bruno-Lösche,Perleberger Str. 33,10559 Berlin",
     "lat": 52.5313186,
-    "lon": 13.3477286
+    "lon": 13.3477286,
+    "district": "Mitte",
+    "phone": "030 / 9018 33025",
+    "email": "service.loesche@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/bruno-loesche-bibliothek/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "10:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-19:30"
+    },
+    "service_hours": null
   },
   {
     "id": "hansabibliothek",
     "name": "Hansabibliothek",
     "address": "Altonaer Str. 15,10557 Berlin",
     "lat": 52.5153194,
-    "lon": 13.34917
+    "lon": 13.34917,
+    "district": "Mitte",
+    "phone": "(030) / 9018 32156",
+    "email": "Hansabibliothek@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/hansabibliothek/",
+    "opening_hours": {
+      "monday": "13:00-19:30",
+      "tuesday": "12:00-18:00",
+      "wednesday": "12:00-18:00",
+      "thursday": "12:00-18:00",
+      "friday": "13:00-19:30",
+      "saturday": "10:00-14:00",
+      "sunday": "10:00-16:00"
+    },
+    "service_hours": null
   },
   {
     "id": "kurt-tucholsky-bibliothek-mitte",
     "name": "Kurt-Tucholsky-Bibliothek (Mitte)",
     "address": "Rostocker Str. 32b,10553 Berlin",
     "lat": 52.5316337,
-    "lon": 13.3261038
+    "lon": 13.3261038,
+    "district": "Mitte",
+    "phone": "(030) / 39480264",
+    "email": "tucholsky@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/kurt-tucholsky-bibliothek/",
+    "opening_hours": {
+      "monday": "12:30-18:00",
+      "tuesday": "12:30-18:00",
+      "wednesday": "12:30-18:00",
+      "thursday": "12:30-18:00",
+      "friday": "12:30-18:00",
+      "saturday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-tiergarten-s-d",
     "name": "Bibliothek Tiergarten Süd",
     "address": "Tiergarten Süd,Lützowstr. 27,10785 Berlin",
     "lat": 52.5037472,
-    "lon": 13.3634802
+    "lon": 13.3634802,
+    "district": "Mitte",
+    "phone": "(030) / 23003088",
+    "email": "tiergarten-sued@stb-mitte.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/bibliothek-tiergarten-sued/",
+    "service_hours": null
   },
   {
     "id": "bezirkszentralbibliothek-philipp-schaeffer",
     "name": "Bezirkszentralbibliothek Philipp Schaeffer",
     "address": "Philipp Schaeffer,Brunnenstr. 181,10119 Berlin",
     "lat": 52.5318068,
-    "lon": 13.3988819
+    "lon": 13.3988819,
+    "district": "Mitte",
+    "phone": "030 / 9018 24444",
+    "email": "Stadtbibliothek-Service@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/bezirkszentralbibliothek-philipp-schaeffer/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "10:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "schiller-bibliothek",
     "name": "Schiller-Bibliothek",
     "address": "Müllerstr. 149,13353 Berlin",
     "lat": 52.546673,
-    "lon": 13.357519
+    "lon": 13.357519,
+    "district": "Mitte",
+    "phone": "(030) / 9018 45683",
+    "email": "schiller@stb-mitte.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/schiller-bibliothek-mit-hugojugendmedienetage/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "10:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-19:30",
+      "sunday": "12:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-sch-neberg-nord",
     "name": "Stadtteilbibliothek Schöneberg-Nord",
     "address": "Pallasstr. 27,10781 Berlin",
     "lat": 52.4943729,
-    "lon": 13.35776
+    "lon": 13.35776,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 6398",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/stadtteilbibliothek-schoeneberg-nord/",
+    "service_hours": null
   },
   {
     "id": "berliner-stadtbibliothek-bstb",
     "name": "Berliner Stadtbibliothek (BStB)",
     "address": "Breite Str. 30-36,10178 Berlin,",
     "lat": 52.5154723,
-    "lon": 13.4041719
+    "lon": 13.4041719,
+    "district": "Mitte",
+    "phone": "030 / 90226-401",
+    "email": "info@zlb.de",
+    "website": "https://www.zlb.de/standorte/berliner-stadtbibliothek/",
+    "opening_hours": {
+      "monday": "10:00-21:00",
+      "tuesday": "10:00-21:00",
+      "wednesday": "10:00-21:00",
+      "thursday": "10:00-21:00",
+      "friday": "10:00-21:00",
+      "saturday": "10:00-19:00"
+    },
+    "service_hours": {
+      "monday": "10:00-20:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00"
+    }
   },
   {
     "id": "berlin-sammlungen",
     "name": "Berlin-Sammlungen",
     "address": "Breite Str. 30/31,10178 Berlin,",
     "lat": 52.515317,
-    "lon": 13.4044386
+    "lon": 13.4044386,
+    "district": "ZLB, Zentral- und Landesbibliothek",
+    "phone": "030 / 90226-477 Auskunft, 90226-477 Mikrofilmbereich",
+    "email": "berlinsammlungen@zlb.de",
+    "website": "http://www.zlb.de",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-19:00"
+    },
+    "service_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00"
+    }
   },
   {
     "id": "amerika-gedenkbibliothek-agb",
     "name": "Amerika-Gedenkbibliothek (AGB)",
     "address": "Blücherplatz 1,10961 Berlin,",
     "lat": 52.496565,
-    "lon": 13.3924947
+    "lon": 13.3924947,
+    "district": "Zentral- und Landesbibliothek, ZLB",
+    "phone": "030 / 90226-401",
+    "email": "info@zlb.de",
+    "website": "http://www.zlb.de",
+    "opening_hours": {
+      "monday": "10:00-21:00",
+      "tuesday": "10:00-21:00",
+      "wednesday": "10:00-21:00",
+      "thursday": "10:00-21:00",
+      "friday": "10:00-21:00",
+      "saturday": "10:00-19:00",
+      "sunday": "11:00-17:00"
+    },
+    "service_hours": {
+      "monday": "10:00-20:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00"
+    }
   },
   {
     "id": "au-enmagazin",
     "name": "Außenmagazin",
     "address": "Blücherplatz 1,10961 Berlin,",
     "lat": 52.496565,
-    "lon": 13.3924947
+    "lon": 13.3924947,
+    "district": "ZLB, Zentral- und Landesbibliothek",
+    "phone": "030 / 90226-401",
+    "email": "info@zlb.de",
+    "website": "http://www.zlb.de",
+    "opening_hours": {
+      "monday": "10:00-21:00",
+      "tuesday": "10:00-21:00",
+      "wednesday": "10:00-21:00",
+      "thursday": "10:00-21:00",
+      "friday": "10:00-21:00",
+      "saturday": "10:00-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "thomas-dehler-bibliothek",
     "name": "Thomas-Dehler-Bibliothek",
     "address": "Martin-Luther-Str. 77, 10825 Berlin-Bezirk Tempelhof-Schöneberg",
     "lat": 52.4882627,
-    "lon": 13.3459152
+    "lon": 13.3459152,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 6496",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/thomas-dehler-bibliothek/",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": "15:00-19:00",
+      "wednesday": "15:00-19:00",
+      "thursday": "15:00-19:00",
+      "friday": "15:00-19:00",
+      "saturday": "12:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "kinder-und-jugendbibliothek-mit-lernzentrum",
     "name": "Kinder- und Jugendbibliothek mit Lernzentrum",
     "address": "Blücherplatz 1,10961 Berlin",
     "lat": 52.496565,
-    "lon": 13.3924947
+    "lon": 13.3924947,
+    "district": "ZLB, Zentral- und Landesbibliothek",
+    "phone": "+49/(30) / 90226-103",
+    "email": "jubi@zlb.de",
+    "website": "http://www.zlb.de/kijubi/portal.html",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "13:00-19:00",
+      "friday": "13:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "heinrich-schulz-bibliothek-mit-musikabteilung",
     "name": "Heinrich-Schulz-Bibliothek mit Musikabteilung",
     "address": "Otto-Suhr-Allee 98,10585 Berlin",
     "lat": 52.5170575,
-    "lon": 13.3086639
+    "lon": 13.3086639,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 12217",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/heinrichschulzbibliothek-203398.php",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "11:00-19:00",
+      "sunday": "12:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "mittelpunktbibliothek-sch-neberg",
     "name": "Mittelpunktbibliothek Schöneberg",
     "address": "Hauptstr. 40,10827 Berlin",
     "lat": 52.4840679,
-    "lon": 13.350545
+    "lon": 13.350545,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 4574",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/mittelpunktbibliothek-schoeneberg/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "13:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-am-luisenbad",
     "name": "Bibliothek am Luisenbad",
     "address": "Badstr. 39,13357 Berlin",
     "lat": 52.5536841,
-    "lon": 13.3783035
+    "lon": 13.3783035,
+    "district": "Mitte",
+    "phone": "030 / 9018 45611",
+    "email": "ServLuisenbad@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/bibliothek-am-luisenbad/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "10:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-19:30",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-mitte-bus-1",
     "name": "Fahrbibliothek Mitte Bus 1",
     "address": "Badstr. 39,13357 Berlin",
     "lat": 52.5536841,
-    "lon": 13.3783035
+    "lon": 13.3783035,
+    "district": "Mitte",
+    "phone": "(030) / 9018 45680",
+    "email": "fahrbibliothek@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/fahrbibliothek/",
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-mitte-bus-2",
     "name": "Fahrbibliothek Mitte Bus 2",
     "address": "Badstr. 39,13357 Berlin",
     "lat": 52.5536841,
-    "lon": 13.3783035
+    "lon": 13.3783035,
+    "district": "Mitte",
+    "phone": "(030) / 9018 45680",
+    "email": "fahrbibliothek@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/fahrbibliothek/",
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-mitte-bus-3",
     "name": "Fahrbibliothek Mitte Bus 3",
     "address": "Badstr. 39,13357 Berlin",
     "lat": 52.5536841,
-    "lon": 13.3783035
+    "lon": 13.3783035,
+    "district": "Mitte",
+    "phone": "(030) / 9018 45680",
+    "email": "fahrbibliothek@ba-mitte.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-mitte/bibliotheken/fahrbibliothek/",
+    "service_hours": null
   },
   {
     "id": "dietrich-bonhoeffer-bibliothek",
     "name": "Dietrich-Bonhoeffer-Bibliothek",
     "address": "Brandenburgische Str. 2,10713 Berlin",
     "lat": 52.487167,
-    "lon": 13.3200022
+    "lon": 13.3200022,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 15900",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/dietrichbonhoefferbibliothek-201474.php",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "11:00-16:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-friedrich-von-raumer",
     "name": "Stadtteilbibliothek Friedrich von Raumer",
     "address": "Dudenstr. 18 - 20,10965 Berlin",
     "lat": 52.485185,
-    "lon": 13.3831476
+    "lon": 13.3831476,
+    "district": "Friedrichshain-Kreuzberg",
+    "phone": "030 / 5058-7613",
+    "email": "info-stadtbibliothek@ba-fk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg/bibliotheken/stadtteilbibliothek-friedrich-von-raumer/",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "11:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "11:00-17:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-am-sch-fersee-stadtteilbibliothek-reinickendorf-ost",
     "name": "Bibliothek am Schäfersee Stadtteilbibliothek Reinickendorf-Ost",
     "address": "Markstrasse 36,13409 Berlin",
     "lat": 52.5611876,
-    "lon": 13.3652607
+    "lon": 13.3652607,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945974",
+    "email": "Bibliothek.Schaefersee@reinickendorf.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/bibliothek-am-schaefersee/artikel.336756.php",
+    "opening_hours": {
+      "monday": "12:00-18:00",
+      "tuesday": "12:00-18:00",
+      "wednesday": "12:00-18:00",
+      "thursday": "12:00-18:00",
+      "friday": "12:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "mittelpunktbibliothek-wilhelm-liebknecht-namik-kemal",
     "name": "Mittelpunktbibliothek Wilhelm Liebknecht / Namik Kemal",
     "address": "Adalbertstr. 2,10999 Berlin",
     "lat": 52.4998388,
-    "lon": 13.4185082
+    "lon": 13.4185082,
+    "district": "Friedrichshain-Kreuzberg",
+    "phone": "030 / 5058-5225/-27",
+    "email": "info-stadtbibliothek@ba-fk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg/bibliotheken/mittelpunktbibliothek-wilhelm-liebknecht-namik-kemal/",
+    "opening_hours": {
+      "monday": "11:00-19:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-17:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bettina-von-arnim-bibliothek",
     "name": "Bettina-von-Arnim-Bibliothek",
     "address": "Schönhauser Allee 75,10439 Berlin",
     "lat": 52.5485766,
-    "lon": 13.4135845
+    "lon": 13.4135845,
+    "district": "Pankow",
+    "phone": "030 / 90295 6933",
+    "email": "bettina-von-arnim-bibliothek@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/bettina-von-arnim-bibliothek/",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "10:00-17:00",
+      "friday": "13:00-19:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-halemweg",
     "name": "Stadtteilbibliothek Halemweg",
     "address": "Halemweg 18,13627 Berlin",
     "lat": 52.5376047,
-    "lon": 13.2869501
+    "lon": 13.2869501,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 25284",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/stadtteilbibliothekhalemweg-203397.php",
+    "opening_hours": {
+      "monday": "12:00-16:00",
+      "tuesday": "12:00-16:00",
+      "wednesday": null,
+      "thursday": "14:00-18:00",
+      "friday": "14:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "ingeborg-bachmann-bibliothek",
     "name": "Ingeborg-Bachmann-Bibliothek",
     "address": "Nehringstr. 10,14059 Berlin",
     "lat": 52.5145406,
-    "lon": 13.2938361
+    "lon": 13.2938361,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 24313",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/ingeborg-bachmann-bibliothek-194044.php",
+    "opening_hours": {
+      "monday": "14:00-18:00",
+      "tuesday": "12:00-18:00",
+      "wednesday": "14:00-18:00",
+      "thursday": "12:00-18:00",
+      "friday": "14:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-am-wasserturm",
     "name": "Bibliothek am Wasserturm",
     "address": "Prenzlauer Allee 227/228,10405 Berlin",
     "lat": 52.5335,
-    "lon": 13.4192557
+    "lon": 13.4192557,
+    "district": "Pankow",
+    "phone": "030 / 902953921",
+    "email": "bibliothek-am-wasserturm@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/bibliothek-am-wasserturm/",
+    "opening_hours": {
+      "monday": "08:00-22:00",
+      "tuesday": "08:00-22:00",
+      "wednesday": "08:00-22:00",
+      "thursday": "08:00-22:00",
+      "friday": "08:00-22:00",
+      "saturday": "08:00-22:00",
+      "sunday": null
+    },
+    "service_hours": {
+      "monday": "13:00-18:00",
+      "tuesday": "11:00-16:00",
+      "wednesday": "13:00-18:00",
+      "thursday": "13:00-18:00",
+      "friday": "11:00-16:00"
+    }
   },
   {
     "id": "museum-pankow",
     "name": "Museum Pankow",
     "address": "Prenzlauer Allee 227/228,10405 Berlin",
     "lat": 52.5335,
-    "lon": 13.4192557
+    "lon": 13.4192557,
+    "district": "Pankow",
+    "phone": "030 / 902953921",
+    "email": "bibliothek-am-wasserturm@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/bibliothek-am-wasserturm/",
+    "opening_hours": {
+      "monday": "08:00-22:00",
+      "tuesday": "08:00-22:00",
+      "wednesday": "08:00-22:00",
+      "thursday": "08:00-22:00",
+      "friday": "08:00-22:00",
+      "saturday": "08:00-22:00",
+      "sunday": null
+    },
+    "service_hours": {
+      "monday": "13:00-18:00",
+      "tuesday": "11:00-16:00",
+      "wednesday": "13:00-18:00",
+      "thursday": "13:00-18:00",
+      "friday": "11:00-16:00"
+    }
   },
   {
     "id": "familienbibliothek-else-ury",
     "name": "Familienbibliothek Else Ury",
     "address": "Glogauer Str. 13,10999 Berlin",
     "lat": 52.4926125,
-    "lon": 13.4363013
+    "lon": 13.4363013,
+    "district": "Friedrichshain-Kreuzberg",
+    "phone": "0173 / 6222486",
+    "email": "info-stadtbibliothek@ba-fk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg/bibliotheken/familienbibliothek-else-ury/",
+    "opening_hours": {
+      "monday": "13:00-18:00",
+      "tuesday": "10:00-15:00",
+      "wednesday": null,
+      "thursday": "13:00-18:00",
+      "friday": "12:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "kleiner-b-cherbus-reinickendorf",
     "name": "Kleiner Bücherbus Reinickendorf",
     "address": "Auguste-Viktoria-Allee 29-31,13403 Berlin",
     "lat": 52.57141,
-    "lon": 13.3154042
+    "lon": 13.3154042,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945954",
+    "email": "fahrbibliothek@reinickendorf.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/kleiner-buecherbus/artikel.336924.php",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null
+    },
+    "service_hours": null
   },
   {
     "id": "kurt-tucholsky-bibliothek-pankow",
     "name": "Kurt-Tucholsky-Bibliothek (Pankow)",
     "address": "Esmarchstr. 18,10407 Berlin",
     "lat": 52.532909,
-    "lon": 13.4322183
+    "lon": 13.4322183,
+    "district": "Pankow",
+    "phone": "030 / 90295 3963",
+    "email": "kurt-tucholsky-bibliothek@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/kurt-tucholsky-bibliothek/",
+    "opening_hours": {
+      "monday": "13:00-18:00",
+      "tuesday": "10:00-15:00",
+      "wednesday": "13:00-18:00",
+      "thursday": "13:00-18:00",
+      "friday": "10:00-15:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "heinrich-b-ll-bibliothek",
     "name": "Heinrich-Böll-Bibliothek",
     "address": "Bezirkszentralbibliothek,Greifswalder Str. 87,10409 Berlin",
     "lat": 52.5421611,
-    "lon": 13.4411415
+    "lon": 13.4411415,
+    "district": "Pankow",
+    "phone": "030 / 90295 3978",
+    "email": "heinrich-boell-bibliothek@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/heinrich-boell-bibliothek/",
+    "opening_hours": {
+      "monday": "09:00-19:00",
+      "tuesday": "09:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "09:00-19:00",
+      "friday": "09:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": "10:00-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibl-reinickendorf-west",
     "name": "Bibl. Reinickendorf - West",
     "address": "Reinickendorf-West,Auguste-Viktoria-Allee 29-31,13403 Berlin",
     "lat": 52.57141,
-    "lon": 13.3154042
+    "lon": 13.3154042,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945950",
+    "email": "bibliothek-west@reinickendorf.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/stadtteilbibliothek-reinickendorf-west/artikel.336767.php",
+    "opening_hours": {
+      "monday": "11:00-17:00",
+      "tuesday": "13:00-17:00",
+      "wednesday": null,
+      "thursday": "13:00-19:00",
+      "friday": "13:00-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "johanna-moosdorf-bibliothek",
     "name": "Johanna-Moosdorf-Bibliothek",
     "address": "Westendallee 45,14052 Berlin",
     "lat": 52.510588,
-    "lon": 13.2586538
+    "lon": 13.2586538,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 27803",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/johanna-moosdorf-bibliothek-194063.php",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": "14:00-18:00",
+      "wednesday": "14:00-18:00",
+      "thursday": "14:00-18:00",
+      "friday": "14:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "adolf-reichwein-bibliothek",
     "name": "Adolf-Reichwein-Bibliothek",
     "address": "Berkaer Str. 7,14199 Berlin",
     "lat": 52.4777318,
-    "lon": 13.2877326
+    "lon": 13.2877326,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 22392",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/adolf-reichwein-bibliothek-201473.php",
+    "opening_hours": {
+      "monday": "12:00-16:00",
+      "tuesday": "14:00-18:00",
+      "wednesday": "12:00-16:00",
+      "thursday": "14:00-18:00",
+      "friday": "14:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bezirkszentralbibliothek-tempelhof-sch-neberg",
     "name": "Bezirkszentralbibliothek Tempelhof-Schöneberg",
     "address": "Götzstr. 8/10/12,12099 Berlin",
     "lat": 52.463717,
-    "lon": 13.3878043
+    "lon": 13.3878043,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 2516",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/bezirkszentralbibliothek/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-tempelhof-sch-neberg",
     "name": "Fahrbibliothek Tempelhof-Schöneberg",
     "address": "Götzstr. 8/10/12,12099 Berlin",
     "lat": 52.463717,
-    "lon": 13.3878043
+    "lon": 13.3878043,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 2361",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/fahrbibliothek/",
+    "opening_hours": {
+      "monday": "15:30-18:30",
+      "tuesday": "16:00-18:00",
+      "wednesday": "16:00-17:30",
+      "thursday": "15:30-18:30",
+      "friday": "15:45-17:30"
+    },
+    "service_hours": null
   },
   {
     "id": "helene-nathan-bibliothek",
     "name": "Helene-Nathan-Bibliothek",
     "address": "Karl-Marx-Straße 66,Parkdeck 4,12043 Berlin",
     "lat": 52.4820379,
-    "lon": 13.4322987
+    "lon": 13.4322987,
+    "district": "Neukölln",
+    "phone": "030 / 90239 4313",
+    "email": "info@stadtbibliothek-neukoelln.de",
+    "website": "http://www.berlin.de/stadtbibliothek-neukoelln",
+    "opening_hours": {
+      "monday": "09:00-18:00",
+      "tuesday": "09:00-18:00",
+      "wednesday": "09:00-18:00",
+      "thursday": "09:00-18:00",
+      "friday": "09:00-18:00",
+      "saturday": "10:00-13:00"
+    },
+    "service_hours": null
   },
   {
     "id": "eberhard-alexander-burgh-bibliothek",
     "name": "Eberhard-Alexander-Burgh-Bibliothek",
     "address": "Rüdesheimer Str. 14,14197 Berlin",
     "lat": 52.4713903,
-    "lon": 13.3134919
+    "lon": 13.3134919,
+    "district": "Charlottenburg-Wilmersdorf",
+    "phone": "030 / 9029 17061",
+    "email": "stadtbibliothek@charlottenburg-wilmersdorf.de",
+    "website": "https://www.berlin.de/ba-charlottenburg-wilmersdorf/verwaltung/aemter/weiterbildung-und-kultur/bibliotheken/eberhard-alexander-burgh-bibliothek-201477.php",
+    "opening_hours": {
+      "monday": "13:00-17:00",
+      "tuesday": "14:00-18:00",
+      "wednesday": null,
+      "thursday": "13:00-17:00",
+      "friday": "14:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "janusz-korczak-bibliothek",
     "name": "Janusz-Korczak-Bibliothek",
     "address": "Berliner Str. 120/121,13187 Berlin",
     "lat": 52.5686092,
-    "lon": 13.4122028
+    "lon": 13.4122028,
+    "district": "Pankow",
+    "phone": "030 / 90295 - 6965",
+    "email": "janusz-korczak-bibliothek@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/janusz-korczak-bibliothek/",
+    "opening_hours": {
+      "monday": "09:00-19:00",
+      "tuesday": "09:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "09:00-19:00",
+      "friday": "09:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": "10:00-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bezirkszentralbibliothek-pablo-neruda",
     "name": "Bezirkszentralbibliothek Pablo Neruda",
     "address": "Frankfurter Allee 14 A,10247 Berlin",
     "lat": 52.5146002,
-    "lon": 13.4570448
+    "lon": 13.4570448,
+    "district": "Friedrichshain-Kreuzberg",
+    "phone": "030 / 902985750",
+    "email": "info-stadtbibliothek@ba-fk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg/bibliotheken/bezirkszentralbibliothek-pablo-neruda/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-17:00",
+      "saturday": "10:00-15:00",
+      "sunday": "10:00-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibobike-mobile-bibliotheksstation",
     "name": "BiboBike (mobile Bibliotheksstation)",
     "address": "Frankfurter Allee 14a,10247 Berlin",
     "lat": 52.5146002,
-    "lon": 13.4570448
+    "lon": 13.4570448,
+    "phone": "030 / 902985750",
+    "email": "info-stadtbibliothek@ba-fk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg/bibliotheken/bibobike/bibobike-953402.php",
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-steglitz-zehlendorf",
     "name": "Fahrbibliothek Steglitz-Zehlendorf",
     "address": "Lauenburger Str. 19, 12157 Berlin",
     "lat": 52.4623099,
-    "lon": 13.3379172
+    "lon": 13.3379172,
+    "district": "Steglitz-Zehlendorf",
+    "phone": "030 / 90299 5098",
+    "email": "fahrbibliothek@ba-sz.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-steglitz-zehlendorf",
+    "opening_hours": {
+      "monday": "09:00-18:30",
+      "tuesday": "09:00-19:00",
+      "wednesday": "09:30-19:00",
+      "thursday": "09:15-18:30",
+      "friday": "09:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "wolfdietrich-schnurre-bibliothek",
     "name": "Wolfdietrich-Schnurre-Bibliothek",
     "address": "Bizetstraße 41,13088 Berlin",
     "lat": 52.5477354,
-    "lon": 13.4526704
+    "lon": 13.4526704,
+    "district": "Pankow",
+    "phone": "030 / 90295 3867",
+    "email": "wolfdietrich-schnurre-bibliothek@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/wolfdietrich-schnurre-bibliothek/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-17:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-17:00",
+      "saturday": "10:00-16:00",
+      "sunday": "10:00-16:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-alt-treptow-manfred-bofinger",
     "name": "Stadtteilbibliothek Alt-Treptow Manfred Bofinger",
     "address": "Karl-Kunger-Str. 30,12435 Berlin",
     "lat": 52.4887284,
-    "lon": 13.450422
+    "lon": 13.450422,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902976831",
+    "email": "stadtbibliothek-alttreptow@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/alt-treptow/",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "11:00-17:00",
+      "wednesday": null,
+      "thursday": "13:00-19:00",
+      "friday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "ingeborg-drewitz-bibliothek",
     "name": "Ingeborg-Drewitz-Bibliothek",
     "address": "Grunewaldstr. 3,12165 Berlin",
     "lat": 52.4578262,
-    "lon": 13.3203876
+    "lon": 13.3203876,
+    "district": "Steglitz-Zehlendorf",
+    "phone": "030 / 90299 2410",
+    "email": "info-bibliothek@ba-sz.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-steglitz-zehlendorf",
+    "opening_hours": {
+      "monday": "11:00-19:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00",
+      "saturday": "11:00-16:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "blindenbibliothek-betty-hirsch",
     "name": "Blindenbibliothek Betty Hirsch",
     "address": "Rothenburgstr. 14,12165 BERLIN",
     "lat": 52.4556756,
-    "lon": 13.314331
+    "lon": 13.314331,
+    "phone": "030 / 90299 2018",
+    "service_hours": null
   },
   {
     "id": "egon-erwin-kisch-bibliothek",
     "name": "Egon-Erwin-Kisch-Bibliothek",
     "address": "Frankfurter Allee 149,10365 Berlin",
     "lat": 52.5133827,
-    "lon": 13.4807688
+    "lon": 13.4807688,
+    "district": "Lichtenberg",
+    "phone": "030 / 555 6719",
+    "email": "egon.erwin.kisch.bibliothek@lichtenberg.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg/standorte/egon-erwin-kisch-bibliothek/",
+    "opening_hours": {
+      "monday": "10:00-18:00",
+      "tuesday": "10:00-18:00",
+      "wednesday": "13:00-18:00",
+      "thursday": "10:00-18:00",
+      "friday": "10:00-18:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-haselhorst",
     "name": "Stadtteilbibliothek Haselhorst",
     "address": "Gartenfelder Str. 104,13599 Berlin",
     "lat": 52.5429472,
-    "lon": 13.2391773
+    "lon": 13.2391773,
+    "district": "Spandau",
+    "phone": "030 / 90279 8690/8693",
+    "email": "bibliothek-haselhorst@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/bibliotheken/haselhorst/stadtteilbibliothek-haselhorst-182097.phpn.index.html",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-17:00",
+      "wednesday": "13:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "13:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "anton-saefkow-bibliothek",
     "name": "Anton-Saefkow-Bibliothek",
     "address": "Anton-Saefkow-Platz 14,10369 Berlin",
     "lat": 52.5305752,
-    "lon": 13.4709538
+    "lon": 13.4709538,
+    "district": "Lichtenberg",
+    "phone": "030 / 90296 3790",
+    "email": "anton.saefkow.bibliothek@lichtenberg.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg/standorte/anton-saefkow-bibliothek/",
+    "opening_hours": {
+      "monday": "09:00-19:00",
+      "tuesday": "09:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "09:00-18:00",
+      "friday": "09:00-18:00",
+      "saturday": "09:00-19:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "grosser-b-cherbus-reinickendorf",
     "name": "Grosser Bücherbus Reinickendorf",
     "address": "Königshorster Str. 6,13439 Berlin",
     "lat": 52.5982033,
-    "lon": 13.3505022
+    "lon": 13.3505022,
+    "district": "Reinickendorf",
+    "email": "fahrbibliothek@reinickendorf.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/artikel.899939.php",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bib-bee-reinickendorf",
     "name": "Bib Bee Reinickendorf",
     "address": "Karolinenstr. 19,13507 Berlin",
     "lat": 52.5919452,
-    "lon": 13.2806035
+    "lon": 13.2806035,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945910",
+    "email": "Melanie.Nagel@reinickendorf.berlin.de",
+    "service_hours": null
   },
   {
     "id": "humboldt-bibliothek",
     "name": "Humboldt-Bibliothek",
     "address": "Humboldt-Bibliothek,Karolinenstraße 19,13507 Berlin",
     "lat": 52.5919003,
-    "lon": 13.2805964
+    "lon": 13.2805964,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945921",
+    "email": "Humboldt-Bibliothek@reinickendorf.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf/",
+    "opening_hours": {
+      "monday": "11:00-19:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00",
+      "saturday": "11:00-16:00"
+    },
+    "service_hours": null
   },
   {
     "id": "heimatmuseum-neuk-lln-kein-ausgabeort",
     "name": "Heimatmuseum Neukölln (kein Ausgabeort)",
     "address": "Alt Britz 81,12359 Berlin",
     "lat": 52.4459291,
-    "lon": 13.4378259
+    "lon": 13.4378259,
+    "district": "Neukoelln",
+    "phone": "030 / 627277727",
+    "email": "info@museum-neukoelln.de",
+    "website": "http://www.museum-neukoelln.de",
+    "opening_hours": {
+      "monday": "11:00-17:00",
+      "tuesday": "11:00-17:00",
+      "wednesday": "11:00-17:00",
+      "thursday": "11:00-17:00",
+      "friday": "11:00-17:00",
+      "saturday": "11:00-17:00",
+      "sunday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-spandau",
     "name": "Fahrbibliothek Spandau",
     "address": "Carl-Schurz-Str. 13,13597 Berlin",
     "lat": 52.536132,
-    "lon": 13.2013533
+    "lon": 13.2013533,
+    "district": "Spandau",
+    "phone": "030 / 90279-5530 oder 3539-4719",
+    "email": "fahrbibliothek@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/bibliotheken/fahrbibliothek/",
+    "opening_hours": {
+      "monday": "11:30-19:00",
+      "tuesday": "11:30-19:00",
+      "wednesday": "11:30-19:00",
+      "thursday": "11:30-19:00",
+      "friday": "11:30-19:00"
+    },
+    "service_hours": null
   },
   {
     "id": "hauptbibliothek-spandau",
     "name": "Hauptbibliothek Spandau",
     "address": "Carl-Schurz-Strasse 13,13597 Berlin",
     "lat": 52.536132,
-    "lon": 13.2013533
+    "lon": 13.2013533,
+    "district": "Spandau",
+    "phone": "030 / 90279-5501/5534",
+    "email": "bibliothek@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "10:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-15:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-m-rkisches-viertel",
     "name": "Bibliothek Märkisches Viertel",
     "address": "Wilhelmsruher Damm 142 C,13439 Berlin",
     "lat": 52.5979125,
-    "lon": 13.3523303
+    "lon": 13.3523303,
+    "district": "Reinickendorf",
+    "phone": "030 / 902943833",
+    "email": "bibliothek-mv@reinickendorf.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/bibliothek-im-maerkischen-viertel/artikel.336916.php",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "11:00-17:00",
+      "wednesday": "11:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-lankwitz",
     "name": "Stadtteilbibliothek Lankwitz",
     "address": "Bruchwitzstr. 37,12247 Berlin",
     "lat": 52.4360723,
-    "lon": 13.3506193
+    "lon": 13.3506193,
+    "district": "Steglitz-Zehlendorf",
+    "phone": "030 / 90299 3870",
+    "email": "stb.lankwitz@ba-sz.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-steglitz-zehlendorf",
+    "opening_hours": {
+      "monday": "12:00-16:00",
+      "tuesday": null,
+      "wednesday": "11:00-16:00",
+      "thursday": "12:00-18:00",
+      "friday": "12:00-18:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-hakenfelde",
     "name": "Stadtteilbibliothek Hakenfelde",
     "address": "Iznikstr. 2,13587 Berlin",
     "lat": 52.5601505,
-    "lon": 13.2215369
+    "lon": 13.2215369,
+    "district": "Spandau",
+    "email": "bibliothek@ba-spandau.berlin.de",
+    "service_hours": null
   },
   {
     "id": "margarete-kubicka-bibliothek",
     "name": "Margarete-Kubicka-Bibliothek",
     "address": "Gutschmidtstr. 33,12359 Berlin",
     "lat": 52.4367269,
-    "lon": 13.4461009
+    "lon": 13.4461009,
+    "district": "Neukölln",
+    "phone": "030 / 90239 1223",
+    "email": "margarete.kubicka@stadtbibliothek-neukoelln.de",
+    "website": "http://www.berlin.de/stadtbibliothek-neukoelln/bibliotheken/margarete-kubicka-bibliothek/",
+    "opening_hours": {
+      "monday": "12:00-18:00",
+      "tuesday": "12:00-18:00",
+      "wednesday": null,
+      "thursday": "10:00-16:00",
+      "friday": "12:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "gottfried-benn-bibliothek",
     "name": "Gottfried-Benn-Bibliothek",
     "address": "Nentershäuser Platz 1,14163 Berlin",
     "lat": 52.4320744,
-    "lon": 13.2553953
+    "lon": 13.2553953,
+    "district": "Steglitz-Zehlendorf",
+    "phone": "030 / 90299 5458",
+    "email": "stb.zehlendorf@ba-sz.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-steglitz-zehlendorf",
+    "opening_hours": {
+      "monday": "11:00-19:00",
+      "tuesday": "11:00-19:00",
+      "wednesday": "11:00-19:00",
+      "thursday": "11:00-19:00",
+      "friday": "11:00-19:00",
+      "saturday": "10:00-14:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-falkenhagener-feld",
     "name": "Stadtteilbibliothek Falkenhagener Feld",
     "address": "Falkenhagener Feld,Westerwaldstr. 9,13589 Berlin",
     "lat": 52.550079,
-    "lon": 13.1779583
+    "lon": 13.1779583,
+    "district": "Spandau",
+    "phone": "030 / 60400687",
+    "email": "bibliothek@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/bibliotheken/falkenhagener-feld/artikel.182168.php",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "12:00-17:00",
+      "wednesday": "12:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "12:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bodo-uhse-bibliothek",
     "name": "Bodo-Uhse-Bibliothek",
     "address": "Erich-Kurz-Str. 9,10319 Berlin",
     "lat": 52.4976732,
-    "lon": 13.5203346
+    "lon": 13.5203346,
+    "district": "Lichtenberg",
+    "phone": "030 / 512 2102",
+    "email": "bodo.uhse.bibliothek@lichtenberg.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg/standorte/bodo-uhse-bibliothek/",
+    "service_hours": null
   },
   {
     "id": "anna-seghers-bibliothek",
     "name": "Anna-Seghers-Bibliothek",
     "address": "Prerower Platz 2,13051 Berlin",
     "lat": 52.564801,
-    "lon": 13.505755
+    "lon": 13.505755,
+    "district": "Lichtenberg",
+    "phone": "030 / 927964 -10/-30/-40",
+    "email": "anna.seghers.bibliothek@lichtenberg.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg/standorte/anna-seghers-bibliothek/",
+    "opening_hours": {
+      "monday": "09:00-19:00",
+      "tuesday": "09:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "09:00-18:00",
+      "friday": "09:00-18:00",
+      "saturday": null
+    },
+    "service_hours": null
   },
   {
     "id": "mittelpunktbibliothek-treptow-alte-feuerwache",
     "name": "Mittelpunktbibliothek Treptow Alte Feuerwache",
     "address": "Michael-Brückner-Str. 9,12439 Berlin",
     "lat": 52.4540551,
-    "lon": 13.5139087
+    "lon": 13.5139087,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902976800",
+    "email": "stadtbibliothek-feuerwachetreptow@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/mittelpunktbibliothek-treptow/",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": "10:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-14:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "gertrud-junge-bibliothek",
     "name": "Gertrud-Junge-Bibliothek",
     "address": "Gemeinschaftshaus,Bat-Yam-Platz 1,12353 Berlin",
     "lat": 52.4256906,
-    "lon": 13.4627589
+    "lon": 13.4627589,
+    "district": "Neukölln",
+    "email": "gemeinschaftshaus@stadtbibliothek-neukoelln.de",
+    "website": "http://www.berlin.de/stadtbibliothek-neukoelln/bibliotheken/gertrud-junge-bibliothek/",
+    "opening_hours": {
+      "monday": "11:00-15:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "13:00-19:00",
+      "friday": "11:00-15:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-marienfelde",
     "name": "Stadtteilbibliothek Marienfelde",
     "address": "Marienfelder Allee 107, 12277 Berlin",
     "lat": 52.4168431,
-    "lon": 13.3665881
+    "lon": 13.3665881,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 - 4144 / 4138",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/stadtteilbibliothek-marienfelde/",
+    "opening_hours": {
+      "monday": "10:00-15:00",
+      "tuesday": "12:00-18:00",
+      "wednesday": null,
+      "thursday": "12:00-18:00",
+      "friday": "10:00-15:00",
+      "saturday": null,
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-erich-weinert",
     "name": "Stadtteilbibliothek Erich Weinert",
     "address": "Helene-Weigel-Platz 4,12681 Berlin",
     "lat": 52.5281781,
-    "lon": 13.5381417
+    "lon": 13.5381417,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 542 9251",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/stadtteilbibliothek-erich-weinert/",
+    "opening_hours": {
+      "monday": "11:00-18:00",
+      "tuesday": "11:00-18:00",
+      "wednesday": "09:00-13:00",
+      "thursday": "11:00-18:00",
+      "friday": "09:00-13:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bezirkszentralbibliothek-mark-twain",
     "name": "Bezirkszentralbibliothek Mark Twain",
     "address": "Marzahner Promenade 54,12679 Berlin",
     "lat": 52.546976,
-    "lon": 13.5569384
+    "lon": 13.5569384,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 54704-144",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/bezirkszentralbibliothek-mark-twain/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "14:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "musikbibliothek-in-der-mark-twain-bibliothek",
     "name": "Musikbibliothek (in der Mark-Twain-Bibliothek)",
     "address": "Marzahner Promenade 54,12679 Berlin",
     "lat": 52.546976,
-    "lon": 13.5569384
+    "lon": 13.5569384,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 54704-142",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/musikbibliothek/",
+    "opening_hours": {
+      "monday": "10:00-19:30",
+      "tuesday": "10:00-19:30",
+      "wednesday": "14:00-19:30",
+      "thursday": "10:00-19:30",
+      "friday": "10:00-19:30",
+      "saturday": "10:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-frohnau",
     "name": "Bibliothek Frohnau",
     "address": "Fuchssteinerweg 17,13465 Berlin",
     "lat": 52.6354524,
-    "lon": 13.2951387
+    "lon": 13.2951387,
+    "district": "Reinickendorf",
+    "phone": "030 / 902945968",
+    "email": "bibliothek-frohnau@reinickendorf.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-reinickendorf/bibliotheken/stadtteilbibliothek-frohnau/artikel.336740.php",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-17:00",
+      "wednesday": null,
+      "thursday": "13:00-19:00",
+      "friday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "gertrud-ha-bibliothek",
     "name": "Gertrud-Haß-Bibliothek",
     "address": "Alt-Rudow 45,12357 Berlin",
     "lat": 52.4189604,
-    "lon": 13.4942709
+    "lon": 13.4942709,
+    "district": "Neukölln",
+    "phone": "030 / 90239-1940",
+    "email": "rudow@stadtbibliothek-neukoelln.de",
+    "website": "http://www.berlin.de/stadtbibliothek-neukoelln/bibliotheken/gertrud-hass-bibliothek/",
+    "opening_hours": {
+      "monday": "11:00-18:00",
+      "tuesday": "11:00-18:00",
+      "wednesday": "11:00-18:00",
+      "thursday": "11:00-18:00",
+      "friday": "11:00-15:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-heerstrasse",
     "name": "Stadtteilbibliothek Heerstrasse",
     "address": "Obstallee 22F,13593 Berlin",
     "lat": 52.5222515,
-    "lon": 13.1652726
+    "lon": 13.1652726,
+    "district": "Spandau",
+    "phone": "030 / 3631091",
+    "email": "bibliothek-heerstrasse@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/bibliotheken/heerstrasse/stadtteilbibliothek-heerstrasse-182099.php",
+    "opening_hours": {
+      "monday": "12:00-19:00",
+      "tuesday": "12:00-17:00",
+      "wednesday": "12:00-17:00",
+      "thursday": "12:00-19:00",
+      "friday": "12:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-lichtenrade",
     "name": "Stadtteilbibliothek Lichtenrade",
     "address": "Steinstraße 41,12307 Berlin",
     "lat": 52.3878917,
-    "lon": 13.397116
+    "lon": 13.397116,
+    "district": "Tempelhof-Schöneberg",
+    "phone": "030 / 90277 8286",
+    "email": "stabi-ks@ba-ts.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg/bibliotheken/stadtteilbibliothek-lichtenrade/",
+    "opening_hours": {
+      "monday": "11:00-18:00",
+      "tuesday": "11:00-18:00",
+      "wednesday": "11:00-18:00",
+      "thursday": "11:00-18:00",
+      "friday": "11:00-18:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-adlershof-stefan-heym",
     "name": "Stadtteilbibliothek Adlershof Stefan Heym",
     "address": "Dörpfeldstr. 52/56,12489 Berlin",
     "lat": 52.4386377,
-    "lon": 13.5494383
+    "lon": 13.5494383,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902975731",
+    "email": "stadtbibliothek-adlershof@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/adlershof/",
+    "opening_hours": {
+      "monday": null,
+      "tuesday": "11:00-18:00",
+      "wednesday": null,
+      "thursday": "11:00-18:00",
+      "friday": null
+    },
+    "service_hours": null
   },
   {
     "id": "mittelpunktbibliothek-ehm-welk",
     "name": "Mittelpunktbibliothek Ehm Welk",
     "address": "Alte Hellersdorfer Str. 125,12629 Berlin",
     "lat": 52.5469627,
-    "lon": 13.5922373
+    "lon": 13.5922373,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 99 895 26",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/mittelpunktbibliothek-ehm-welk/",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "11:00-15:00",
+      "thursday": "13:00-19:00",
+      "friday": "11:00-15:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-karow",
     "name": "Bibliothek Karow",
     "address": "Achillesstraße 77,13125 Berlin",
     "lat": 52.6165876,
-    "lon": 13.4915523
+    "lon": 13.4915523,
+    "district": "Pankow",
+    "phone": "030 / 90295 6949",
+    "email": "stadtteilbibliothek-karow@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/stadtteilbibliothek-karow/",
+    "opening_hours": {
+      "monday": "11:00-17:00",
+      "tuesday": "11:00-17:00",
+      "wednesday": null,
+      "thursday": "13:00-19:00",
+      "friday": "13:00-19:00",
+      "saturday": "10:00-15:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-mahlsdorf",
     "name": "Stadtteilbibliothek Mahlsdorf",
     "address": "Alt-Mahlsdorf 24-26,12623 Berlin",
     "lat": 52.505632,
-    "lon": 13.6092991
+    "lon": 13.6092991,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 567 6866",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/stadtteilbibliothek-mahlsdorf/",
+    "opening_hours": {
+      "monday": "13:00-17:00",
+      "tuesday": "13:00-19:00",
+      "wednesday": "10:00-14:00",
+      "thursday": "13:00-19:00",
+      "friday": "10:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-heinrich-von-kleist",
     "name": "Stadtteilbibliothek Heinrich von Kleist",
     "address": "Havemannstr. 17B,12689 Berlin",
     "lat": 52.5682148,
-    "lon": 13.5738621
+    "lon": 13.5738621,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 933 9380",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/stadtteilbibliothek-heinrich-von-kleist/",
+    "opening_hours": {
+      "monday": "13:00-18:00",
+      "tuesday": "13:00-18:00",
+      "wednesday": "09:00-14:00",
+      "thursday": "13:00-19:00",
+      "friday": "09:00-14:00"
+    },
+    "service_hours": null
   },
   {
     "id": "mittelpunktbibliothek-k-penick-alter-markt",
     "name": "Mittelpunktbibliothek Köpenick Alter Markt",
     "address": "Alter Markt 2,12555 Berlin",
     "lat": 52.4457578,
-    "lon": 13.5786008
+    "lon": 13.5786008,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902973418",
+    "email": "stadtbibliothek-altermarktkoepenick@ba-tk.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/mittelpunktbibliothek-koepenick/",
+    "opening_hours": {
+      "monday": "10:00-19:00",
+      "tuesday": "10:00-19:00",
+      "wednesday": "13:00-19:00",
+      "thursday": "10:00-19:00",
+      "friday": "10:00-19:00",
+      "saturday": "10:00-19:00",
+      "sunday": "11:00-17:00"
+    },
+    "service_hours": null
   },
   {
     "id": "bibliothek-buch",
     "name": "Bibliothek Buch",
     "address": "Wiltbergstr. 19-23,13125 Berlin-Buch",
     "lat": 52.6356478,
-    "lon": 13.4942881
+    "lon": 13.4942881,
+    "district": "Pankow",
+    "phone": "030 / 90295-6941",
+    "email": "stadtteilbibliothek-buch@ba-pankow.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow/bibliotheken/stadtteilbibliothek-buch/",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "10:00-16:00",
+      "wednesday": "13:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "13:00-19:00",
+      "saturday": "10:00-15:00",
+      "sunday": null
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-altglienicke",
     "name": "Stadtteilbibliothek Altglienicke",
     "address": "Ortolfstr. 182-184,12524 Berlin",
     "lat": 52.4033691,
-    "lon": 13.5281708
+    "lon": 13.5281708,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902976722",
+    "email": "stadtbibliothek-altglienicke@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/altglienicke/",
+    "opening_hours": {
+      "monday": "10:00-16:00",
+      "tuesday": "12:00-18:00",
+      "wednesday": null,
+      "thursday": "12:00-18:00",
+      "friday": "10:00-16:00"
+    },
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-treptow-k-penick",
     "name": "Fahrbibliothek Treptow-Köpenick",
     "address": "An Ihrer Haltestelle,12555 Berlin",
     "lat": 52.4622442,
-    "lon": 13.5867593
+    "lon": 13.5867593,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902973411",
+    "email": "stadtbibliothek-fahrbibliothek@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/fahrbibliothek/",
+    "opening_hours": {
+      "monday": "11:00-13:00",
+      "tuesday": "11:30-14:30",
+      "wednesday": "12:00-15:00",
+      "thursday": "11:30-14:30",
+      "friday": "11:30-13:30"
+    },
+    "service_hours": null
   },
   {
     "id": "fahrbibliothek-treptow-k-penick-kleiner-bus",
     "name": "Fahrbibliothek Treptow-Köpenick Kleiner Bus",
     "address": "An Ihrer Haltestelle,12555 Berlin",
     "lat": 52.4622442,
-    "lon": 13.5867593
+    "lon": 13.5867593,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 90297 3410",
+    "email": "stadtbibliothek-fahrbibliothek@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/fahrbibliothek-ii/artikel.731362.php",
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-kaulsdorf-nord",
     "name": "Stadtteilbibliothek Kaulsdorf - Nord",
     "address": "Neue Grottkauer Str. 5,12619 Berlin",
     "lat": 52.5292289,
-    "lon": 13.5930636
+    "lon": 13.5930636,
+    "district": "Marzahn-Hellersdorf",
+    "phone": "030 / 563 6705",
+    "email": "bibl.service@ba-mh.berlin.de",
+    "website": "https://www.berlin.de/bibliotheken-mh/bibliotheken/stadtteilbibliothek-kaulsdorf-nord/",
+    "opening_hours": {
+      "monday": "12:00-19:00",
+      "tuesday": "12:00-19:00",
+      "wednesday": "09:00-13:00",
+      "thursday": "12:00-19:00",
+      "friday": "09:00-13:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-kladow",
     "name": "Stadtteilbibliothek Kladow",
     "address": "Sakrower Landstraße 2,14089 Berlin",
     "lat": 52.4533504,
-    "lon": 13.1430742
+    "lon": 13.1430742,
+    "district": "Spandau",
+    "phone": "030 / 81615889",
+    "email": "bibliothek-kladow@ba-spandau.berlin.de",
+    "website": "http://www.berlin.de/stadtbibliothek-spandau/bibliotheken/kladow/stadtteilbibliothek-kladow-182136.php",
+    "opening_hours": {
+      "monday": "13:00-19:00",
+      "tuesday": "13:00-17:00",
+      "wednesday": "13:00-17:00",
+      "thursday": "13:00-19:00",
+      "friday": "09:00-15:00"
+    },
+    "service_hours": null
   },
   {
     "id": "stadtteilbibliothek-friedrichshagen",
     "name": "Stadtteilbibliothek Friedrichshagen",
     "address": "Peter-Hille-Str.1,12587 Berlin",
     "lat": 52.4548895,
-    "lon": 13.6214551
+    "lon": 13.6214551,
+    "district": "Treptow-Köpenick",
+    "phone": "030 / 902976840",
+    "email": "stadtbibliothek-friedrichshagen@ba-tk.berlin.de",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick/bibliotheken/friedrichshagen/",
+    "opening_hours": {
+      "monday": "12:00-17:00",
+      "tuesday": "12:00-17:00",
+      "wednesday": "14:00-19:00",
+      "thursday": "14:00-19:00",
+      "friday": null
+    },
+    "service_hours": null
   }
 ]

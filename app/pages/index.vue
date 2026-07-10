@@ -136,8 +136,8 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
 
 
       <div class="text-center text-sm text-gray-400 mt-8">
-        Feedback? Email an <a href="mailto:bibblitz@proton.me"
-          class="text-blue-500 hover:text-blue-700">bibblitz@proton.me</a>
+        Feedback? Email an <a href="mailto:info@bibblitz.de"
+          class="text-blue-500 hover:text-blue-700">info@bibblitz.de</a>
       </div>
 
       <div class="mt-12 flex gap-3 text-xs">

@@ -1,9 +1,8 @@
 export interface AvailabilityInfo {
-  branch: string;
+  libraryName: string;
+  libraryId?: string;
   status: string;
   shelfmark?: string;
-  lat?: number;
-  lon?: number;
   distance?: number;
   daysToWait?: number;
 }

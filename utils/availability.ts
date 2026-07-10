@@ -190,14 +190,13 @@ export function calculateStatusInfo(
 export function filterAndEnrichBranches(rawAvailability: AvailabilityInfo[]): AvailabilityInfo[] {
   return rawAvailability
     .map(item => {
-      const matchedLibrary = findMatchingLibrary(item.branch)
+      const matchedLibrary = findMatchingLibrary(item.libraryName)
       const sortIndex = matchedLibrary ? libraryData.indexOf(matchedLibrary) : -1
       const daysToWait = calculateDaysToWait(item.status)
 
       return {
         ...item,
-        lat: matchedLibrary?.lat,
-        lon: matchedLibrary?.lon,
+        libraryId: matchedLibrary?.id,
         daysToWait,
         sortIndex
       }
@@ -211,7 +210,15 @@ export function filterAndEnrichBranches(rawAvailability: AvailabilityInfo[]): Av
 export function sortBranchesByDistance(availability: AvailabilityInfo[], userCoords: { lat: number; lon: number }): AvailabilityInfo[] {
   const mappedAvailability = availability.map(item => {
 
-    const distance = calculateHaversineDistance(userCoords.lat, userCoords.lon, item.lat!, item.lon!)
+    const library = libraryData.find(lib => lib.id === item.libraryId)
+    const { lat, lon } = library || { lat: undefined, lon: undefined }
+    if (lat === undefined || lon === undefined) {
+      return {
+        ...item,
+        distance: undefined
+      }
+    }
+    const distance = calculateHaversineDistance(userCoords.lat, userCoords.lon, lat, lon)
 
     return {
       ...item,

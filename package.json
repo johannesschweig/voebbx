@@ -19,7 +19,7 @@
     "nuxt": "^4.4.8",
     "tailwindcss": "^4.3.2",
     "tough-cookie": "^6.0.1",
-    "vercel": "^54.18.0",
+    "vercel": "^55.0.0",
     "vue": "^3.5.35",
     "vue-router": "^5.1.0"
   },

@@ -88,7 +88,7 @@ export default defineEventHandler(async (event) => {
         if (branchText.toLowerCase().includes('kopierlink') || branchText.toLowerCase().includes('[buch]')) return;
         if (branchText && statusText) {
           availability.push({
-            branch: branchText,
+            libraryName: branchText,
             status: statusText,
             shelfmark: shelfmarkText || undefined
           });
