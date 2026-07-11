@@ -1,12 +1,9 @@
 # TODO
-- marketing first: facebook?, blog post hacker news, linkedin, more stickers
+- marketing first: facebook?, blog post hacker news, linkedin, flyers, more stickers
 - buy domain
   - check in google search console
-  - check/change email
 - consisten back button styling
-- where is schiller library: address on click
-  - add data to libraries: district,opening horus, website
-  - nice map illustration
+
 
 # Contemplating / Ideas
 - korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
@@ -27,6 +24,10 @@
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 
 # DONE
+- where is schiller library: address on click
+  - add data to libraries: district,opening horus, website
+  - nice map illustration
+- check/change email
 - set zip code in search somehow
 - better aggregation if zip code is default
 - clicking on navbar / or pressing x in search does not clear the results

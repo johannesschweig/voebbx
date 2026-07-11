@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import libraryData from '~/assets/libraries.json'
-import { useUserStore } from '#imports'
 import { calculateHaversineDistance } from '~~/utils/distance'
+import LibraryMap from '~/components/LibraryMap.vue'
 
 const route = useRoute()
 const userStore = useUserStore()
@@ -86,13 +86,15 @@ const distanceText = computed(() => {
       <span>← Zurück</span>
     </NuxtLink>
 
+    <LibraryMap :libraryId="libraryId" />
+
     <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
 
       <div class="p-5 border-b border-gray-100 bg-linear-to-br from-slate-50 to-white">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
           {{ library.district }}
         </span>
-        <h1 class="text-xl font-extrabold text-gray-900 mt-2.5 leading-tight">
+        <h1 class="text-xl font-extrabold text-emerald-950 mt-2.5 leading-tight">
           {{ library.name }}
         </h1>
       </div>
@@ -149,7 +151,7 @@ const distanceText = computed(() => {
           </div>
         </div>
 
-        <div class="flex items-start gap-3">
+        <div v-if="library.service_hours" class="flex items-start gap-3">
           <div class="p-2 bg-gray-100 text-gray-600 rounded-lg mt-0.5 shrink-0">
             🙋
           </div>
