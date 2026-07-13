@@ -68,7 +68,7 @@ onMounted(async () => {
     [selectedLibrary?.lat, selectedLibrary?.lon]
   )
 
-  map.fitBounds(bounds, { padding: [10, 10] })
+  map.fitBounds(bounds, { padding: [20, 20] })
 })
 
 function addLibraryMarkers(L: any) {

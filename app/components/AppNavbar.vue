@@ -1,19 +1,17 @@
 <template>
-  <nav class="sticky top-0 z-[900] border-b border-gray-100 bg-white/80 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl watchlistIds-center justify-between px-4 py-3 sm:px-6">
+  <nav class="sticky top-0 z-900 border-b border-gray-100 bg-white/80 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl justify-between px-4 py-3 sm:px-6">
       
       <NuxtLink to="/" class="text-xl font-black tracking-tight text-gray-900 hover:opacity-80 transition-opacity">
         BibBlitz
       </NuxtLink>
 
-      <div class="flex watchlistIds-center gap-2 sm:gap-3">
-        
+      <div class="flex gap-2 sm:gap-3">
         <NuxtLink 
           to="/" 
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
+          class="flex gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
           inactive-class="text-gray-700"
           active-class="bg-blue-100 text-blue-700"
-
         >
           <span>🔍</span>
           <span>Suche</span>
@@ -21,7 +19,7 @@
 
         <NuxtLink 
           to="/watchlist"
-          class="flex watchlistIds-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
+          class="flex gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
           inactive-class="text-gray-700"
           active-class="bg-blue-100 text-blue-700"
         >
@@ -64,7 +62,6 @@ import { useUserStore } from '~/stores/userStore'
 const store = useUserStore()
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
-const router = useRouter()
 
 async function handleLogout() {
   await supabase.auth.signOut()

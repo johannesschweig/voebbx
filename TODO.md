@@ -1,29 +1,28 @@
 # TODO
 - marketing first: facebook?, blog post hacker news, linkedin, flyers, more stickers
-- buy domain
-  - check in google search console
-- consisten back button styling
-
 
 # Contemplating / Ideas
 - korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
 - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
-- events for click on library and clicking on author
-  - search by clicking on author
 - /detail fails: we need a refetch button or something
 - 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
   - covers on openlibrary are super sparse
   - voebb img needs a referrer (!headache): endpoint?
   - check google covers with api or someo other service
-- a share button on the detail page
 - rework navbar to header and menubar. authmodal as page. 
 - show people recent searches
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
+- add standort in availability
 
 # DONE
+- a share button on the detail page
+- events for click on library and clicking on author
+- consistent back button styling
+- buy domain
+  - check in google search console
 - where is schiller library: address on click
   - add data to libraries: district,opening horus, website
   - nice map illustration
@@ -77,3 +76,5 @@
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
 - instant notifications when available: in app (native) or via email or in telegram
 - zip code visualiziation: there are just too many zip codes. better label with district
+- search by clicking on author
+  - no one did it yet

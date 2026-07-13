@@ -8,6 +8,7 @@ import { sortBranchesByDistance } from '../../../utils/availability'
 import { useUserStore } from '~/stores/userStore.js'
 import { ref, computed } from 'vue'
 import ZipCode from '~/components/ZipCode.vue'
+import ShareIcon from '~/assets/share.svg'
 
 const { track } = useUmami()
 const route = useRoute()
@@ -64,17 +65,35 @@ function authorClicked() {
   track('author-click', { query: data.value?.data.author ?? '' })
 }
 
-function libraryClicked(branch: string) {
-  track('library-click', { query: branch })
+const shareMedia = async () => {
+  const item = data.value?.data || { id: -1, title: 'Unbekannt' }
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: `${item.title} - Verfügbarkeit`,
+        text: `Hey, "${item.title}" gibt es bei den Berliner Bibliotheken! Hab's gerade über BibBlitz gecheckt:`,
+        url: window.location.href,
+      })
+      window.umami?.track('share-media', { id: item.id, type: 'mobile'})
+    } catch (err) {
+      console.log('Teilen abgebrochen', err)
+    }
+  } else {
+    // Fallback: Link in die Zwischenablage kopieren + Toast-Anzeige
+    window.umami?.track('share-media', { id: item.id, type: 'fallback' })
+    navigator.clipboard.writeText(window.location.href)
+    alert('Link wurde in die Zwischenablage kopiert!')
+  }
 }
 </script>
 
 <template>
   <div class="max-w-2xl mx-auto font-sans text-gray-800">
-    <!-- Zurück-Button & Status -->
-    <div class="mb-6 flex justify-between items-center">
-      <NuxtLink @click="$router.back()" class="text-sm text-blue-600 hover:underline">← Zurück</NuxtLink>
-      <BookmarkButton :mediaId="mediaId" :context="'detail'" />
+    <!-- Zurück-Button -->
+    <div class="mb-2">
+      <NuxtLink class="btn btn-text btn-md mb-2 pl-0" @click="$router.go(-1)">
+        ← Zurück
+      </NuxtLink>
     </div>
 
     <!-- Lade-Zustand -->
@@ -92,13 +111,24 @@ function libraryClicked(branch: string) {
     <div v-else-if="data?.data">
       <!-- Titel & Metadaten -->
       <header class="mb-6 border-b border-gray-200 pb-6">
-        <h1 class="text-2xl font-bold leading-tight text-gray-900 mb-2">
+        <h1 class="text-xl md:text-2xl font-bold leading-tight text-gray-900 mb-2">
           {{ data.data.title }}
         </h1>
-        <div class="flex flex-wrap gap-2 text-sm text-gray-600">
-          <span v-if="data.data.author" class="bg-gray-100 px-2.5 py-1 rounded" @click="authorClicked()">✍️ {{
-            data.data.author }}</span>
-          <span v-if="data.data.mediaType" class="bg-gray-100 px-2.5 py-1 rounded">📦 {{ data.data.mediaType }}</span>
+        <div class="flex flex-col gap-2 text-sm text-gray-600 mb-2">
+          <div v-if="data.data.author" class="" @click="authorClicked()"> {{
+            data.data.author }}</div>
+          <div v-if="data.data.mediaType" class="">{{ data.data.mediaType }}</div>
+        </div>
+        <!-- Buttons -->
+        <div class="flex gap-2">
+          <BookmarkButton :mediaId="mediaId" :context="'detail'" />
+          <button class="btn btn-sm btn-secondary" @click="shareMedia()">
+            <ShareIcon class="w-3! h-3! text-gray-800" />
+            <span>Teilen</span>
+          </button>
+          <a :href="getPermanentUrlFromId(data.data.id)" target="_blank" class="btn btn-sm btn-secondary">
+            ↗ VÖBB
+          </a>
         </div>
       </header>
 
@@ -117,15 +147,15 @@ function libraryClicked(branch: string) {
 
           <ZipCode v-if="userStore.userZipDefault" v-model="userStore.userZip" />
           <NuxtLink v-for="(item, index) in displayedBranches" :key="index" :to="`/library/${item.libraryId}`"
-            class="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
-            :class="item.distance < 3 ? 'bg-white' : 'bg-gray-50'"
-            >
+            class="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 hover:bg-blue-50 group hover:border-blue-50 active:bg-blue-50 active:border-blue-50"
+            :class="item.distance < 3 ? 'bg-white' : 'bg-gray-50'">
             <div>
-              <h3 class="font-medium text-gray-900">{{ item.libraryName }}</h3>
+              <h3 class="font-medium text-gray-900 group-hover:text-blue-900 group-active:text-blue-900">{{
+                item.libraryName }}</h3>
               <p v-if="item.shelfmark" class="text-xs text-gray-500 mt-0.5">
                 Signatur: <span class="font-mono bg-gray-50 px-1 py-0.5 border border-gray-300 rounded text-gray-700">{{
                   item.shelfmark
-                  }}</span>
+                }}</span>
                 <!-- {{ item.daysToWait}} -->
               </p>
             </div>
@@ -148,13 +178,11 @@ function libraryClicked(branch: string) {
         </div>
       </section>
 
-      <!-- VÖBB-Direktlink -->
-      <footer class="mt-8 text-center">
-        <a :href="getPermanentUrlFromId(data.data.id)" target="_blank"
-          class="inline-block border border-blue-600 bg-white hover:bg-blue-100 text-blue-700 font-medium text-sm px-5 py-2.5 rounded-lg transition">
-          Im VÖBB-Katalog öffnen ↗
-        </a>
-      </footer>
+
     </div>
   </div>
 </template>
+
+http://localhost:3000/media/00306745
+Hey, das Medium "Catan : das Spiel ; Siedeln, Handeln, Bauen / Autor: Klaus Teuber ; Illustration: Michael Menzel" ist
+gerade in einer Berliner Bibliothek frei! Hab's gerade über BibBlitz gecheckt:

@@ -81,17 +81,17 @@ const distanceText = computed(() => {
 <template>
   <div class="max-w-md mx-auto p-4">
 
-    <NuxtLink class="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 mb-4 transition-colors"
-      @click="$router.go(-1)">
-      <span>← Zurück</span>
+    <NuxtLink class="btn btn-text btn-md mb-2 pl-0" @click="$router.go(-1)">
+      ← Zurück
     </NuxtLink>
 
-    <LibraryMap :libraryId="libraryId" />
+    <LibraryMap :libraryId="libraryId" class="mb-2"/>
 
     <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
 
       <div class="p-5 border-b border-gray-100 bg-linear-to-br from-slate-50 to-white">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+        <span
+          class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
           {{ library.district }}
         </span>
         <h1 class="text-xl font-extrabold text-emerald-950 mt-2.5 leading-tight">
@@ -159,7 +159,8 @@ const distanceText = computed(() => {
             <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">
               Service Zeiten
             </h3>
-            <p class="text-sm text-gray-500">Ausleihe bei Mitarbeitern (z.B. Brettspiele, Konsolenspiele, tlw. Tonies)</p>
+            <p class="text-sm text-gray-500">Ausleihe bei Mitarbeitern (z.B. Brettspiele, Konsolenspiele, tlw. Tonies)
+            </p>
 
             <div class="bg-gray-50 rounded-xl p-3 text-sm flex flex-col gap-1.5">
               <div v-for="(germanLabel, englishKey) in dayLabels" :key="englishKey"
