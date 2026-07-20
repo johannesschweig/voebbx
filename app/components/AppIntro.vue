@@ -14,7 +14,7 @@
     <div class="px-5 pb-5 space-y-4">
       
       <div class="flex items-start gap-3">
-        <div class="flex-shrink-0 w-8 h-8 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-sm border border-amber-100">
+        <div class="shrink-0 w-8 h-8 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-sm border border-amber-100">
           ⚡
         </div>
         <div>
@@ -24,7 +24,7 @@
       </div>
 
       <div class="flex items-start gap-3">
-        <div class="flex-shrink-0 w-8 h-8 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-sm border border-blue-100">
+        <div class="shrink-0 w-8 h-8 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-sm border border-blue-100">
           🕒
         </div>
         <div>
@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex items-start gap-3">
-        <div class="flex-shrink-0 w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-sm border border-emerald-100">
+        <div class="shrink-0 w-8 h-8 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-sm border border-emerald-100">
           📱
         </div>
         <div>

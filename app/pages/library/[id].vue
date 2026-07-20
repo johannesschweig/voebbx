@@ -20,7 +20,8 @@ const dayLabels = {
 
 const libraryId = computed(() => {
   const id = route.params.id
-  return Array.isArray(id) ? id[0] : id
+  const raw = Array.isArray(id) ? id[0] : id
+  return /^[a-z]/i.test(raw) ? raw : undefined
 })
 
 const library = computed(() => {
@@ -85,7 +86,7 @@ const distanceText = computed(() => {
       ← Zurück
     </NuxtLink>
 
-    <LibraryMap :libraryId="libraryId" class="mb-2"/>
+    <LibraryMap v-if="libraryId" :libraryId="libraryId" :key="libraryId" class="mb-2" />
 
     <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
 

@@ -12,10 +12,6 @@ const props = defineProps({
 })
 
 
-// const emit = defineEmits<{
-//   select: [library: LibraryMapItem]
-// }>()
-
 const userStore = useUserStore()
 const mapEl = ref<HTMLElement>()
 let map: any
@@ -54,7 +50,7 @@ onMounted(async () => {
     iconAnchor: [7, 7],
   })
   if (!userStore.userZipDefault) {
-    L.marker([userStore.userCoords.lat, userStore.userCoords.lon], { icon: userIcon })
+    L.marker([userStore.userCoords.lat, userStore.userCoords.lon], { icon: userIcon, zIndexOffset: 2000 }, )
       .addTo(map)
       .bindPopup(`<b>Dein Standort (${userStore.userZip})</b>`)
   }
@@ -104,7 +100,7 @@ function addLibraryMarkers(L: any) {
 
   libraryData.forEach(lib => {
     const icon = lib.id === props.libraryId ? selectedLibIcon : libIcon
-    const marker = L.marker([lib.lat, lib.lon], { icon: icon })
+    const marker = L.marker([lib.lat, lib.lon], { icon: icon, zIndexOffset: lib.id === props.libraryId ? 1000 : 0 })
       .addTo(map)
       .bindPopup(`
         <div style="font-family: sans-serif; min-width: 140px;">

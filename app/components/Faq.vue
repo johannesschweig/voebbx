@@ -34,6 +34,11 @@ const faqs = [
     id: 'app-store',
     question: 'Gibt es eine App für den App Store?',
     answer: 'Nein, aber du kannst BibBlitz im Browser über das „Teilen“-Menü einfach zum Startbildschirm hinzufügen. Es verhält sich dann genau wie eine native App.'
+  },
+  {
+    id: 'i-have-question',
+    question: 'Ich habe eine Frage/Anregung/Wunsch...',
+    answer: 'Schreib mir gerne eine Mail an <a href="mailto:info@bibblitz.de" class="link">info@bibblitz.de</a>. Ich freue mich auf dein Feedback.'
   }
 ]
 
@@ -44,8 +49,8 @@ const toggleFaq = (index: number) => {
 </script>
 
 <template>
-  <section class="w-full max-w-md mx-auto px-4 py-8 font-sans">
-    <h2 class="text-xl font-bold text-gray-900 mb-5 px-1">Häufige Fragen</h2>
+  <section class="w-full max-w-md mx-auto font-sans">
+    <h2 class="text-xl font-bold text-gray-900 mb-5">Häufige Fragen</h2>
 
     <div class="space-y-3">
       <div v-for="(faq, index) in faqs" :key="index"
@@ -63,9 +68,7 @@ const toggleFaq = (index: number) => {
         </button>
 
         <div v-show="openIndex === index" class="border-t border-gray-100 bg-gray-50/50">
-          <p class="p-4 text-sm text-gray-700 leading-relaxed">
-            {{ faq.answer }}
-          </p>
+          <p class="p-4 text-sm text-gray-700 leading-relaxed" v-html="faq.answer"></p>
         </div>
       </div>
     </div>

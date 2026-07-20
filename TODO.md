@@ -1,9 +1,12 @@
 # TODO
-- marketing first: facebook?, blog post hacker news, linkedin, flyers, more stickers
+- marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang), more stickers
 
 # Contemplating / Ideas
+- clean up title and authors somehow
+- open graph im head für link previews
 - korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
-- seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
+- showcase: popular books/games/tonies
+  - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - /detail fails: we need a refetch button or something
 - 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
@@ -15,9 +18,13 @@
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
-- add standort in availability
+- add standort column in availability
+- add year (Veröffentlichung)
+- filter by language (nebenan request)
 
 # DONE
+- map: green dot sometimes gets overlayed
+- about section (why do people visit the imprint)
 - a share button on the detail page
 - events for click on library and clicking on author
 - consistent back button styling

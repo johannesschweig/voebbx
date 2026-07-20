@@ -22,7 +22,7 @@ async function handleLogout() {
       <h1 class="text-2xl font-black mb-4">Deine Merkliste</h1>
 
       <div v-if="userStore.loading" class="text-center py-8 text-gray-500">
-        Lade Merkliste aus Supabase...
+        Lade Merkliste...
       </div>
 
       <div v-else-if="userStore.watchlistIds.length === 0"

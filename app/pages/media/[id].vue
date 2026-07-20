@@ -98,7 +98,7 @@ const shareMedia = async () => {
 
     <!-- Lade-Zustand -->
     <div v-if="pending" class="text-center py-12 text-gray-500 animate-pulse">
-      <p class="text-lg font-semibold">Suche Medien-Details beim VÖBB...</p>
+      <p class="text-lg font-semibold">Suche Medien-Details...</p>
     </div>
 
     <!-- Fehler-Zustand -->

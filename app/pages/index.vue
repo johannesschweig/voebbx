@@ -3,9 +3,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
-import EmptyState from '~/components/EmptyState.vue'
+import AppIntro from '~/components/AppIntro.vue'
 import Faq from '~/components/Faq.vue'
 import MediaItem from '~/components/MediaItem.vue'
+import About from '~/components/About.vue'
 
 const { track } = useUmami()
 const route = useRoute()
@@ -130,15 +131,14 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
         Keine Treffer für „{{ lastQuery }}" gefunden.
       </div>
       <div v-else class="flex flex-col gap-8">
-        <EmptyState />
+        <AppIntro />
         <Faq />
+        <About />
       </div>
 
 
-      <div class="text-center text-sm text-gray-400 mt-8">
-        Feedback? Email an <a href="mailto:info@bibblitz.de"
-          class="text-blue-500 hover:text-blue-700">info@bibblitz.de</a>
-      </div>
+      <!-- <a href="mailto:info@bibblitz.de"
+          class="text-blue-500 hover:text-blue-700">info@bibblitz.de</a>-->
 
       <div class="mt-12 flex gap-3 text-xs">
         <NuxtLink to="/imprint" class="text-gray-400 hover:text-gray-600">Impressum</NuxtLink>

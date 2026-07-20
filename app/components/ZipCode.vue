@@ -29,7 +29,7 @@ function saveLocation() {
     showSuccess.value = false
     userStore.saveLocation(localZipInput.value)
     editing.value = false
-    track('zip-save', { query: localZipInput.value.substring(0, 4) + 'XXX' })
+    track('zip-save', { query: localZipInput.value.substring(0, 4) + 'X' })
   }, 2000)
 }
 </script>

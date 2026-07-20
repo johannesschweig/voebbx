@@ -9,7 +9,6 @@ const props = defineProps<{
 const itemCacheStore = useItemCacheStore()
 const ICON_URL = 'https://www.voebb.de/aDISWeb_kopac86/img/medien/'
 // buch, band, konventionelles spiel, dvd, medienkombination, mp3
-console.log(`MediaItem.vue: mediaId=${props.mediaId}, mediaType=${itemCacheStore.items[props.mediaId]?.mediaType}`)
 const icon = computed(() => {
   const mediaType = itemCacheStore.items[props.mediaId]?.mediaType.toLowerCase()
   if (!mediaType) return ''
@@ -48,7 +47,6 @@ const icon = computed(() => {
     case 'plastik':
       return `${ICON_URL}plastik.svg`
     default:
-      console.log(`Unbekannter Medientyp: ${mediaType} für Medien-ID: ${props.mediaId}`)
       return ''
   }
 })
