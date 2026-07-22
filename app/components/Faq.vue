@@ -17,13 +17,8 @@ const faqs = [
   },
   {
     id: 'data-storage',
-    question: 'Wo werden meine Daten (PLZ, Merkliste) gespeichert?',
+    question: 'Wo werden meine Daten (PLZ-Stammbezirk) gespeichert?',
     answer: 'Deine Daten werden lokal im Browser (localstorage) gespeichert.'
-  },
-  {
-    id: 'sync-watchlist',
-    question: 'Wie kann ich meine Merkliste synchronisieren?',
-    answer: 'Erstelle dir einen kostenlosten Account, um deine Merkliste auf allen Geräten zu synchronisieren.'
   },
   {
     id: 'fewer-results',
