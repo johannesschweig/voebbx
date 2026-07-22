@@ -1,61 +1,93 @@
 <!-- pages/index.vue -->
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMediaStore } from '~/stores/mediaStore'
+import { useItemCacheStore } from '#imports'
 import AppIntro from '~/components/AppIntro.vue'
 import Faq from '~/components/Faq.vue'
 import MediaItem from '~/components/MediaItem.vue'
 import About from '~/components/About.vue'
+import MediaTypeFilter from '~/components/MediaTypeFilter.vue'
 
 const { track } = useUmami()
 const route = useRoute()
 const router = useRouter()
 const mediaStore = useMediaStore()
+const itemCacheStore = useItemCacheStore()
+
 const searchQuery = ref('')
 const loading = ref(false)
 const hasSearched = ref(false)
 const lastQuery = ref('')
+
+// Aktuell gewählter Filter (null = alle)
+const selectedMediaType = ref<string | null>(null)
+
 const quickSearches = [
   { label: '📖 Dune', query: 'Dune Wüstenplanet' },
   { label: '🧩 Catan', query: 'Siedler von Catan' },
   { label: '🎧 Tonie Eiskönigin', query: 'Tonie Eiskönigin' }
 ]
 
+// 1. Übersicht aller vorkommenden Medientypen inklusive Häufigkeit
+const mediaTypes = computed(() => {
+  const counts: Record<string, number> = {}
+
+  for (const id of mediaStore.searchIds) {
+    const rawType = itemCacheStore.items[id]?.mediaType || 'unbekannt'
+    const type = rawType.toLowerCase().trim()
+    counts[type] = (counts[type] || 0) + 1
+  }
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1]) // Nach Anzahl absteigend sortieren
+    .map(([type, count]) => ({ type, count }))
+})
+
+// 2. Gefilterte IDs basierend auf ausgewähltem Tag
+const filteredSearchIds = computed(() => {
+  if (!selectedMediaType.value) {
+    return mediaStore.searchIds
+  }
+
+  return mediaStore.searchIds.filter(id => {
+    const itemType = itemCacheStore.items[id]?.mediaType?.toLowerCase().trim() || 'unbekannt'
+    return itemType === selectedMediaType.value
+  })
+})
+
 watch(
   () => route.query.q,
   (newQuery) => {
     if (newQuery) {
-      // 1. URL hat einen Suchbegriff -> Suche ausführen/anzeigen
       const queryStr = String(newQuery)
       searchQuery.value = queryStr
       hasSearched.value = true
-      
+
       if (queryStr !== mediaStore.lastQuery) {
         handleSearch(queryStr, 'user')
       }
     } else {
-      // 2. Kein ?q= in der URL
       if (mediaStore.lastQuery && mediaStore.searchIds.length > 0) {
-        // Der Nutzer kam von einer Unterseite (z.B. Merkliste) zurück:
-        // Wir stellen die URL und den Suchbegriff wieder her!
         searchQuery.value = mediaStore.lastQuery
         hasSearched.value = true
         router.replace({ query: { q: mediaStore.lastQuery } })
       } else {
-        // Wirklich leerer Zustand (Logo geklickt oder manuell geleert)
         searchQuery.value = ''
         hasSearched.value = false
+        selectedMediaType.value = null
         mediaStore.clearSearch()
       }
     }
   },
-  { immediate: true } 
+  { immediate: true }
 )
 
 function handleInputClear() {
   if (searchQuery.value === '') {
     hasSearched.value = false
+    selectedMediaType.value = null
     mediaStore.searchIds = []
     router.replace({ query: {} })
   }
@@ -71,12 +103,13 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
   if (!cleanQuery) return
   loading.value = true
   hasSearched.value = false
+  selectedMediaType.value = null
   lastQuery.value = cleanQuery
   router.replace({ query: { q: cleanQuery } })
-    track(
-      source === 'user' ? 'search-started' : 'search-quick',
-      { query: cleanQuery }
-    )
+  track(
+    source === 'user' ? 'search-started' : 'search-quick',
+    { query: cleanQuery }
+  )
   try {
     await mediaStore.executeSearch(cleanQuery)
   } catch (error) {
@@ -86,7 +119,6 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
     hasSearched.value = true
   }
 }
-
 </script>
 
 <template>
@@ -94,7 +126,7 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
     <div class="max-w-2xl mx-auto md:py-12">
 
       <!-- Suchformular -->
-      <div class="mb-10">
+      <div class="mb-6">
         <form @submit.prevent="handleSearch(searchQuery, 'user')" class="flex gap-2 mb-3">
           <input v-model="searchQuery" type="search" placeholder="Titel, Autor, Spiel …" @search="handleInputClear"
             @input="handleInputClear"
@@ -105,6 +137,7 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
           </button>
         </form>
 
+        <!-- Vorschläge (Nur im Start-Zustand) -->
         <div v-if="mediaStore.searchIds.length === 0 && !loading"
           class="flex flex-wrap gap-2 items-center text-xs text-gray-500 px-1">
           <span class="mr-1 hidden sm:inline">Vorschläge:</span>
@@ -114,6 +147,11 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
             class="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
             {{ item.label }}
           </button>
+        </div>
+
+        <!-- Filter-Tags direkt unter der Suche (Sobald Ergebnisse da sind) -->
+        <div v-if="mediaStore.searchIds.length > 0 && !loading">
+          <MediaTypeFilter v-model="selectedMediaType" :types="mediaTypes" :total-count="mediaStore.searchIds.length" />
         </div>
       </div>
 
@@ -125,26 +163,27 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
       <!-- Ergebnisse -->
       <div v-else-if="mediaStore.searchIds.length > 0">
         <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mb-4">
-          {{ mediaStore.searchIds.length }} Treffer
+          {{ filteredSearchIds.length }} von {{ mediaStore.searchIds.length }} Treffern
         </p>
-        <ul class="space-y-2">
-          <MediaItem v-for="id in mediaStore.searchIds" :key="id" :mediaId="id" />
+
+        <!-- Liste nutzt nun filteredSearchIds -->
+        <ul v-if="filteredSearchIds.length > 0" class="space-y-2">
+          <MediaItem v-for="id in filteredSearchIds" :key="id" :mediaId="id" />
         </ul>
+        <div v-else class="text-center py-12 text-gray-400 text-sm">
+          Keine Treffer für den gewählten Filter.
+        </div>
       </div>
 
       <!-- Leer-Zustand nach Suche -->
       <div v-else-if="hasSearched" class="text-center py-16 text-gray-400 text-sm">
-        Keine Treffer für „{{ lastQuery }}" gefunden.
+        Keine Treffer für „{{ lastQuery }}“ gefunden.
       </div>
       <div v-else class="flex flex-col gap-8">
         <AppIntro />
         <Faq />
         <About />
       </div>
-
-
-      <!-- <a href="mailto:info@bibblitz.de"
-          class="text-blue-500 hover:text-blue-700">info@bibblitz.de</a>-->
 
       <div class="mt-12 flex gap-3 text-xs">
         <NuxtLink to="/imprint" class="text-gray-400 hover:text-gray-600">Impressum</NuxtLink>

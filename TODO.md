@@ -1,5 +1,6 @@
 # TODO
 - marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang), more stickers
+- what to do with merkliste. nobody uses it
 
 # Contemplating / Ideas
 - clean up title and authors somehow
@@ -21,10 +22,10 @@
 - add standort column in availability
 - add year (Veröffentlichung)
 - filter
-  - by media type
   - filter by language (nebenan request)
 
 # DONE
+- filter by media type
 - search should not reset when coming from watchlist (user request)
 - map: green dot sometimes gets overlayed
 - about section (why do people visit the imprint)

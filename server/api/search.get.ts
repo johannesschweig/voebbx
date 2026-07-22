@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    // 1. Frischer Cookie-Jar für jeden isolierten Request (Exakt wie in deinem Express-Code)
     const jar = new CookieJar();
     const client = wrapper(axios.create({ jar }));
 
@@ -61,16 +60,24 @@ export default defineEventHandler(async (event) => {
 
       if (!id) return;
 
-      // Filter gegen E-Ressourcen
       const rowContainer = $(el).closest('.rList_grid_wrapper');
+
+      // Filter gegen E-Ressourcen (z. B. "siehe Vollanzeige")
       if (rowContainer.length > 0) {
         const altText = rowContainer.find('.rList_availability img').attr('alt') || '';
         if (altText.toLowerCase().includes('siehe vollanzeige')) return; 
       }
 
+      // mediatype from img
+      const mediumImg = rowContainer.find('.rList_medium img');
+      const rawMediaType = mediumImg.attr('title') || mediumImg.attr('alt') || 'unbekannt';
+      
+      const mediaType = rawMediaType.trim();
+
       searchResults.push({
         id,
         title: titleText.trim().replace(/\s+/g, ' '),
+        mediaType
       });
     });
 
