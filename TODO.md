@@ -20,9 +20,12 @@
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 - add standort column in availability
 - add year (Veröffentlichung)
-- filter by language (nebenan request)
+- filter
+  - by media type
+  - filter by language (nebenan request)
 
 # DONE
+- search should not reset when coming from watchlist (user request)
 - map: green dot sometimes gets overlayed
 - about section (why do people visit the imprint)
 - a share button on the detail page

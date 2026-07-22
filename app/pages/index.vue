@@ -22,36 +22,42 @@ const quickSearches = [
   { label: '🎧 Tonie Eiskönigin', query: 'Tonie Eiskönigin' }
 ]
 
-// onMounted(() => {
-//   if (route.query.q && typeof route.query.q === 'string') {
-//     searchQuery.value = route.query.q
-//     handleSearch(searchQuery.value, 'user')
-//   }
-// })
-
 watch(
   () => route.query.q,
   (newQuery) => {
-    if (!newQuery) {
-      // Wenn kein 'q' in der URL (Navbar-Klick), alles auf Startzustand setzen
-      searchQuery.value = ''
-      lastQuery.value = ''
-      hasSearched.value = false
-      mediaStore.searchIds = []
-    } else if (newQuery !== searchQuery.value) {
-      // Falls via Browser-History (Zurück-Button) gesucht wird
-      searchQuery.value = String(newQuery)
-      handleSearch(searchQuery.value, 'user')
+    if (newQuery) {
+      // 1. URL hat einen Suchbegriff -> Suche ausführen/anzeigen
+      const queryStr = String(newQuery)
+      searchQuery.value = queryStr
+      hasSearched.value = true
+      
+      if (queryStr !== mediaStore.lastQuery) {
+        handleSearch(queryStr, 'user')
+      }
+    } else {
+      // 2. Kein ?q= in der URL
+      if (mediaStore.lastQuery && mediaStore.searchIds.length > 0) {
+        // Der Nutzer kam von einer Unterseite (z.B. Merkliste) zurück:
+        // Wir stellen die URL und den Suchbegriff wieder her!
+        searchQuery.value = mediaStore.lastQuery
+        hasSearched.value = true
+        router.replace({ query: { q: mediaStore.lastQuery } })
+      } else {
+        // Wirklich leerer Zustand (Logo geklickt oder manuell geleert)
+        searchQuery.value = ''
+        hasSearched.value = false
+        mediaStore.clearSearch()
+      }
     }
   },
-  { immediate: true } // Ersetzt das alte onMounted komplett beim ersten Laden
+  { immediate: true } 
 )
 
 function handleInputClear() {
   if (searchQuery.value === '') {
     hasSearched.value = false
     mediaStore.searchIds = []
-    router.replace({ query: {} }) // Entfernt das ?q= aus der URL
+    router.replace({ query: {} })
   }
 }
 

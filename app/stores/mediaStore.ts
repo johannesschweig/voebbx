@@ -3,7 +3,8 @@ import { useItemCacheStore } from './itemCacheStore';
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
-    searchIds: [] as string[]
+    searchIds: [] as string[],
+    lastQuery: '',
   }),
 
   actions: {
@@ -26,7 +27,12 @@ export const useMediaStore = defineStore('media', {
 
         // 2. Im eigenen Store nur die IDs abspeichern
         this.searchIds = data.results.map((item: any) => item.id);
+        this.lastQuery = query
       }
+    },
+    clearSearch() {
+      this.searchIds = []
+      this.lastQuery = ''
     }
 
   }
