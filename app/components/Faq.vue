@@ -18,7 +18,7 @@ const faqs = [
   {
     id: 'data-storage',
     question: 'Wo werden meine Daten (PLZ, Merkliste) gespeichert?',
-    answer: 'Deine Daten werden lokal im Browser gespeichert. Wenn du ein Konto erstellst, werden sie zusätzlich in einer Datenbank (Supabase) gespeichert, um deine Daten auf allen Geräten zu synchronisieren.'
+    answer: 'Deine Daten werden lokal im Browser (localstorage) gespeichert.'
   },
   {
     id: 'sync-watchlist',

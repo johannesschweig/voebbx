@@ -1,8 +1,9 @@
 # TODO
 - marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang), more stickers
-- what to do with merkliste. nobody uses it
 
 # Contemplating / Ideas
+- instant notifications when available: in app (native) or via email or in telegram
+  - bell functionality: add a bell to a exemplar. if you load the page all bells are loaded. you get a popup with the bells that are green.
 - clean up title and authors somehow
 - open graph im head für link previews
 - korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
@@ -14,7 +15,6 @@
   - covers on openlibrary are super sparse
   - voebb img needs a referrer (!headache): endpoint?
   - check google covers with api or someo other service
-- rework navbar to header and menubar. authmodal as page. 
 - show people recent searches
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
@@ -22,9 +22,12 @@
 - add standort column in availability
 - add year (Veröffentlichung)
 - filter
+  - improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
   - filter by language (nebenan request)
 
 # DONE
+- what to do with merkliste. nobody uses it
+  - throw merkliste route raus. throw account sync raus. throw bookmarkbutton raus
 - filter by media type
 - search should not reset when coming from watchlist (user request)
 - map: green dot sometimes gets overlayed
@@ -85,7 +88,8 @@
 - show bestellmöglichkeit für magazin
   - signature is not unique for magazin stuff (see http://bibblitz.de/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
 - add link to google maps to library selection: not likely that people don't know the library they want to go to
-- instant notifications when available: in app (native) or via email or in telegram
 - zip code visualiziation: there are just too many zip codes. better label with district
 - search by clicking on author
   - no one did it yet
+- rework navbar to header and menubar. authmodal as page. 
+  - minimal navbar for now

@@ -4,12 +4,6 @@ import { useMediaStore } from '#imports'
 
 const userStore = useUserStore()
 const mediaStore = useMediaStore()
-const user = useSupabaseUser()
-const supabase = useSupabaseClient()
-
-async function handleLogout() {
-  await supabase.auth.signOut()
-}
 </script>
 
 <template>
@@ -28,29 +22,7 @@ async function handleLogout() {
           <span>🔍</span>
           <span>Suche</span>
         </NuxtLink>
-
-        <NuxtLink to="/watchlist" class="flex gap-1.5 rounded-xl px-3 py-2 text-sm font-bold transition-all"
-          inactive-class="text-gray-700" active-class="bg-blue-100 text-blue-700">
-          <span>⭐</span>
-          <span>Merkliste</span>
-          <span v-if="userStore.watchlistIds.length > 0"
-            class="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-black text-white">
-            {{ userStore.watchlistIds.length }}
-          </span>
-        </NuxtLink>
-
-        <button v-if="user" @click="handleLogout" class="ml-2 btn btn-secondary btn-md hidden md:inline"
-          title="Abmelden">
-          <span>Abmelden</span>
-        </button>
-
-        <button v-else @click="userStore.showAuthModal = true"
-          class="ml-2 btn btn-primary btn-md md:self-start hidden md:inline">
-          Anmelden
-        </button>
-
       </div>
-
     </div>
   </nav>
 </template>

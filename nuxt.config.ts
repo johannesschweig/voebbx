@@ -23,14 +23,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxtjs/supabase', 'nuxt-svgo'],
-  supabase: {
-    redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
-      exclude: ['/*']
-    }
-  },
+  modules: ['@pinia/nuxt', 'nuxt-svgo'],
   nitro: {
     externals: {
       inline: ['axios', 'tough-cookie', 'axios-cookiejar-support', 'http-cookie-agent']

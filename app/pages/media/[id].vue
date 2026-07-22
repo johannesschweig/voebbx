@@ -3,7 +3,6 @@
 import { useRoute } from 'vue-router'
 import { useItemCacheStore } from '@/stores/itemCacheStore'
 import { getPermanentUrlFromId } from '../../../utils/index.ts'
-import BookmarkButton from '~/components/BookmarkButton.vue'
 import { sortBranchesByDistance } from '../../../utils/availability'
 import { useUserStore } from '~/stores/userStore.js'
 import { ref, computed } from 'vue'
@@ -17,8 +16,6 @@ const itemCacheStore = useItemCacheStore()
 const userStore = useUserStore()
 const showAllBranches = ref(false)
 
-// Das übernimmt jetzt komplett die Logik: 
-// Gibt uns den Cache zurück oder fetcht automatisch!
 const { data, pending, error } = useAsyncData(`detail-${mediaId}`, async () => {
   const details = await itemCacheStore.fetchDetails(mediaId)
   if (!details) throw new Error('Details konnten nicht geladen werden')
@@ -121,7 +118,6 @@ const shareMedia = async () => {
         </div>
         <!-- Buttons -->
         <div class="flex gap-2">
-          <BookmarkButton :mediaId="mediaId" :context="'detail'" />
           <button class="btn btn-sm btn-secondary" @click="shareMedia()">
             <ShareIcon class="w-3! h-3! text-gray-800" />
             <span>Teilen</span>
@@ -145,7 +141,7 @@ const shareMedia = async () => {
 
         <div v-else class="space-y-3">
 
-          <ZipCode v-if="userStore.userZipDefault" v-model="userStore.userZip" />
+          <ZipCode v-model="userStore.userZip" />
           <NuxtLink v-for="(item, index) in displayedBranches" :key="index" :to="`/library/${item.libraryId}`"
             class="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 hover:bg-blue-50 group hover:border-blue-50 active:bg-blue-50 active:border-blue-50"
             :class="item.distance < 3 ? 'bg-white' : 'bg-gray-50'">

@@ -49,20 +49,6 @@
     </section>
 
     <section class="space-y-4 mt-8">
-      <h2 class="text-xl font-semibold">Nutzerkonto &amp; Datenbank (Supabase)</h2>
-      <p class="m-0">Für die Bereitstellung der Merkliste (Watchlist) und den Login nutzen wir Supabase. Dienstanbieter
-        ist Supabase Inc., 970 Toa Payoh North #07-04, Singapur (mit EU-Infrastruktur, z. B. Frankfurt am Main).</p>
-      <p class="m-0">Wenn Sie ein Nutzerkonto anlegen oder die Merkliste nutzen, werden folgende Daten in der Datenbank
-        verarbeitet: Ihre E-Mail-Adresse, technische IDs (User-ID, Session-Daten) und die von Ihnen gespeicherten
-        Bibliotheks-Medien.</p>
-      <p class="m-0">Rechtsgrundlage: Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO
-        (Vertragserfüllung bzw. vorvertragliche Maßnahmen). Die Speicherung ist technisch notwendig, um Ihnen die
-        personalisierte Merklisten-Funktion anbieten zu können.</p>
-      <p class="m-0">Datenübertragung: Mit Supabase wurde ein Vertrag zur Auftragsverarbeitung inklusive
-        EU-Standardvertragsklauseln geschlossen, um den Schutz Ihrer Daten nach europäischen Standards zu sichern.</p>
-    </section>
-
-    <section class="space-y-4 mt-8">
       <h2 class="text-xl font-semibold">Webanalyse (Umami)</h2>
       <p class="m-0">Zur datenschutzfreundlichen Analyse der Besucherströme nutzen wir das Open-Source-Analysewerkzeug
         Umami.</p>

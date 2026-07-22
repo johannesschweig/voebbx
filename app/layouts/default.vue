@@ -8,7 +8,5 @@
       <slot />
     </main>
 
-    <!-- Globaler Authentifizierungs-Modal (wird über den Pinia-Store gesteuert) -->
-    <AuthModal />
   </div>
 </template>
