@@ -2,30 +2,30 @@
 - marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang), more stickers
 
 # Contemplating / Ideas
+- filter
+  - improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
+  - filter by language (nebenan request)
 - instant notifications when available: in app (native) or via email or in telegram
   - bell functionality: add a bell to a exemplar. if you load the page all bells are loaded. you get a popup with the bells that are green.
 - clean up title and authors somehow
 - open graph im head für link previews
-- korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
 - showcase: popular books/games/tonies
   - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
-- /detail fails: we need a refetch button or something
+- if /detail fails: we need a refetch button or something
 - 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
   - covers on openlibrary are super sparse
   - voebb img needs a referrer (!headache): endpoint?
-  - check google covers with api or someo other service
+  - check google covers with api or some other service
 - show people recent searches
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 - add standort column in availability
 - add year (Veröffentlichung)
-- filter
-  - improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
-  - filter by language (nebenan request)
 
 # DONE
+- libraries page: add to google search console via sitemap
 - what to do with merkliste. nobody uses it
   - throw merkliste route raus. throw account sync raus. throw bookmarkbutton raus
 - filter by media type
@@ -83,7 +83,6 @@
     - warm (deployed): 5s
   - detail
     - deployed: 4s
-    
 - job to check them regularly: watchlist is convenient enough
 - show bestellmöglichkeit für magazin
   - signature is not unique for magazin stuff (see http://bibblitz.de/media/12485080). I would need to pass Standort (Magazin/Außenmagazin) or Bestellmöglichkeit (bestellbar)
@@ -93,3 +92,6 @@
   - no one did it yet
 - rework navbar to header and menubar. authmodal as page. 
   - minimal navbar for now
+- contact form for faster feedback?
+  - needs Mail-Versand-Service (Resend, Mailgun) oder Supabase-Tabelle, DSGVO-Pflichtfelder, Spam-Schutz. lots of work
+- korrekten footer anzeigen auf allen seiten (impressum, datenschutz, kontakt)
