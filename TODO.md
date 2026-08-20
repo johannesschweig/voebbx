@@ -1,16 +1,15 @@
 # TODO
-- marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang), more stickers
+- marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang)
 
 # Contemplating / Ideas
+- showcase: popular books/games/tonies
+  - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - filter
-  - improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
   - filter by language (nebenan request)
 - instant notifications when available: in app (native) or via email or in telegram
   - bell functionality: add a bell to a exemplar. if you load the page all bells are loaded. you get a popup with the bells that are green.
 - clean up title and authors somehow
 - open graph im head für link previews
-- showcase: popular books/games/tonies
-  - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - if /detail fails: we need a refetch button or something
 - 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
@@ -23,8 +22,10 @@
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 - add standort column in availability
 - add year (Veröffentlichung)
+- merging of different versions of the same book/game (what to do with the id?)
 
 # DONE
+- filter: improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
 - libraries page: add to google search console via sitemap
 - what to do with merkliste. nobody uses it
   - throw merkliste route raus. throw account sync raus. throw bookmarkbutton raus

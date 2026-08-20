@@ -19,7 +19,7 @@
         </div>
         <div>
           <h3 class="text-sm font-bold text-slate-900 leading-tight">Sofort-Check</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Verfügbarkeit direkt im Kiez sehen, ohne Extraklicks.</p>
+          <p class="text-xs text-slate-500 mt-0.5">Verfügbarkeit direkt in deiner Nähe sehen, ohne Extraklicks.</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
         </div>
         <div>
           <h3 class="text-sm font-bold text-slate-900 leading-tight">Keine Zeitverschwendung</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Merkliste läuft nie ab. Kein nerviges Session-Ende.</p>
+          <p class="text-xs text-slate-500 mt-0.5">Teilbare Links. Kein nerviges Session-Ende.</p>
         </div>
       </div>
 

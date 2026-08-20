@@ -9,6 +9,7 @@ import Faq from '~/components/Faq.vue'
 import MediaItem from '~/components/MediaItem.vue'
 import About from '~/components/About.vue'
 import MediaTypeFilter from '~/components/MediaTypeFilter.vue'
+import { getMediaTypeConfig } from '../../utils/mediaTypeMapping'
 
 const { track } = useUmami()
 const route = useRoute()
@@ -36,24 +37,22 @@ const mediaTypes = computed(() => {
 
   for (const id of mediaStore.searchIds) {
     const rawType = itemCacheStore.items[id]?.mediaType || 'unbekannt'
-    const type = rawType.toLowerCase().trim()
-    counts[type] = (counts[type] || 0) + 1
+    const label = getMediaTypeConfig(rawType).label  // ← normalisiert
+    counts[label] = (counts[label] || 0) + 1
   }
 
   return Object.entries(counts)
-    .sort((a, b) => b[1] - a[1]) // Nach Anzahl absteigend sortieren
+    .sort((a, b) => b[1] - a[1])
     .map(([type, count]) => ({ type, count }))
 })
 
 // 2. Gefilterte IDs basierend auf ausgewähltem Tag
 const filteredSearchIds = computed(() => {
-  if (!selectedMediaType.value) {
-    return mediaStore.searchIds
-  }
+  if (!selectedMediaType.value) return mediaStore.searchIds
 
   return mediaStore.searchIds.filter(id => {
-    const itemType = itemCacheStore.items[id]?.mediaType?.toLowerCase().trim() || 'unbekannt'
-    return itemType === selectedMediaType.value
+    const rawType = itemCacheStore.items[id]?.mediaType || 'unbekannt'
+    return getMediaTypeConfig(rawType).label === selectedMediaType.value
   })
 })
 

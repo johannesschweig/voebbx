@@ -8,7 +8,7 @@ const faqs = [
   {
     id: 'distance',
     question: 'Wie wird die Entfernung berechnet?',
-    answer: 'Zwischen deinem Kiez und der Bibliothek. Standard ist die PLZ 10178 (Mitte). Du kannst deine eigene PLZ ganz einfach in den Einstellungen der Merkliste hinterlegen.'
+    answer: 'Als Luftlinie zwischen deinem Stammbezirk und der Bibliothek. Standard ist die PLZ 10178 (Berlin-Mitte). Du kannst deine eigene PLZ hinterlegen.'
   },
   {
     id: 'data-source',
