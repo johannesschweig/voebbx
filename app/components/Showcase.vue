@@ -1,0 +1,57 @@
+<!-- components/Showcase.vue -->
+<script setup lang="ts">
+import { onMounted, ref, computed } from 'vue'
+import { useItemCacheStore } from '~/stores/itemCacheStore'
+import MediaItem from '~/components/MediaItem.vue'
+
+// Handverlesene, gelegentlich aktualisierte Auswahl beliebter Medien für die Startseite
+const showcase = {
+  ids: [
+    '34112359',
+    '01392424',
+    '07235286',
+    '34971091',
+    '35168840',
+    '00224031',
+    '06115009'
+  ]
+}
+
+const itemCacheStore = useItemCacheStore()
+
+const INITIAL_COUNT = 3
+const expanded = ref(false)
+const visibleIds = computed(() => expanded.value ? showcase.ids : showcase.ids.slice(0, INITIAL_COUNT))
+
+// Nacheinander laden statt gleichzeitig – die VÖBB-Quelle antwortet
+// bei vielen parallelen Anfragen unzuverlässig (Timeouts/Rate-Limiting).
+async function loadShowcase() {
+  for (const id of showcase.ids) {
+    await itemCacheStore.fetchDetails(id)
+  }
+  // Fehlgeschlagene Abfragen einmal erneut versuchen
+  const missing = showcase.ids.filter(id => !itemCacheStore.items[id]?.title)
+  for (const id of missing) {
+    await itemCacheStore.fetchDetails(id)
+  }
+}
+
+onMounted(() => {
+  loadShowcase()
+})
+</script>
+
+<template>
+  <section>
+    <p class="text-xs font-medium text-gray-400 uppercase tracking-widest mb-4">
+      Beliebt bei BibBlitz
+    </p>
+    <ul class="space-y-2">
+      <MediaItem v-for="id in visibleIds" :key="id" :mediaId="id" />
+    </ul>
+    <button v-if="!expanded && showcase.ids.length > INITIAL_COUNT" type="button" @click="expanded = true"
+      class="btn btn-sm btn-secondary mt-3">
+      Mehr anzeigen
+    </button>
+  </section>
+</template>

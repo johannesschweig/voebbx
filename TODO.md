@@ -2,8 +2,7 @@
 - marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang)
 
 # Contemplating / Ideas
-- showcase: popular books/games/tonies
-  - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
+- seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - filter
   - filter by language (nebenan request)
 - instant notifications when available: in app (native) or via email or in telegram
@@ -20,11 +19,14 @@
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
+- vollanzeige as title: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK15831927
 - add standort column in availability
 - add year (Veröffentlichung)
 - merging of different versions of the same book/game (what to do with the id?)
 
 # DONE
+- showcase: popular books/games/tonies
+  - july: 34112359 01392424 07235286 34971091 35168840 00224031 06115009
 - filter: improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
 - libraries page: add to google search console via sitemap
 - what to do with merkliste. nobody uses it

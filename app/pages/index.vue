@@ -8,6 +8,7 @@ import AppIntro from '~/components/AppIntro.vue'
 import Faq from '~/components/Faq.vue'
 import MediaItem from '~/components/MediaItem.vue'
 import About from '~/components/About.vue'
+import Showcase from '~/components/Showcase.vue'
 import MediaTypeFilter from '~/components/MediaTypeFilter.vue'
 import { getMediaTypeConfig } from '../../utils/mediaTypeMapping'
 
@@ -180,6 +181,7 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
       </div>
       <div v-else class="flex flex-col gap-8">
         <AppIntro />
+        <Showcase />
         <Faq />
         <About />
       </div>
