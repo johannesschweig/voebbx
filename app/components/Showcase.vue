@@ -18,6 +18,7 @@ const showcase = {
 }
 
 const itemCacheStore = useItemCacheStore()
+const { track } = useUmami()
 
 const INITIAL_COUNT = 3
 const expanded = ref(false)
@@ -39,6 +40,10 @@ async function loadShowcase() {
 onMounted(() => {
   loadShowcase()
 })
+
+function trackClick(id: string) {
+  track('showcase-click', { id })
+}
 </script>
 
 <template>
@@ -47,7 +52,7 @@ onMounted(() => {
       Beliebt bei BibBlitz
     </p>
     <ul class="space-y-2">
-      <MediaItem v-for="id in visibleIds" :key="id" :mediaId="id" />
+      <MediaItem v-for="id in visibleIds" :key="id" :mediaId="id" @click="trackClick(id)" />
     </ul>
     <button v-if="!expanded && showcase.ids.length > INITIAL_COUNT" type="button" @click="expanded = true"
       class="btn btn-sm btn-secondary mt-3">
