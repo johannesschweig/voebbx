@@ -121,9 +121,9 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
 }
 
 async function handleLoadMore() {
-  track('search-load-more', { query: mediaStore.lastQuery })
   try {
     await mediaStore.loadMore()
+    track('search-next-page', { query: mediaStore.lastQuery, page: mediaStore.currentPage })
   } catch (error) {
     console.error('Fehler beim Nachladen weiterer Treffer:', error)
   }

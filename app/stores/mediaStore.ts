@@ -8,6 +8,7 @@ export const useMediaStore = defineStore('media', {
     nextPageToken: null as string | null,
     hasMore: false,
     loadingMore: false,
+    currentPage: 1,
   }),
 
   actions: {
@@ -15,6 +16,7 @@ export const useMediaStore = defineStore('media', {
       this.searchIds = [];
       this.nextPageToken = null;
       this.hasMore = false;
+      this.currentPage = 1;
       const itemCache = useItemCacheStore();
 
       const data: any = await $fetch('/api/search', { query: { q: query } });
@@ -60,6 +62,7 @@ export const useMediaStore = defineStore('media', {
           this.searchIds = [...this.searchIds, ...newIds];
           this.nextPageToken = data.token ?? null;
           this.hasMore = !!data.hasMore;
+          this.currentPage += 1;
         }
       } finally {
         this.loadingMore = false;
