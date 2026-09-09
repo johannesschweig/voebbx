@@ -119,6 +119,15 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
     hasSearched.value = true
   }
 }
+
+async function handleLoadMore() {
+  track('search-load-more', { query: mediaStore.lastQuery })
+  try {
+    await mediaStore.loadMore()
+  } catch (error) {
+    console.error('Fehler beim Nachladen weiterer Treffer:', error)
+  }
+}
 </script>
 
 <template>
@@ -172,6 +181,13 @@ async function handleSearch(queryText: string, source: 'user' | 'quick') {
         </ul>
         <div v-else class="text-center py-12 text-gray-400 text-sm">
           Keine Treffer für den gewählten Filter.
+        </div>
+
+        <div v-if="mediaStore.hasMore" class="text-center mt-4">
+          <button type="button" class="btn btn-md btn-secondary" :disabled="mediaStore.loadingMore"
+            @click="handleLoadMore">
+            {{ mediaStore.loadingMore ? 'Lädt …' : 'Weitere Treffer laden' }}
+          </button>
         </div>
       </div>
 

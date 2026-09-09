@@ -23,7 +23,7 @@ const faqs = [
   {
     id: 'fewer-results',
     question: 'Warum finde ich weniger Treffer als beim VÖBB?',
-    answer: 'BibBlitz lädt aus Performancegründen nur die erste Ergebnisseite. Das schont die Infrastruktur der Bibliotheken und sorgt dafür, dass deine Suche bei uns blitzschnell bleibt.'
+    answer: 'BibBlitz lädt aus Performancegründen erstmal nur die erste Ergebnisseite. Mit „Weitere Treffer laden“ holst du dir bei Bedarf mehr.'
   },
   {
     id: 'app-store',

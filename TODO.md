@@ -2,29 +2,32 @@
 - marketing first: blog post hacker news, linkedin, flyers (10x21cm, din lang)
 
 # Contemplating / Ideas
+- sort
+    - nach erscheinungsdatum
+    - add year (Veröffentlichung)
 - seltenes fundstück / meistausgeliehene medien für artikel in der zeitung
 - filter
   - filter by language (nebenan request)
 - instant notifications when available: in app (native) or via email or in telegram
   - bell functionality: add a bell to a exemplar. if you load the page all bells are loaded. you get a popup with the bells that are green.
+  - bell for a search?
 - clean up title and authors somehow
 - open graph im head für link previews
 - if /detail fails: we need a refetch button or something
-- 2nd page search
 - covers for books, e.g. https://www.voebb.de/vlb/cover/<isbn-wo-dashes>/m 200ms or open library https://covers.openlibrary.org/b/isbn/0385472579-M.jpg 600ms
   - covers on openlibrary are super sparse
   - voebb img needs a referrer (!headache): endpoint?
   - check google covers with api or some other service
-- show people recent searches
+- show people their recent searches
   - I would need to store those in localstorage
 - availability fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK35371610 Zusatzinfos statt Bestellmöglichkeit
 - title fails: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK34234459
 - vollanzeige as title: https://www.voebb.de/aDISWeb/app/prod00?sp=SAK15831927
 - add standort column in availability
-- add year (Veröffentlichung)
 - merging of different versions of the same book/game (what to do with the id?)
 
 # DONE
+- 2nd page search
 - showcase: popular books/games/tonies
   - july: 34112359 01392424 07235286 34971091 35168840 00224031 06115009
 - filter: improve media type filter: filter labels (Dvd->DVD), aggregate (DVD+DVD-ROM)
