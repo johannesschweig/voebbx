@@ -13,6 +13,7 @@ const props = defineProps({
 
 
 const userStore = useUserStore()
+const config = useRuntimeConfig()
 const mapEl = ref<HTMLElement>()
 let map: any
 let markers: any[] = []
@@ -30,7 +31,7 @@ onMounted(async () => {
   })
 
   // CartoDB Positron – clean, minimal, grau/weiß
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${config.public.cartoApiKey}`, {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19
